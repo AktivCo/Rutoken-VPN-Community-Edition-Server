@@ -1,5 +1,5 @@
 {
-    "attr-lowercase": ["*ngIf", "ngStyle", "[ngClass]", "[(ngModel)]", "(onLogoutEvent)", "(onUpdateVpnCertEvent)", "(onUpdateSystemEvent)", "(ngSubmit)", "(ngModelChange)", "*ngFor", "*ngSwitch", "[routerLink]", "routerLink", "#loginForm", "#modal", "#pwdForm", "#ntpForm", "#caForm", "#domainForm", "#userForm", "#vpnForm", "#networkForm"],
+    "attr-lowercase": ["*ngIf", "ngStyle", "[ngClass]", "[isInDemoMode]", "[(ngModel)]", "(onLogoutEvent)", "(onUpdateVpnCertEvent)", "(onUpdateSystemEvent)", "(ngSubmit)", "(ngModelChange)", "*ngFor", "*ngSwitch", "[routerLink]", "routerLink", "#loginForm", "#modal", "#pwdForm", "#ntpForm", "#caForm", "#domainForm", "#userForm", "#vpnForm", "#networkForm"],
     "attr-no-duplication": true,
     "attr-value-double-quotes": true,
     "attr-unsafe-chars": true,

@@ -12,6 +12,8 @@ export class HeaderComponent {
 
     @Input() vpncertinfo: any;
 
+    @Input() isInDemoMode = false;
+
     // eslint-disable-next-line @angular-eslint/no-output-on-prefix
     @Output() onUpdateSystemEvent: EventEmitter<any> = new EventEmitter();
 

@@ -10,4 +10,6 @@ export class IdentityModel {
     canGenereateMobileCert: boolean;
 
     canGenereateCertOnToken: boolean;
+
+    isDemoMode: boolean;
 }

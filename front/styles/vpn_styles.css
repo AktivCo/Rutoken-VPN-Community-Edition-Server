@@ -42,6 +42,14 @@ a:hover span {
   padding-right: 15px;
 }
 
+.header .demomode {
+  color: red;
+  margin-top: 45px;
+  text-align: right;
+  font-weight: bold;
+  padding-right: 15px;
+}
+
 /* --------------------------------------------------------------------------------
   Firmware Update Notify
   -------------------------------------------------------------------------------- */

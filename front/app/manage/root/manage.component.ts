@@ -14,6 +14,8 @@ export class ManageComponent implements OnInit {
 
     username: string;
 
+    isInDemoMode = false;
+
     constructor(
         private router: Router,
         private authService: AuthService,
@@ -22,7 +24,9 @@ export class ManageComponent implements OnInit {
     ) {}
 
     ngOnInit(): void {
-        this.username = this.authService.getIdentity().username;
+        const identity = this.authService.getIdentity();
+        this.username = identity.username;
+        this.isInDemoMode = identity.isDemoMode;
 
         this.checkVpnCert().then(() => {}, () => {});
     }
