@@ -37,6 +37,6 @@ debug.log
 /pkiapi/pki
 /openvpn/*
 celeryshell
-
 \.vscode/
 /venv/
+*.LICENSE.txt
