@@ -1,0 +1,67 @@
+<header class="page_title">
+    <h1>Пароль администратора</h1>
+</header>
+<!-- content -->
+
+<div class="text">
+    <p>Для изменения пароля администратора необходимо ввести текущий пароль, новый пароль, а также подтверждение нового пароля.
+    </p>
+</div>
+
+<div class="tbl_settings no_cross chk_this" *ngIf="model">
+    <form #pwdForm="ngForm" (ngSubmit)="onSubmit()">
+        <table>
+            <thead class="warning" [ngClass]="{'error': !pwdForm.form.pristine && (pwdForm.form.invalid ||  model.password1 != model.password2) }" *ngIf="!error">
+                <tr>
+                    <td colspan="2" *ngIf="pwdForm.form.invalid && !pwdForm.form.pristine">Проверьте корректность введенных данных</td>
+                    <td colspan="2" *ngIf="pwdForm.form.valid && !pwdForm.form.pristine && model.password1 != model.password2">Указанные пароли не совпадают</td>
+                    <td colspan="2" *ngIf="(pwdForm.form.valid || pwdForm.form.pristine) && model.password1 == model.password2">Обязательно для заполнения</td>
+                </tr>
+
+            </thead>
+
+            <thead class="warning error" *ngIf="error">
+                <tr>
+                    <td colspan="2">{{error}}</td>
+                </tr>
+            </thead>
+
+            <tbody>
+                <tr>
+                    <th>Текущий пароль</th>
+                    <td>
+                        <span class="required" [ngClass]="{'error': password0.invalid && !password0.pristine}">
+                        <input class="chk" type="password" [(ngModel)]="model.password0" name="password0" #password0="ngModel"
+                            pattern="^[A-Za-z0-9]{1,30}$" autocomplete="off" placeholder="Введите текущий пароль" required />
+                      </span>
+                    </td>
+                </tr>
+                <tr>
+                    <th>Новый пароль</th>
+                    <td>
+                        <span class="required" [ngClass]="{'error': (!password1.pristine && (password1.invalid || model.password1 != model.password2))}">
+                        <input class="chk" type="password" [(ngModel)]="model.password1" name="password1" #password1="ngModel"
+                            pattern="^[A-Za-z0-9]{1,30}$" autocomplete="off" placeholder="Введите новый пароль" required />
+                      </span>
+                    </td>
+                </tr>
+                <tr>
+                    <th>Новый пароль еще раз</th>
+                    <td>
+                        <span class="required" [ngClass]="{'error': (!password2.pristine && (password2.invalid || model.password1 != model.password2)) }">
+                        <input class="chk" type="password" [(ngModel)]="model.password2" name="password2" #password2="ngModel"
+                            pattern="^[A-Za-z0-9]{1,30}$" autocomplete="off" placeholder="Подтвердите новый пароль" required />
+                      </span>
+                    </td>
+                </tr>
+            </tbody>
+            <tfoot>
+                <th></th>
+                <td>
+                    <p *ngIf="done && !error">Настройки сохранены. Для продолжения работы необходимо выполнить повторный вход в систему. </p>
+                    <button class="b_fill red" *ngIf="!done || error" type="submit" [disabled]="disabled || !pwdForm.form.valid || pwdForm.form.pristine || model.password1 != model.password2">Установить новый пароль</button>
+                </td>
+            </tfoot>
+        </table>
+    </form>
+</div>

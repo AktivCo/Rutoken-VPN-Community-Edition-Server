@@ -1,0 +1,45 @@
+<div class="modal">
+    <header class="hgroup">
+        <h2>ВЫПОЛНЕНИЕ НЕОБХОДИМЫХ ОПЕРАЦИЙ</h2>
+    </header>
+
+    <div class="text" *ngIf="taskViewService?.model?.status == 1">
+        <p *ngIf="taskViewService?.model?.type == 1">
+            Производится генерация настроек центра сертификации. Этот процесс может занять 5-10 минут. Пожалуйста, подождите.
+        </p>
+        <p *ngIf="taskViewService?.model?.type == 2">
+            Производится обновление. Это довольно ресурсоемкий процесс и может занять 5-10 минут. Пожалуйста, подождите.
+            <br/>
+            <span *ngIf="taskViewService?.model?.description" class="status">Статус: <b>{{ taskViewService?.model?.description}}</b></span>
+        </p>
+        <p *ngIf="taskViewService?.model?.type == 3">
+            Перезагрузка устройства {{ 'VPN_SHORTNAME' | translate }} приведет к сбросу текущих подключений. Также в течение некоторого времени не будет доступен
+            кабинет администратора.
+        </p>
+        <p *ngIf="taskViewService?.model?.type == 4">
+            Выключение устройства {{ 'VPN_SHORTNAME' | translate }} приведет к сбросу текущих подключений. Для повторного включения будет необходим физический
+            доступ к устройству.
+        </p>
+        <p>
+            <span class="progress_600"></span>
+        </p>
+    </div>
+
+    <div class="text center" *ngIf="taskViewService?.model?.status == 2">
+        <p *ngIf="taskViewService?.model?.type == 1">
+            Генерация настроек центра сертификации завершена.
+        </p>
+        <p *ngIf="taskViewService?.model?.type == 2">
+            Обновление установлено.
+        </p>
+        <p *ngIf="taskViewService?.model?.type == 3">
+            Устройство было перезагружено.
+        </p>
+    </div>
+
+    <div class="control center" *ngIf="taskViewService?.model?.status == 2">
+        <a class="b_cell gray" (click)="closeModal()">Закрыть</a>
+    </div>
+</div>
+
+<div class="fade"></div>

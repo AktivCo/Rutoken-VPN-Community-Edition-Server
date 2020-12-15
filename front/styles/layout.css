@@ -1,0 +1,1201 @@
+/* ================================================================================
+   ================================================================================
+
+   LAYOUT STYLES DIGEST
+   --------------------------------------------------------------------------------
+
+   01. Base — Базовые параметры шаблона.
+   02. Header — Универсальный заголовок сайта.
+   03. Jumper — Горизонтальная навигация
+   04. Ground — Промо-листалка на титульной странице
+   05. Crumbs — Хлебные крошки
+   06. Ranges — Каркасы страниц и вертикальная навигация
+   07. Mandat — Содержательная часть титульной страницы
+   08. Option — «Расхлопы» карты сайта, галереи и линейки партнеров
+   09. Footer — Универсальный «подвал» сайта.
+   10. Images — Настройки галереи FancyBox
+
+   ================================================================================ */
+
+/* ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+   BASE Styles
+   --------------------------------------------------------------------------------
+   Базовые параметры шаблона.
+
+   ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ */
+
+/* --- Обнуление стилей --- */
+
+html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote,
+pre, a, abbr, acronym, address, big, cite, code, del, dfn, img, ins, kbd, q, s, samp,
+small, strike, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset,
+form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside,
+canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output,
+ruby, section, summary, time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+}
+article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section {
+	display: block;
+}
+body {
+	line-height: 1;
+}
+ul {
+	list-style: none;
+}
+blockquote, q {
+	quotes: none;
+}
+blockquote:before, blockquote:after, q:before, q:after {
+	content: "";
+	content: none;
+}
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+strong {
+  font-weight: bold;
+}
+
+/* --------------------------------------------------------------------------------
+   Workspace
+   -------------------------------------------------------------------------------- */
+
+html {
+  min-width: 1060px;
+}
+body {
+  overflow-x: auto;
+  overflow-y: scroll !important;
+  font: 13px/1.5 "Trebuchet MS", Helvetica, Arial, sans-serif;
+  background-color: #fff;
+	color: #444;
+}
+
+/* --------------------------------------------------------------------------------
+   Transparency Layer
+   -------------------------------------------------------------------------------- */
+
+.shadow {
+  display: none;
+  z-index: 20;
+	top: 0px;
+	left: 0px;
+	width: 100%;
+	height: 100%;
+	position: absolute;
+	background: transparent url("./images/layout/bgr_overlay.png");
+}
+
+.shadow.show {
+	display: block;
+}
+/* --- Тот редкий случай, когда отключены JS или Cookie --- */
+.shit .shadow.menu {
+  height: calc(100% - 175px);
+  height: moz-calc(100% - 175px);
+  top: 175px;
+  z-index: 20;
+}
+
+
+/* --------------------------------------------------------------------------------
+   Global Notification
+   -------------------------------------------------------------------------------- */
+
+.notify {
+  background: #fdf2ab url("./images/layout/bgr_notify.png") repeat-x 0 0;
+  border-bottom: 1px solid #a29330;
+   display: none;
+}
+.notify.hidden {
+  display: none;
+}
+.ie7.shit .notify {
+  display: block;
+  height: 35px;
+}
+.notify p {
+  clear: both;
+  display: block;
+  width: 960px;
+  margin: 0 auto;
+  text-align: center;
+  font: normal 12px/35px "Segoe UI", Helvetica, Arial;
+  color: #000;
+}
+.notify p strong {
+  text-transform: uppercase;
+}
+.z_index_fix {
+  z-index: -1;
+}
+.z_index_add {
+  z-index: 1;
+}
+
+/* --------------------------------------------------------------------------------
+   Global Links
+   -------------------------------------------------------------------------------- */
+
+a {
+  color: #aaa;
+}
+a span {
+  color: #888;
+}
+a:hover,
+a:hover span {
+  color: #444;
+}
+a:active {
+  background-color: transparent;
+}
+
+
+
+
+
+/* ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+   HEADER Styles
+   --------------------------------------------------------------------------------
+   Универсальный заголовок сайта.
+
+   ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ */
+
+.header {
+  height: 71px;
+  background: transparent url("./images/layout/bgr_body.png") repeat-x left top;
+}
+.header dl {
+  clear: both;
+  width: 960px;
+  margin: 0 auto;
+  overflow: hidden;
+}
+
+/* --------------------------------------------------------------------------------
+   Logotype
+   -------------------------------------------------------------------------------- */
+
+.header .logo {
+  float: left;
+  overflow: hidden;
+}
+.header .logo a {
+  display: block;
+  width: var(--rutokenImageWidth);
+  height: 71px;
+  background-image: var(--rutokenImage);
+}
+
+/* --------------------------------------------------------------------------------
+   Authentication
+   -------------------------------------------------------------------------------- */
+
+.header .auth {
+  float: left;
+  padding: 7px 15px 0 25px;
+  font: normal 12px/1.5 "Segoe UI", Helvetica, Arial, Arial, sans-serif;
+}
+
+/* --- Visible Link Panel --- */
+.header .auth ul {
+  overflow: hidden;
+}
+.header .auth ul li {
+  padding-left: 10px;
+  display: block;
+  float: left;
+}
+.header .auth ul li:first-child {
+  padding: 0;
+}
+
+/* Sign-In Button */
+
+.header .auth .sign_in {
+  display: block;
+  padding: 1px 10px 3px;
+  background-color: #ddd;
+  border-radius: 2px;
+}
+
+.header .auth .sign_in:hover {
+  background-color: #444;
+}
+.header .auth .sign_in:hover,
+.header .auth .sign_in:hover span {
+  color: #fff;
+}
+
+/* Sign-UP Link */
+
+.header .auth .sign_up {
+  display: block;
+  padding: 1px 0 0;
+  text-decoration: underline;
+  color: #ccc;
+}
+.header .auth a.sign_up span,
+.header .auth a.sign_up:hover,
+.header .auth a.sign_up:hover span {
+  color: #444;
+}
+
+/* Sign-OUT Simple Link */
+.header .auth .sign_out {
+  text-decoration: underline;
+  color: #ccc;
+}
+
+/* --- Sign-In Form  --- */
+
+.header .auth .actions {
+  display: none;
+}
+#auth table {
+  width: 360px;
+  border-collapse: separate;
+}
+#auth table th {
+  width: 60px;
+  text-align: left;
+  padding: 0 0 15px;
+}
+#auth table td {
+  padding: 0 0 15px;
+  vertical-align: top;
+}
+#auth table td div {
+  padding: 5px 0 0;
+}
+#auth table td input[type='text'],
+#auth table td input[type='password'] {
+  width: 270px;
+  padding: 2px 5px 5px;
+  border: 1px solid;
+  border-radius: 3px;
+  border-color: #aaa #ccc #ddd #ccc;
+  background: #f9f9f9 url("./images/layout/bgr_field.png") repeat-x top left;
+  font: normal 13px/1.3 "Trebuchet MS", Helvetica, Arial;
+}
+#auth table .submit th,
+#auth table .submit td {
+  padding: 10px 0 0;
+}
+#auth table .submit td:last-child {
+  width: 125px;
+}
+#auth table .submit td a {
+  display: block;
+	font: normal 12px/1.4 "Segoe UI", Helvetica, Arial, Arial, sans-serif;
+}
+
+/* --------------------------------------------------------------------------------
+   Language
+   -------------------------------------------------------------------------------- */
+
+.header .lang {
+  float: left;
+  padding: 5px 15px 0 10px;
+}
+.header .lang ul {
+  padding: 5px 10px 0;
+  border: 1px solid #fff;
+}
+.header .lang ul.show {
+  padding: 5px 10px;
+  background-color: #fff;
+  border-color: #eee #ddd #aaa #ddd;
+  position: relative;
+  z-index: 1;
+}
+.header .lang ul li {
+  display: none;
+  padding: 0 0 5px 21px;
+  line-height: 1.3;
+	font: normal 12px/1.5 "Trebuchet MS", Helvetica, Arial, Arial, sans-serif;
+}
+.header .lang ul.show li,
+.header .lang ul li.current {
+  display: block;
+}
+.header .lang ul li.current span {
+  display: block;
+  cursor: pointer;
+  padding-right: 10px;
+  background: transparent url("./images/layout/tick_lang.png") no-repeat right 8px;
+}
+.header .lang ul li.current strong {
+  font-weight: normal;
+  border-bottom: 1px dotted #444;
+}
+
+
+/* --------------------------------------------------------------------------------
+   Company Navigation
+   -------------------------------------------------------------------------------- */
+
+.header .fast  {
+  float: right;
+}
+.header .fast ul {
+	overflow: hidden;
+	margin: 10px 0 0 0;
+}
+.header .fast li {
+	float: left;
+	margin-right: 7px;
+	font: italic 12px/1.5 "Trebuchet MS", Helvetica, Arial, Arial, sans-serif;
+	color: #888;
+}
+.header .fast li:after {
+  content: "/";
+  font-weight: bold;
+  margin-left: 7px;
+}
+.header .fast li:last-child,
+.header .fast li:last-child:after {
+	margin: 0;
+	padding: 0;
+  content: "";
+}
+.header .fast li.last_child,
+.header .fast li.last_child:after {
+	margin: 0;
+	padding: 0;
+  content: "";
+}
+.header .fast li strong {
+  font-weight: normal;
+}
+
+/* --- Name for Demo --- */
+
+header .name {
+  float: right;
+  line-height: 2.7;
+  color: #888;
+}
+header .name h1,
+header .name span {
+  display: inline;
+  font: bold 13px "Segoe UI", Helvetica, Arial;
+  text-transform: uppercase;
+}
+
+/* --------------------------------------------------------------------------------
+   Header Links
+   -------------------------------------------------------------------------------- */
+
+.header a {
+	color: #666;
+	text-decoration: none;
+}
+.header a:hover {
+	color: #444;
+	text-decoration: underline;
+}
+.header .current a {
+	text-decoration: underline;
+	color: #444;
+}
+.header .current a:hover {
+	text-decoration: none;
+}
+
+
+
+
+
+/* ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+   JUMPER Styles
+   --------------------------------------------------------------------------------
+   Горизонтальная навигация по сайту.
+
+   ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ */
+
+.jumper {
+  width: 960px;
+  margin: 10px auto 0;
+  padding: 0 0 15px;
+
+}
+.jumper nav {
+  height: 50px;
+  border-bottom: 2px solid #444;
+}
+.ground,
+.jumper nav {
+  background-color: #fff;
+}
+
+/* --------------------------------------------------------------------------------
+   Level 1: Catalogue
+   -------------------------------------------------------------------------------- */
+
+.jumper .catalogue {
+  float: left;
+  margin: 5px 0 0 0;
+
+}
+.jumper .catalogue li {
+  float: left;
+  position: relative;
+  padding: 0 15px 0 20px;
+  font: bold 15px/40px "Segoe UI", Helvetica, Arial;
+  background: transparent url("./images/layout/template/tick_navy.png") no-repeat right 18px;
+}
+.jumper .catalogue li a,
+.jumper .catalogue li strong {
+  display: block;
+  padding-bottom: 8px;
+}
+.jumper .catalogue li a,
+.jumper .catalogue li a:link,
+.jumper .catalogue li a:visited {
+  text-decoration: none;
+  color: #444;
+}
+.jumper .catalogue li a:hover,
+.jumper .catalogue li strong:hover {
+  color: #222;
+}
+.jumper .catalogue li strong:hover {
+  cursor: default;
+}
+.jumper .catalogue li.current > a:after,
+.jumper .catalogue li.current > strong:after {
+  width: 0;
+  height: 0;
+  display: block;
+  position: absolute;
+  content: "";
+  left: 50%;
+  top: 45px;
+  margin-left: -5px;
+  border:  10px solid transparent;
+  border-top-color: #444;
+}
+
+/* --------------------------------------------------------------------------------
+   Level 1: Services
+   -------------------------------------------------------------------------------- */
+
+.jumper .services {
+  float: right;
+  margin-right: 20px;
+  position: relative;
+}
+.jumper .services dt,
+.jumper .services dd {
+  float: left;
+  position: relative;
+}
+.jumper .services dt {
+  margin: 5px 20px 0 0;
+  padding: 0 15px 0 0;
+  background: transparent url("./images/layout/template/tick_navy.png") no-repeat right 19px;
+  font: bold 13px/3.1 "Segoe UI", Helvetica, Arial;
+}
+.jumper .services dt a {
+  display: block;
+  padding-bottom: 5px;
+}
+.jumper .services dt a{
+  color: #444;
+  text-decoration: none;
+}
+.jumper .services dd a {
+	display: block;
+	width: 145px;
+	height: 25px;
+	margin-top: 13px;
+	background: transparent url("./images/layout/template/button_service.png") no-repeat left top;
+}
+.jumper .services dd.current a {
+	background: transparent url("./images/layout/template/button_service_current.png") no-repeat left top;
+}
+.jumper .services dd a:hover,
+.jumper .services dd.current a:hover {
+  background-position: left center;
+}
+.jumper .services dd a:active,
+.jumper .services dd.current a:active {
+  background-position: left bottom;
+}
+.jumper .services dd a span {
+  display: none;
+}
+
+/* --------------------------------------------------------------------------------
+   Level 2: Navigation
+   -------------------------------------------------------------------------------- */
+
+/* --- Container --- */
+
+.jumper .level {
+	top: 45px;
+	background-color: #fff;
+	border: 5px solid #444;
+  box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.3), inset 1px 1px 5px rgba(0, 0, 0, 0.3);
+	position: absolute;
+  display: block;
+  z-index: 20;
+
+}
+.jumper .level:before {
+  width: 0;
+  height: 0;
+  display: block;
+  position: absolute;
+  content: "";
+  top: -12px;
+  margin-left: -8px;
+  border-left: 8px solid transparent;
+  border-right: 8px solid transparent;
+  border-bottom: 8px solid #444;
+}
+.jumper li.hover .level,
+.jumper dt.hover .level {
+  display: block;
+  z-index: 1000;
+
+}
+
+/* --- Subivision --- */
+
+.jumper .level ul {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+
+}
+.jumper .level ul li {
+  width: 210px;
+  margin: 0;
+  padding: 0 0 0 15px;
+  font: normal 13px/1.25 "Trebuchet MS", Helvetica, Arial;
+  background: none;
+}
+.jumper .level ul li a {
+  margin: 0;
+  padding: 13px 0 13px 15px;
+	background: transparent url("./images/layout/template/bullet_sub_lite.png") 0 19px no-repeat;
+  border-bottom: 1px solid #ddd;
+  display: block;
+}
+.jumper .level ul li a:hover {
+	background-image: url("./images/layout/template/bullet_sub_dark.png");
+  text-decoration: underline;
+  color: #222;
+}
+.jumper .level ul li.last a {
+  border-bottom: none;
+}
+
+/* --- Promo --- */
+
+.jumper .level dl {
+  float: right;
+  width: 200px;
+  height: 175px;
+  border-left: 1px solid #ddd;
+  text-align: center;
+	line-height: 1;
+  margin: 0;
+  padding: 0;
+}
+.jumper .level dl dt {
+  text-align: center;
+  padding: 25px 0 5px;
+}
+.jumper .level dl dd {
+  text-align: center;
+  padding: 0 15px;
+}
+.jumper .level dl dd a {
+  font: italic 13px/1.2 "Trebuchet MS", Helvetica, Arial;
+  text-decoration: underline !important;
+}
+.jumper .level dl dd a:hover {
+  color: #222;
+}
+
+
+
+
+
+/* --------------------------------------------------------------------------------
+   Skin for Navigation
+   -------------------------------------------------------------------------------- */
+
+.main .skin {
+  clear: both;
+  width: 1060px;
+  margin: 0 auto;
+  position: relative;
+  margin-bottom: 25px;
+  overflow: hidden;
+}
+.main .skin .jumper  {
+  top: 0;
+  left: 50px;
+  position: absolute;
+  z-index: 998 !important; /* Чтобы не было конфликта с NCQuickBar, у которого z-index = 999 */
+}
+
+.main .skin .jumper nav {
+  /* box-shadow: 0 2px 0 rgba(0, 0, 0, 0.1); */
+ -webkit-box-shadow: 0 7px 15px -9px rgba(0, 0, 0, 0.5);
+  -moz-box-shadow: 0 7px 15px -9px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 7px 15px -9px rgba(0, 0, 0, 0.5);
+}
+
+
+
+/* ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+   SITE PAGE Styles
+   --------------------------------------------------------------------------------
+   Содержательная часть внутренних страниц сайта.
+
+   ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ */
+
+
+
+
+
+/* --------------------------------------------------------------------------------
+   Classic Page — two columns: nav + content
+   -------------------------------------------------------------------------------- */
+
+.content.wide .wrap {
+	
+  display: flex;
+  flex-direction: row;
+}
+.content.wide .data {
+  width: 900px;
+  padding: 0;
+  margin-left: 25px;
+   
+}
+.content.wide .menu {
+	
+  width: 210px;
+}
+
+/* --- Columns --- */
+
+
+.content.wide .data .more {
+  float: right;
+  width: 180px;
+}
+
+
+
+/* --------------------------------------------------------------------------------
+   Headers
+   -------------------------------------------------------------------------------- */
+
+/* --- Standard --- */
+
+.content .page_title {
+  clear: both;
+  height: 65px;
+  border-bottom: 1px solid #ddd;
+  overflow: hidden;
+  margin-bottom: 25px;
+}
+.content .page_title h1 {
+  margin: 0;
+  float: left;
+  overflow: hidden;
+  font: bold 32px/2 "Segoe UI", Helvetica, Arial, sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: #444;
+}
+
+
+/* --- Long --- */
+
+.content .long_title {
+  clear: both;
+  height: 65px;
+  border-bottom: 1px solid #ddd;
+  overflow: hidden;
+  margin-bottom: 25px;
+}
+.content .long_title h1 {
+  margin: 0;
+  float: left;
+  overflow: hidden;
+  font: bold 28px/2.5 "Segoe UI", Helvetica, Arial, sans-serif;
+  /* letter-spacing: -0.5px; */
+  color: #444;
+}
+
+/* --- News --- */
+
+.content .news_title  {
+  margin: 15px 0 25px;
+}
+.content .news_title h1 {
+	font: bold 34px/1.1 "Segoe UI", Helvetica, Arial, sans-serif;
+}
+.content .news_title h4  {
+	margin-top: 20px;
+	font: italic 15px/1.5 "Segoe UI", Helvetica, Arial, sans-serif;
+}
+.content .news_title h4 time,
+.content .news_title h4 span {
+  display: block;
+	margin: 0 0 15px;
+  padding-top: 10px;
+	font: italic 12px/1 "Segoe UI", Helvetica, Arial, sans-serif;
+	color:#aaa;
+}
+.content .news_title h4 a span {
+  display: inline;
+	font: italic 15px/1.5 "Segoe UI", Helvetica, Arial, sans-serif;
+  color: #888;
+}
+.content .news_title h4 a:hover span {
+  color: #000;
+}
+
+
+/* --- Action Button --- */
+
+.content .page_title .action {
+  float: right;
+  display: block;
+  position: relative;
+  width: 150px;
+  margin: 20px 0 0;
+  padding: 0 15px;
+  font: bold 11px/2.5 "Segoe UI", Helvetica, Arial, sans-serif;
+  background-color: #888;
+  text-transform: uppercase;
+  text-decoration: none;
+  text-align: center;
+  color: #fff;
+}
+.content .page_title .action.sdk {
+  width: 170px;
+}
+.content .page_title .action.branding {
+  width: 200px;
+}
+.content .page_title .action:hover {
+  text-decoration: underline;
+}
+.content .page_title .action:before {
+  display: block;
+  position: absolute;
+  content: "";
+  width: 0;
+  height: 0;
+  left: 0;
+  bottom: 50%;
+  margin-bottom: -5px;
+  border-top: 5px solid transparent;
+  border-bottom: 5px solid transparent;
+  border-left: 5px solid #fff;
+}
+
+/* --------------------------------------------------------------------------------
+   Page Not Found
+   -------------------------------------------------------------------------------- */
+
+.content.lost {
+  width: 100%;
+	height: 700px;
+	
+}
+.content.lost article {
+	width: 200px;
+	margin: 0 auto;
+  padding: 300px 35px 0 0;
+	text-align: center;
+}
+.content.lost article h3 {
+  font: bold 22px/1.5 "Segoe UI", Helvetica, Arial, sans-serif;
+  color: #444;
+}
+.content.lost article p {
+	font: 11px/1 "Trebuchet MS", Helvetica, Arial, sans-serif;
+}
+.content.lost article p a {
+  display: block;
+  padding: 15px 0 0;
+  font: italic 14px/1 "Trebuchet MS", Helvetica, Arial, sans-serif;
+}
+
+
+/* --------------------------------------------------------------------------------
+   Search
+   -------------------------------------------------------------------------------- */
+
+.content.find {
+  width: 960px;
+  overflow: hidden;
+  margin: 0 auto;
+  padding: 0 0 80px;
+}
+
+/* --- Form --- */
+
+.content.find aside {
+  overflow: hidden;
+  padding: 20px 20px 25px;
+  border-bottom: 1px solid #ddd;
+}
+.content.find aside label,
+.content.find aside input,
+.content.find aside button {
+  display: block;
+  float: left;
+	border: none;
+}
+.content.find aside label {
+  padding-right: 15px;
+  font: bold 16px/1.3 "Segoe UI", Helvetica, Arial, sans-serif;
+	text-transform: uppercase;
+}
+.content.find aside input {
+	width: 210px;
+	height: 25px;
+	padding: 0 5px;
+  background: #eee url("./images/layout/bgr_field_search.png") 0 0 no-repeat;
+  font: normal 13px/1.5 "Trebuchet MS", Helvetica, Arial, sans-serif;
+}
+.content.find aside button {
+	width: 35px;
+	height: 25px;
+	margin: 0;
+	padding: 0;
+	background: #aaa url("./images/layout/template/button_search.png") left top no-repeat;
+	cursor: pointer;
+}
+.content.find aside button:hover {
+  background-position:  left center;
+}
+.content.find aside button:active {
+  background-position:  left bottom;
+}
+
+/* --- Header --- */
+
+.content.find article {
+  padding: 0 20px;
+}
+.content.find article .page_title {
+  height: auto;
+  border: none;
+}
+.content.find article .page_title h1 {
+  padding-top: 10px;
+  float: none;
+}
+.content.find article .page_title p {
+  padding: 0 0 15px;
+  font: italic 14px/1 "Trebuchet MS", Helvetica, Arial ,sans-serif;
+  color: #888;
+}
+
+/* --- Results --- */
+
+.content.find ol {
+  padding: 0 0 45px 90px;
+}
+.content.find ol li {
+	padding: 0 0 45px;
+}
+.content.find ol li h3 {
+  padding: 0 0 5px;
+  font: 18px/1 "Segoe UI", Helvetica, Arial;
+}
+.content.find ol li p {
+  font-size: 14px;
+}
+
+/* --------------------------------------------------------------------------------
+   Tags Cloud
+   -------------------------------------------------------------------------------- */
+
+.content.tags {
+  width: 960px;
+  margin: 0 auto;
+  padding: 0 0 80px;
+}
+
+/* --- Cloud --- */
+.content.tags .tagcloud_content {
+  text-align: justify;
+  font-family: Helvetica;
+}
+.content.tags .tagcloud_content a {
+  line-height: 1.7;
+  padding: 0 5px;
+}
+
+/* --- Resilt --- */
+.content.tags article h2 {
+  padding: 0 0 25px;
+  font: 16px/1 "Segoe UI", Helvetica, Arial;
+  clear: both;
+}
+.content.tags article h2 span {
+  font-weight: bold;
+}
+.content.tags ol {
+  padding: 10px 0 45px 75px;
+}
+.content.tags ol li {
+	padding: 0 0 25px;
+}
+.content.tags ol li h3 {
+  padding: 0 0 5px;
+  font: 18px/1 "Segoe UI", Helvetica, Arial;
+}
+.content.tags ol li p {
+  font-size: 14px;
+}
+.content.tags ol li p span {
+  display: block;
+  padding: 3px 0 0;
+  font-size: 12px;
+  font-style: italic;
+  color: #888;
+}
+
+/* --------------------------------------------------------------------------------
+   Demoportal Universal Content Block
+   -------------------------------------------------------------------------------- */
+
+.content.demo {
+  clear: both;
+  width: 960px;
+  margin: 0 auto;
+  overflow: hidden;
+  min-height: 500px; /* Временно */
+}
+.content.demo > article {
+  float: left;
+  width: 720px;
+}
+.content.demo > aside {
+  float: right;
+  width: 210px;
+}
+
+
+
+
+
+/* ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+   MENU Styles
+   --------------------------------------------------------------------------------
+   Вертикальная навигация
+
+   ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ */
+
+/* --------------------------------------------------------------------------------
+   Level 1
+   -------------------------------------------------------------------------------- */
+
+.menu ul {
+  padding: 20px 0 0;
+  border-top: 1px solid #ddd;
+  border-bottom: 2px solid #aaa;
+  position: relative;
+}
+.menu ul li {
+  padding: 0 0 20px 15px;
+  list-style-type: none;
+}
+.menu ul li a,
+.menu ul li strong {
+  display: block;
+  padding: 0 0 0 15px;
+  font: bold 14px/1.3 "Segoe UI", Helvetica, Arial;
+  text-transform: uppercase;
+}
+
+/* --- Standard --- */
+
+.menu ul li a {
+  background: transparent url("./images/layout/template/bullet_div_lite.png") no-repeat left 5px;
+  color: #aaa;
+}
+.menu ul li a span {
+  color: #444;
+}
+.menu ul li a:hover {
+  text-decoration: none;
+}
+.menu ul li a:hover span {
+  color: #222;
+}
+
+/* --- Current --- */
+
+.menu ul li.current a,
+.menu ul li.current strong {
+  background: transparent url("./images/layout/template/bullet_div_dark.png") no-repeat left 5px;
+}
+.menu ul li.current a,
+.menu ul li.current a span,
+.menu ul li.current strong  {
+  color: #444;
+}
+
+/* --- Special --- */
+
+.menu ul .special {
+  margin: 0 0 -2px;
+  padding: 12px 12px 12px 13px;
+  background-position: 10px 17px;
+  border: 3px solid #000;
+}
+.menu ul li.special.current a {
+  background: transparent url("./images/layout/template/bullet_div_special.png") no-repeat left 5px;
+}
+.menu ul li.special.current a,
+.menu ul li.special.current a span,
+.menu ul li.special.current strong  {
+  color: #000;
+}
+
+/* --- Open --- */
+
+.menu ul #open.current.start {
+  margin-top: -21px;
+  border: 4px solid #ddd;
+}
+.menu ul #open.current {
+  padding: 0;
+  margin: 0 0 15px;
+  border: 4px solid #ddd;
+  background-color: #f5f5f5;
+  background-image: none;
+}
+.menu ul #open.current a,
+.menu ul #open.current strong {
+  display: block;
+  padding: 12px 12px 12px 10px;
+  border-bottom: 1px solid #ddd;
+  background-image: none;
+}
+.menu ul #open.current a,
+.menu ul #open.current a span {
+  color: #444;
+}
+.menu ul #open.current strong {
+  color: #222;
+}
+.menu ul #open.current ul {
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  border: none;
+}
+
+/* --------------------------------------------------------------------------------
+   Level 2
+   -------------------------------------------------------------------------------- */
+
+.menu ul li#open.current ul li {
+  padding: 0;
+  border-bottom: 1px solid #fff;
+}
+.menu ul li#open.current ul li a,
+.menu ul li#open.current ul li strong {
+  display: block;
+  padding: 10px 12px 10px 27px;
+  font: bold 13px/1.3 "Trebuchet MS", Helvetica, Arial;
+  background: transparent url("./images/layout/template/bullet_sub_lite.png") no-repeat 15px 16px;
+  text-transform: none;
+  border-bottom: none;
+}
+.menu ul li#open.current ul li a {
+  color: #aaa;
+}
+.menu ul li#open.current ul li a span {
+  color: #888;
+}
+.menu ul li#open.current ul li a:hover {
+  background-image: url("./images/layout/template/bullet_sub_dark.png");
+}
+.menu ul li#open.current ul li a:hover,
+.menu ul li#open.current ul li a:hover span {
+/* Custimize this in the Project Styles File */
+}
+.menu ul li#open.current ul li.current a,
+.menu ul li#open.current ul li.current strong {
+  background-image: url("./images/layout/template/bullet_sub_dark.png");
+}
+.menu ul li#open.current ul li.current a,
+.menu ul li#open.current ul li.current a span,
+.menu ul li#open.current ul li.current strong {
+  color: #000;
+}
+
+
+
+/* ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+   FOOTER Styles
+   --------------------------------------------------------------------------------
+   Универсальный подвал сайта.
+
+   ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ */
+
+.footer {
+  width: 960px;
+  margin: 0 auto 0;
+	padding: 0 0 20px;
+	position: relative;
+  overflow: hidden;  
+	font: normal 12px/1.3 "Trebuchet MS", sans-serif;
+	color: #888;
+}
+
+/* --- Compact View for Other Projects --- */
+
+.footer.outlaw {
+  padding-top: 25px;
+  border-top: 2px solid #444;
+}
+.footer.outlaw dl {
+  overflow: hidden;
+}
+.footer.outlaw dl dt {
+  float: left;
+  padding: 0 15px;
+}
+.footer.outlaw dl dt strong {
+  color: #444;
+}
+.footer.outlaw dl dd {
+  float: right;
+  width: 180px;
+  padding: 0 15px;
+  text-align: right;
+}
+

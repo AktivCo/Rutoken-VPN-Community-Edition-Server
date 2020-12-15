@@ -1,0 +1,66 @@
+<header class="page_title">
+    <h1>Настройка времени</h1>
+</header>
+<!-- content -->
+
+<div class="text">
+
+    <div class="accent_soft" *ngIf="ntpForm.form.pristine">
+        <p *ngIf="!ip">
+            В настоящее время устройство {{ 'VPN_FULLNAME' | translate }} 
+            <strong class="name">не настроено</strong> 
+            на синхронизацию с сервером NTP.
+        </p>
+        <p *ngIf="ip">
+            В настоящее время устройство {{ 'VPN_FULLNAME' | translate }} 
+            <strong class="name">
+                настроено на синхронизацию с NTP сервером {{ip}}
+            </strong>!
+        </p>
+    </div>
+</div>
+
+<div class="tbl_settings no_cross">
+    <form #ntpForm="ngForm" (ngSubmit)="onSubmit()" novalidate>
+        <table>
+            <tbody>
+                <tr>
+                    <th>Параметры синхронизации</th>
+                    <td>
+                        <span>
+                            <select class="frm_switch" (change)="onChange($event.target.value)">
+                                <option value="0">Синхронизировать с клиентом</option>
+                                <option value="1">Синхронизировать с NTP-сервером</option>
+                            </select>
+                        </span>
+                    </td>
+                </tr>
+                <tr class="frm_option" *ngIf="type === 1">
+                    <th>Адрес NTP-сервера</th>
+                    <td>
+                        <span>
+                            <input  type="text"
+                                    placeholder="time.windows.com"
+                                    required
+                                    [(ngModel)]="ip"
+                                    name="ip"
+                                    pattern="^[A-Za-z0-9.-]{1,30}$" />
+                        </span>
+                    </td>
+                </tr>
+            </tbody>
+            <tfoot>
+                <th></th>
+                <td>
+                    <p *ngIf="done">Настройки сохранены </p>
+                    <button class="b_fill red show_modal"
+                            *ngIf="!done"
+                            [disabled]="disabled || (type === 1 && (ntpForm.form.invalid || ntpForm.form.pristine))"
+                            type="submit">
+                        Сохранить изменения
+                    </button>
+                </td>
+            </tfoot>
+        </table>
+    </form>
+</div>

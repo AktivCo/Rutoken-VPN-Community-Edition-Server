@@ -1,0 +1,44 @@
+<div class="modal">
+    <header class="hgroup">
+        <h2>Загрузить VPN Клиент</h2>
+    </header>
+    <div class="text">
+        <p>Скачайте и установите клиентское приложение для используемой операционной системы, после чего подготовьте и загрузите
+            в него файл конфигурации. </p>
+    </div>
+    <div class="download_vpn_client">
+        <dl class="windows">
+            <dt>
+                <a href="https://rutokenvpn.ru/download/%D0%A0%D1%83%D1%82%D0%BE%D0%BA%D0%B5%D0%BD%20VPN%20%D0%BA%D0%BB%D0%B8%D0%B5%D0%BD%D1%82.exe"
+                    target="_blank"></a>
+            </dt>
+            <dd><a href="https://rutokenvpn.ru/download/%D0%A0%D1%83%D1%82%D0%BE%D0%BA%D0%B5%D0%BD%20VPN%20%D0%BA%D0%BB%D0%B8%D0%B5%D0%BD%D1%82.exe"
+                    target="_blank"><span>Windows</span></a></dd>
+        </dl>
+        <dl class="macosx">
+            <dt>
+                <a href="https://rutokenvpn.ru/download/%D0%A0%D1%83%D1%82%D0%BE%D0%BA%D0%B5%D0%BD%20VPN%20%D0%BA%D0%BB%D0%B8%D0%B5%D0%BD%D1%82.pkg"
+                    target="_blank"></a>
+            </dt>
+            <dd><a href="https://rutokenvpn.ru/download/%D0%A0%D1%83%D1%82%D0%BE%D0%BA%D0%B5%D0%BD%20VPN%20%D0%BA%D0%BB%D0%B8%D0%B5%D0%BD%D1%82.pkg"
+                    target="_blank"><span>Mac OS X</span></a></dd>
+        </dl>
+        <dl class="ios" *ngIf="pkeyType ==='rsa'">
+            <dt>
+                <a href="https://itunes.apple.com/us/app/openvpn-connect/id590379981?mt=8" disabled target="_blank"></a>
+            </dt>
+            <dd><a href="https://itunes.apple.com/us/app/openvpn-connect/id590379981?mt=8" target="_blank"><span>Apple iOS</span></a></dd>
+        </dl>
+        <dl class="android" *ngIf="pkeyType ==='rsa'">
+            <dt>
+                <a href="https://play.google.com/store/apps/details?id=net.openvpn.openvpn&hl=ru" target="_blank"></a>
+            </dt>
+            <dd><a href="https://play.google.com/store/apps/details?id=net.openvpn.openvpn&hl=ru" target="_blank"><span>Android</span></a></dd>
+        </dl>
+
+    </div>
+    <div class="control center">
+        <a class="b_cell gray" (click)="closeModal()">Отмена</a>
+    </div>
+</div>
+<div class="fade"></div>

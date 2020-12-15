@@ -1,0 +1,93 @@
+<div #modal></div>
+<header class="page_title">
+    <h1>Настройка сети</h1>
+</header>
+
+<div class="text">
+    <p>IP адрес сервера - постоянный адрес, на котором будет находиться {{ 'VPN_FULLNAME' | translate }} сервер и данный web-сервис. Введите
+        настройки вашей локальной сети.</p>
+</div>
+
+<div class="tbl_settings no_cross chk_this" *ngIf="model">
+    <form #networkForm="ngForm" (ngSubmit)="onSubmit()" novalidate>
+        <table>
+            <thead class="warning" [ngClass]="{'error': networkForm.form.invalid && !networkForm.form.pristine}">
+                <tr>
+                    <td colspan="2"
+                        *ngIf="networkForm.form.invalid && !networkForm.form.pristine">
+                        Проверьте корректность введенных данных
+                    </td>
+                    <td colspan="2"
+                        *ngIf="networkForm.form.valid || networkForm.form.pristine">
+                        Обязательно для заполнения
+                    </td>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <th>IP-адрес</th>
+                    <td>
+                        <span class="required" [ngClass]="{'error': server_ip.invalid && !server_ip.pristine}">
+                            <input class="chk" type="text" [(ngModel)]="model.server_ip"
+                            name="server_ip" #server_ip="ngModel"
+                            pattern="^(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])$"
+                            autocomplete="off" placeholder="___.___.___.___"  required/>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <th>Маска подсети</th>
+                    <td>
+                        <span class="required" [ngClass]="{'error': server_mask.invalid && !server_mask.pristine}">
+                            <input class="chk" type="text" [(ngModel)]="model.server_mask" name="server_mask" #server_mask="ngModel"
+                            pattern="^(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])$"
+                            autocomplete="off" placeholder="___.___.___.___" required />
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <th>Основной шлюз</th>
+                    <td>
+                        <span class="required" [ngClass]="{'error': server_gate.invalid && !server_gate.pristine}">
+                            <input class="chk" type="text" [(ngModel)]="model.server_gate" name="server_gate"  #server_gate="ngModel"
+                            pattern="^(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])$"
+                            autocomplete="off"  placeholder="___.___.___.___" required />
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <th>DNS-сервер №1</th>
+                    <td>
+                        <span class="required" [ngClass]="{'error': server_dns1.invalid && !server_dns1.pristine}">
+                            <input class="chk" type="text" [(ngModel)]="model.server_dns1" name="server_dns1" #server_dns1="ngModel"
+                            pattern="^(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])$"
+                            autocomplete="off" placeholder="___.___.___.___" required />
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <th>DNS-сервер №2</th>
+                    <td>
+                        <span [ngClass]="{'error': server_dns2.invalid && !server_dns2.pristine}">
+                            <input type="text" [(ngModel)]="model.server_dns2" name="server_dns2" #server_dns2="ngModel"
+                            pattern="^(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])$"
+                            autocomplete="off" placeholder="___.___.___.___" value="" />
+                        </span>
+                    </td>
+                </tr>
+            </tbody>
+            <tfoot>
+                <th></th>
+                <td>
+                    <p *ngIf="done">Настройки сохранены </p>
+                    <button *ngIf="!done"
+                            class="b_fill red"
+                            type="submit"
+                            [disabled]="disabled || !networkForm.form.valid || networkForm.form.pristine">
+                        Сохранить настройки
+                    </button>
+                </td>
+            </tfoot>
+        </table>
+    </form>
+</div>

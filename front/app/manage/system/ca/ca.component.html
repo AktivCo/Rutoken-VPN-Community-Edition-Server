@@ -1,0 +1,53 @@
+<header class="page_title">
+    <h1>Центр сертификации</h1>
+</header>
+<!-- content -->
+
+<div class="text short">
+    <p>Задайте название компании (возможен ввод только латинских симоволов), нажмите кнопку "Сохранить настройки" и дождитесь
+        успешного завершения автоматической генерации настроек центра сертификации. Процесс может занять несколько минут.
+        
+        </p>
+</div>
+
+<div class="tbl_settings no_cross chk_this" *ngIf="model">
+    <form #caForm="ngForm" (ngSubmit)="onSubmit()" novalidate>
+        <table>
+            <tbody>
+                <tr>
+                    <th>Название компании</th>
+                    <td>
+                        <span class="required" [ngClass]="{'error': common_name.invalid && !common_name.pristine}">
+                            <input class="chk" type="text" [(ngModel)]="model.common_name" name="common_name" #common_name="ngModel"
+                            pattern="^[A-Za-z0-9]{1,30}$"
+                            autocomplete="off" placeholder="Your Company" required/>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <th>Инфраструктура открытых ключей</th>
+                    <td>
+                        <span>
+                        <select class="chk" [(ngModel)]="model.pki_type" name="pki_type" required *ngIf="settings.settings">
+                            <option *ngFor="let item of settings.settings.pkiOptions" [value]="item.pkeyType">{{item.title}}</option>
+                        </select>
+                      </span>
+                    </td>
+                </tr>
+            </tbody>
+            <tfoot>
+                <th></th>
+                <td>
+                    <p *ngIf="done">Настройки сохранены </p>
+                    <button class="b_fill red show_modal"
+                            *ngIf="!done"
+                            type="submit"
+                            [disabled]="disabled || !caForm.form.valid || caForm.form.pristine">
+                        Сохранить настройки
+                    </button>
+                </td>
+            </tfoot>
+        </table>
+    </form>
+</div>
+<div #modal></div>

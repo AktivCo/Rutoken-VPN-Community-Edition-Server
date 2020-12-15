@@ -1,0 +1,17 @@
+{
+    "attr-lowercase": ["*ngIf", "ngStyle", "[ngClass]", "[(ngModel)]", "(onLogoutEvent)", "(onUpdateVpnCertEvent)", "(onUpdateSystemEvent)", "(ngSubmit)", "(ngModelChange)", "*ngFor", "*ngSwitch", "[routerLink]", "routerLink", "#loginForm", "#modal", "#pwdForm", "#ntpForm", "#caForm", "#domainForm", "#userForm", "#vpnForm", "#networkForm"],
+    "attr-no-duplication": true,
+    "attr-value-double-quotes": true,
+    "attr-unsafe-chars": true,
+    "attr-value-not-empty": false,
+    "doctype-first": false,
+    "head-script-disabled": true,
+    "id-class-ad-disabled": true,
+    "id-unique": true,
+    "src-not-empty": true,
+    "spec-char-escape": true,
+    "tagname-lowercase": true,
+    "tag-pair": true,
+    "tag-self-close": true,
+    "title-require": true
+}

@@ -1,0 +1,27 @@
+<header class="header">
+    <div class="wrap">
+        <dl>
+            <dt class="logo">
+                <a routerLink="['/'']"></a>
+            </dt>
+            <dd class="firmware blink" *ngIf="vpncertinfo?.needRequest">
+
+                <a (click)="startUpdateVpnCertClick()" *ngIf="vpncertinfo?.needRequest">
+                    <span>Обновите VPN сертификат </span>
+                </a>
+            </dd>
+            <dd class="auth">
+                <ul>
+                    <li>Пользователь:
+                        <strong *ngIf="username">{{username}}</strong>
+                    </li>
+                    <li>
+                        <a class="sign_out" (click)="logoutClick()">
+                            <span>Завершить сеанс</span>
+                        </a>
+                    </li>
+                </ul>
+            </dd>
+        </dl>
+    </div>
+</header>

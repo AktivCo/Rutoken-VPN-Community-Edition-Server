@@ -1,0 +1,1225 @@
+/* ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+   VPN Styles
+   --------------------------------------------------------------------------------
+   Визуальные настройки программной оболочки устройства VPN.
+   Стили шаблона кастомизированы на основе глобального LAYOUT.CSS.
+   Cтили контента частично на базе глабального STYLES.CSS.
+
+   ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ */
+
+/* ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+   BASE Styles
+   --------------------------------------------------------------------------------
+   Layout: Базовые параметры шаблона
+
+   ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ */
+
+a {
+  color: #aaa;
+  cursor: pointer;
+}
+a span {
+  color: #178;
+}
+a:hover,
+a:hover span {
+  color: #d23;
+}
+
+
+/* ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+   HEADER Styles
+   --------------------------------------------------------------------------------
+   Layout: Универсальный заголовок страниц.
+
+   ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ */
+
+.header .auth {
+  float: right;
+  padding-right: 15px;
+}
+
+/* --------------------------------------------------------------------------------
+  Firmware Update Notify
+  -------------------------------------------------------------------------------- */
+
+.header .firmware {
+  float: left;
+  margin: 4px 0 0 46px;
+  padding: 5px 15px 5px 35px;
+  font: bold 12px/1.5 "Segoe UI", Helvetica, Arial, Arial, sans-serif;
+  text-transform: uppercase;
+  background: #178 url("./images/layout/rutoken_vpn/button_settings.png") no-repeat 15px 100%;
+  color: #fff;
+  animation: blink 3s linear infinite;
+  
+
+}
+@keyframes blink {
+  0%    { background-color: rgb( 17, 119, 136);      }
+  50%   { background-color: rgba(17, 119, 136, 0.2); }
+  100%  { background-color: rgba(17, 119, 136, 1);   }
+}
+.header .firmware:hover {
+  animation: none;
+}
+.header .firmware a,
+.header .firmware a:hover,
+.header .firmware a span {
+  color: #fff;
+}
+
+.header .firmware .dot {
+  vertical-align: top;
+  font-size: 0.9em;
+}
+
+
+
+/* ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+   JUMPER Styles
+   --------------------------------------------------------------------------------
+   Layout: Горизонтальная навигация по сайту.
+
+   ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ */
+
+
+.jumper nav {
+   
+  border-bottom-color: #d23;
+}
+
+.jumper .catalogue li {
+  z-index: 30;
+  background-image: url("./images/layout/rutoken_vpn/tick_navy.png");
+}
+.jumper .catalogue li:hover,
+.jumper .catalogue li a:hover,
+.jumper .catalogue li strong:hover {
+  cursor: pointer;
+  color: #d23;
+}
+
+.jumper .catalogue li.current > a:after,
+.jumper .catalogue li.current > strong:after {
+  border-top-color: #d23;
+}
+.jumper .catalogue .level li.current > a:after,
+.jumper .catalogue .level li.current > strong:after {
+  border: none;
+ 
+}
+
+
+.jumper .level {
+  display: none;
+	border-color: #d23;
+}
+.jumper .level:before {
+  border-bottom-color: #d23;
+}
+.jumper .level ul li {
+  width: 220px;
+}
+.jumper .level ul li a {
+  color: black;
+	background-image: url("./images/layout/rutoken_vpn/bullet_sub_lite.png");
+}
+
+
+
+.jumper .level ul li a:hover {
+	background-image: url("./images/layout/rutoken_vpn/bullet_sub_dark.png");
+  display: block;
+  cursor: pointer;
+}
+.jumper .level ul li a span,
+.jumper .level ul li a:hover span{
+  color: inherit;
+}
+
+/* --- Service Link --- */
+
+.jumper .services dt {
+  z-index: 30;
+  padding-right: 0;
+  margin: 5px 0 0 0;
+  background-image: none;
+}
+.jumper .services dt a,
+.jumper .services dt strong {
+  display: block;
+  padding: 0 0 5px;
+  cursor: pointer;
+}
+.jumper .services dt a:hover {
+	color: #d23;
+  text-decoration: underline;
+}
+
+/* --------------------------------------------------------------------------------
+   Выпадающие блоки
+   -------------------------------------------------------------------------------- */
+
+.level {
+  margin-left: -20px;
+}
+.level ul {
+  width: 235px;
+}
+ .level:before {
+  left: 55px;
+}
+
+
+
+
+
+
+/* ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+   CONTENT SIDE Styles
+   --------------------------------------------------------------------------------
+   Layout: Содержательная часть страниц сайта.
+
+   ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ */
+
+/* --------------------------------------------------------------------------------
+   Корректировки макета
+   -------------------------------------------------------------------------------- */
+
+.content {
+  clear: both;
+  width: 960px;
+  margin: 0 auto;
+  overflow: hidden;
+  padding: 0 0 50px;
+  min-height: calc(100vh - 200px);
+}
+.content .page_title {
+  padding-top: 15px;
+}
+.content .page_title .action {
+  background-color: #178;
+  width: 180px;
+}
+.content.wide .menu {
+  margin-top: 80px;
+}
+
+/* ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+   MENU Styles
+   --------------------------------------------------------------------------------
+   Вертикальная навигация
+
+   ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ */
+
+
+.menu ul {
+  border-bottom-color: #d23;
+}
+
+.menu ul li a {
+  background-image: url("./images/layout/rutoken_vpn/bullet_div_dark.png");
+  color: #d23;
+}
+.menu ul li a,
+.menu ul li.current a,
+.menu ul li.current strong {
+  background-image: url("./images/layout/rutoken_vpn/bullet_div_dark.png");
+}
+.menu ul li.current a,
+.menu ul li.current a span,
+.menu ul li.current strong  {
+  text-decoration: none;
+  color: #d23;
+}
+.menu ul .special {
+  border: 3px solid #d23;
+}
+.menu ul li.special.current a,
+.menu ul li.special.current strong {
+  background-image: url("./images/layout/rutoken_vpn/bullet_div_dark.png");
+}
+.menu ul li.special.current a,
+.menu ul li.special.current a span,
+.menu ul li.special.current strong  {
+  color: #d23;
+  
+}
+
+
+
+
+/* ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+   FOOTER Styles
+   --------------------------------------------------------------------------------
+   Layout: Универсальный подвал сайта.
+
+   ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ */
+
+.footer.outlaw {
+  border-top-color: #d23;
+}
+
+
+
+
+/* ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+   BASE CONTENT Styles
+   --------------------------------------------------------------------------------
+   Content: Содержательная часть страниц сайта.
+
+   ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ */
+
+/* --------------------------------------------------------------------------------
+   Text Styles
+   -------------------------------------------------------------------------------- */
+
+.center  {
+ text-align: center;
+}
+
+/* --- Header --- */
+
+.text h2 {
+  padding: 25px 0;
+  font: bold 22px/1 "Segoe UI", Helvetica, Arial, sans-serif;
+}
+.text h3 {
+  padding: 15px 0 15px;
+  font: bold 22px/1 "Segoe UI", Helvetica, Arial, sans-serif;
+}
+
+/* --- Paragraph --- */
+
+.text p:last-child {
+  padding: 0;
+}
+.text p .status {
+  font: italic 12px/1 "Segoe UI", Helvetica, Arial, sans-serif;
+  color: #888;
+}
+.text p .status b {
+  color: #d23;
+}
+
+.text .status.error{
+  font: italic 14px/1 "Segoe UI", Helvetica, Arial, sans-serif;
+  color: #d23;
+}
+/* --- List Container  --- */
+
+.text ul {
+	padding: 10px 0 15px 45px;
+}
+.text ol li,
+.text ul li:before,
+.text ol li a:hover,
+.text ol li a:hover span {
+  color: #d23;
+}
+.text ol li a {
+  color: #aaa;
+}
+.text ol li a span {
+  color: #178;
+}
+
+
+/* --- Мягкое предупреждение --- */
+
+.accent_warn {
+  padding: 5px 25px 25px;
+  background-color: #f5f5f5;
+}
+.accent_warn h3 {
+  color: #d23;
+}
+
+.accent_warn p {
+  padding: 0;
+  font-size: 14px;
+  color: #d23;
+}
+
+/* Шрифт параграфа */
+.accent_lite {
+  padding: 15px 25px;
+  background-color: #f5f5f5;
+}
+.accent_lite p {
+  padding: 0 !important;
+  font-style: italic;
+  color: #888;
+}
+
+
+/* --------------------------------------------------------------------------------
+   Панель виджетов
+   -------------------------------------------------------------------------------- */
+
+.widjets {
+  overflow: hidden;
+  padding: 15px 15px 35px;
+  display: flex;
+  justify-content: center;
+  align-content: center;
+
+}
+.widjets dl {
+  
+  width: 400px;
+  padding: 25px 25px 0;
+  border: 1px solid #ddd;
+  margin: 0 10px;
+}
+
+
+.widjets dl:not(.disabled):hover {
+  border-color: #fff;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+}
+.widjets dl dt,
+.widjets dl dt div {
+  height: 150px;
+  display: block;
+  overflow: hidden;
+  text-align: center;
+}
+.widjets dl dd {
+  padding: 0 0 25px;
+  text-align: center;
+}
+.widjets dl dd h4 {
+  padding: 15px 0 10px;
+  font: bold 18px/1 "Segoe UI", Helvetica, Arial, sans-serif;
+  text-transform: uppercase;
+}
+
+.widjets dl .rvpn_desktop,
+.widjets dl .rvpn_mobile {
+
+  display: block;  
+  width: 400px;
+  height: 150px;  
+  
+}
+
+.widjets dl .rvpn_desktop {
+
+  background: transparent url('./images/widjets/rvpn_desktop.png') no-repeat center top;
+}
+
+.widjets dl .rvpn_mobile {
+
+  background: transparent url('./images/widjets/rvpn_mobile.png') no-repeat center top;
+}
+
+.widjets dl:not(.disabled):hover .rvpn_desktop {
+  
+  background: transparent url('./images/widjets/rvpn_desktop.png') no-repeat center bottom;
+}
+
+.widjets dl:not(.disabled):hover .rvpn_mobile {
+
+  background: transparent url('./images/widjets/rvpn_mobile.png') no-repeat center bottom;
+}
+
+.widjets dl .rvpn_mobile {
+
+  background: transparent url('./images/widjets/rvpn_mobile.png') no-repeat center top;
+}
+
+
+
+
+
+
+/* ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+   Buttons
+   --------------------------------------------------------------------------------
+   Описание.
+
+   ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ */
+
+
+/* --------------------------------------------------------------------------------
+   Links like Classic Button
+   -------------------------------------------------------------------------------- */
+
+/* --- Colors --- */
+button:focus{
+  outline: none;
+}
+
+button{
+  cursor: pointer;
+}
+
+.b_fill.navy {
+  background-color: #178;
+}
+.b_fill.red {
+  background-color: #d23;
+}
+.b_fill.gray {
+  background-color: #aaa;
+}
+
+/* --------------------------------------------------------------------------------
+   Links with Border
+   -------------------------------------------------------------------------------- */
+
+.b_cell.gray {
+  border-color: #888;
+  color: #888;
+}
+.b_cell.gray:hover {
+  border-color: #888;
+  background-color: #888;
+  color: #fff;
+}
+.b_cell.navy {
+  border-color: #178;
+  color: #178;
+}
+.b_cell.navy:hover {
+  border-color: #178;
+  background-color: #178;
+  color: #fff;
+}
+
+
+
+/* --------------------------------------------------------------------------------
+   Links with Border and Icon
+   -------------------------------------------------------------------------------- */
+
+/* --- Red --- */
+
+.b_icon {
+  display: inline-block;
+  padding: 8px 10px 8px 30px;
+  font: bold 12px/1 "Segoe UI", Helvetica, Arial;
+  text-transform: uppercase;
+  text-decoration: none;
+  background: #fff url("./images/layout/template/button_symbol.png") no-repeat 7px top ;
+  border: 2px solid #888;
+  color: #888;
+  margin-right: 4px;
+}
+.b_icon:hover {
+  text-decoration: underline;
+  background: #888 url("./images/layout/template/button_symbol.png") no-repeat 7px bottom ;
+  color: #fff ;
+}
+
+/* link Option — no border */
+/* Rutoken VPN —  предложение скачать и загрузить плагин */
+
+.b_icon.link {
+  border-color: #fff;
+  text-decoration: underline;
+  color: #aaa;
+}
+.b_icon.link span {
+  color: #178;
+}
+.b_icon.link:hover,
+.b_icon.link:hover span {
+  background-color: #fff;
+  color: #d23;
+}
+
+/* Disabled Option */
+
+button.b_icon[disabled],
+button.b_icon:hover[disabled] {
+  border-color: #ccc;
+  background-color: #eee;
+  background: #eee url("./images/layout/template/button_symbol.png") no-repeat 7px top ;
+  text-decoration: none;
+  cursor: text;
+  color: #888;
+}
+
+.b_icon.red {
+  border-color: #d23;
+}
+
+.b_icon.force-red {
+  border-color: #d23;
+  background-color: #d23 !important;
+}
+
+.b_icon.red,
+.b_icon.red span {
+  color: #d23;
+}
+.b_icon.red:hover {
+  background-color: #d23;
+}
+.b_icon.red:hover,
+.b_icon.red:hover span {
+  color: #fff;
+}
+
+/* --- Navy --- */
+
+.b_icon.navy {
+  border-color: #178;
+}
+.b_icon.navy,
+.b_icon.navy span {
+  color: #178;
+}
+.b_icon.navy:hover {
+  background-color: #178;
+}
+.b_icon.navy:hover,
+.b_icon.navy:hover span {
+  color: #fff;
+}
+
+/* --- Grey ---*/
+
+.b_icon.grey,
+.b_icon.grey span {
+  color: #888;
+}
+
+/* --- Icons --- */
+
+.b_icon.trouble {
+  background-image: url("./images/layout/rutoken_vpn/button_trouble.png");
+}
+.b_icon.settings {
+  background-image: url("./images/layout/rutoken_vpn/button_settings.png");
+}
+.b_icon.settings[disabled],
+.b_icon.settings[disabled]:hover{
+  background: #eee url("./images/layout/rutoken_vpn/button_settings.png") no-repeat 7px bottom ;
+  color: #888 !important;
+  text-decoration: none;
+}
+.b_icon.share {
+  background-image: url("./images/layout/rutoken_vpn/button_share.png");
+}
+.b_icon.save {
+  background-image: url("./images/layout/rutoken_vpn/button_save.png");
+}
+.b_icon.choice {
+  background-image: url("./images/layout/rutoken_vpn/button_choose.png");
+}
+.b_icon.device {
+  background-image: url("./images/layout/rutoken_vpn/button_device.png");
+}
+.b_icon.mobile {
+  background-image: url("./images/layout/rutoken_vpn/button_mobile.png");
+}
+.b_icon.device-empty {
+  background-image: url("./images/layout/rutoken_vpn/button_device.png");
+  height: 32px;
+  padding-left: 20px;
+}
+
+.b_icon.device-empty.force-red {
+  background: url("./images/layout/rutoken_vpn/button_device.png") no-repeat 7px bottom;
+}
+
+.b_icon.mobile-empty {
+  background-image: url("./images/layout/rutoken_vpn/button_mobile.png");
+  height: 32px;
+  padding-left: 20px;
+}
+.b_icon.mobile-empty.force-red {
+  background: url("./images/layout/rutoken_vpn/button_mobile.png") no-repeat 7px bottom;
+}
+.b_icon.add {
+  background-image: url("./images/layout/rutoken_vpn/button_add.png");
+}
+.b_icon.add_once {
+  background-image: url("./images/layout/rutoken_vpn/button_add_once.png");
+}
+
+.b_icon.refresh {
+  background-image: url("./images/layout/rutoken_vpn/button_refresh.svg");
+  background-size: 25px 25px;
+  vertical-align: middle;
+  background-position: 2px center;
+  background-repeat: no-repeat;
+
+}
+.b_icon.refresh.navy {
+  background-image: url("./images/layout/rutoken_vpn/button_refresh_navy.svg");
+  background-size: 25px 25px;
+  vertical-align: middle;
+  background-position: 2px center;
+  background-repeat: no-repeat;
+
+}
+
+.b_icon.red:hover.b_icon.refresh {
+  background-image: url("./images/layout/rutoken_vpn/button_refresh_white.svg");
+}
+
+.b_icon.navy:hover.b_icon.refresh {
+  background-image: url("./images/layout/rutoken_vpn/button_refresh_white.svg");
+}
+/* --- Disabled --- */
+
+button.b_icon.add[disabled],
+button.b_icon.add:hover[disabled] {
+  background: #eee url("./images/layout/rutoken_vpn/button_add_disabled.png") no-repeat 7px top ;
+}
+
+button.b_icon.navy.refresh[disabled],
+button.b_icon.navy.refresh:hover[disabled] {
+  background: #eee url("./images/layout/rutoken_vpn/button_refresh_disabled.svg") no-repeat;
+}
+
+button.b_icon.add_once[disabled],
+button.b_icon.add_once:hover[disabled] {
+  background: #eee url("./images/layout/rutoken_vpn/button_add_disabled.png") no-repeat 7px top ;
+}
+
+button.b_icon.device[disabled],
+button.b_icon.device:hover[disabled] {
+  background: #eee url("./images/layout/rutoken_vpn/button_device_disabled.png") no-repeat 7px top ;
+}
+button.b_icon.mobile[disabled],
+button.b_icon.mobile:hover[disabled] {
+  background: #eee url("./images/layout/rutoken_vpn/button_mobile_disabled.png") no-repeat 7px top ;
+}
+
+/* --------------------------------------------------------------------------------
+   Link without Border and Description. Icon only!
+   -------------------------------------------------------------------------------- */
+
+.b_sign.delete {
+  background-image: url("./images/layout/rutoken_vpn/button_delete.png");
+}
+
+.b_sign.add {
+  background-image: url("./images/layout/rutoken_vpn/button_add_red.png");
+}
+
+
+
+
+/* --------------------------------------------------------------------------------
+   Modal: VPN Client Download
+   -------------------------------------------------------------------------------- */
+.download_vpn_client {
+  overflow: hidden;
+  padding: 0 0 25px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+
+}
+
+
+.download_vpn_client dl dt a {
+
+  display: inline-block;
+  width: 128px;
+  height: 128px;
+  border: 1px solid #fff;
+  background-image: url("./images/layout/rutoken_vpn/sprite_os.png");
+  background-repeat: no-repeat;
+  margin: 0 10px;
+}
+.download_vpn_client dl.windows dt a {
+  background-position: 0 0%;
+}
+.download_vpn_client dl.windows:hover a {
+  background-position: 0 100%;
+}
+
+.download_vpn_client dl.macosx dt a {
+  background-position: -138px 0;
+}
+.download_vpn_client dl.macosx:hover dt a {
+  background-position: -138px 100%;
+}
+.download_vpn_client dl.ios dt a {
+  background-position: -276px 0;
+}
+.download_vpn_client dl.ios:hover dt a {
+  background-position: -276px 100%;
+}
+.download_vpn_client dl.android dt a {
+  background-position: -414px 0;
+}
+.download_vpn_client dl.android:hover dt a {
+  background-position: -414px 100%;
+}
+.download_vpn_client dl dd {
+  padding: 10px 0 0;
+  text-align: center;
+}
+.download_vpn_client dl dd a {
+  font: bold 14px/1 "Segoe UI", Helvetica, Arial, sans-serif;
+  text-transform: uppercase;
+  color: #d23;
+}
+.download_vpn_client dl dd a span {
+  color: #444;
+}
+.download_vpn_client dl dd a:hover span {
+  color: #d23;
+}
+
+
+
+
+/* --------------------------------------------------------------------------------
+   One Button Form (Reboot, Turnoff)
+   -------------------------------------------------------------------------------- */
+
+.frm_compact {
+  padding: 25px;
+  text-align: center;
+  background-color: #f5f5f5;
+}
+
+
+
+
+
+/* --------------------------------------------------------------------------------
+   Table Control Panel
+   -------------------------------------------------------------------------------- */
+
+.tbl_control {
+  padding: 0 0 35px;
+}
+.tbl_control dl {
+  overflow: hidden;
+  padding: 15px;
+  background-color: #f5f5f5;
+}
+.tbl_control dl dt {
+  float: left;
+}
+.tbl_control dl dt a {
+  margin-right: 10px;
+}
+.tbl_control dl dt a:last-child {
+  margin-right: 0;
+}
+.tbl_control dl dd {
+  float: right;
+}
+.tbl_control select {
+  display: inline-block;
+  border: 1px solid;
+  border-color: #aaa #ccc #ddd #ccc;
+  font: normal 13px/1 "Trebuchet MS", Helvetica, Arial;
+  background: #fff url("./images/layout/bgr_field.png") repeat-x top left;
+  height: 30px;
+  padding: 5px;
+  width: 200px;
+  margin: 1px 0 0;
+}
+.tbl_control input[type='text'] {
+  float: left;
+  display: block;
+  margin-top: 1px;
+  border: 1px solid;
+  border-color: #aaa #ccc #ddd #ccc;
+  font: normal 13px/1 "Trebuchet MS", Helvetica, Arial;
+  background: #fff url("./images/layout/bgr_field.png") repeat-x top left;
+  width: 450px;
+  height: 28px;
+  padding: 0 7px;
+  margin: 1px 0 0;
+}
+
+
+
+
+/* ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+   Admin Table Form
+   --------------------------------------------------------------------------------
+   Простые табличные формы для админки.
+
+   ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ */
+
+.tbl_settings .required:after,
+.tbl_settings thead.warning td:before {
+  color: #178;
+}
+.tbl_settings table tbody th {
+  width: 200px;
+}
+.modal .tbl_settings table tbody th {
+  width: 150px;
+}
+.tbl_settings table tbody th,
+.tbl_settings table tbody td {
+  padding: 10px 15px 0 15px;
+  vertical-align: top;
+}
+.tbl_settings table tbody td {
+  padding: 0 0 25px;
+}
+/*.tbl_settings table tbody .checkbox th,
+.tbl_settings table tbody .checkbox td {
+  padding: 0 0 25px;
+}*/
+.tbl_settings table tbody td input[type="checkbox"] {
+    margin-top: 10px;
+    cursor: pointer;
+}
+.tbl_settings table tbody td .routing {
+    margin-top: 40px;   
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+
+}
+.tbl_settings table tbody td .routing .routing-item {
+
+    display: inline-block;
+    vertical-align: middle;
+    width: auto;
+    margin-right: 20px;
+    line-height: 30px;    
+}
+.tbl_settings table tbody td .routing button {
+    height: 30px;
+    line-height: 10px;   
+}
+
+
+
+.tbl_settings table tfoot th,
+.tbl_settings table tfoot td {
+  padding: 25px 15px 0 0;
+}
+
+
+
+
+/* ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+   Result Table
+   --------------------------------------------------------------------------------
+   Таблица для списка устройств, сертификатов и пользователей.
+
+   ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ */
+
+.tbl_result {
+  width: 100%;
+  line-height: 1.5;
+}
+
+.tbl_result th {
+  text-align: left;
+  padding: 10px 15px 10px 65px;
+}
+.tbl_result td {
+  padding: 10px 15px 10px 15px;
+}
+.tbl_result .login {
+  max-width: 100px;
+  word-wrap: break-word;
+}
+.tbl_result .fullname {
+  max-width: 200px;
+  word-wrap: break-word;
+}
+
+/* --------------------------------------------------------------------------------
+   Table Head
+   -------------------------------------------------------------------------------- */
+	 
+.tbl_result thead th,
+.tbl_result thead td {
+  border-bottom: 2px solid #ddd;
+  text-transform: uppercase;
+}
+.tbl_result th,
+.tbl_result thead td  {
+  font: bold 14px/1.5 "Segoe UI", Helvetica, Arial;
+}
+
+
+/* --------------------------------------------------------------------------------
+   Table Body
+   -------------------------------------------------------------------------------- */
+	 
+.tbl_result tbody th,
+.tbl_result tbody td {
+  font-size: 13px;
+  vertical-align: middle;
+  border-bottom: 1px dotted #aaa;
+}
+.tbl_result tbody td:last-child {
+  text-align: right;
+}
+.tbl_result tbody tr:last-child th,
+.tbl_result tbody tr:last-child td {
+  border-bottom: 1px solid #ddd;
+}
+.tbl_result tbody tr:hover th,
+.tbl_result tbody tr:hover td {
+  background-color: #f9f9f9;
+}
+.tbl_result tbody tr th {
+  background: transparent url("./images/layout/template/tbl_icon.png") no-repeat 15px center;
+}
+
+.tbl_result tbody tr.device th {
+  background-image:  url("./images/layout/rutoken_vpn/tbl_device_on.png");
+}
+.tbl_result tbody tr.device.no_support th {
+  background-image:  url("./images/layout/rutoken_vpn/tbl_device_off.png");
+}
+.tbl_result tbody tr.mobile th {
+  
+  
+  background-image:  url("./images/layout/rutoken_vpn/tbl_mobile_on.png");
+}
+.tbl_result tbody tr.connected th {
+  
+  height: 32px;
+  background-image:  url("./images/layout/rutoken_vpn/tbl_connected.svg");
+  background-size: 30px 30px;
+  vertical-align: middle;
+  background-repeat: no-repeat;
+}
+.tbl_result tbody tr.domain th {
+  background-image:  url("./images/layout/rutoken_vpn/tbl_domain_on.png");
+}
+.tbl_result tbody tr.local th {
+  background-image:  url("./images/layout/rutoken_vpn/tbl_local_on.png");
+}
+.tbl_result tbody tr.user th {
+  background-image:  url("./images/layout/rutoken_vpn/tbl_user_off.png");
+}
+.tbl_result tbody tr.user.ready th {
+  background-image:  url("./images/layout/rutoken_vpn/tbl_user_on.png");
+}
+.tbl_result tbody tr.user.ready td {
+  font-style: italic;
+  color: #888;
+}
+.tbl_result tbody td a {
+  margin-right: 15px;
+}
+.tbl_result tbody td a:last-child  {
+  margin-right: 0;
+}
+.tbl_result.choose_device tbody tr:last-child th,
+.tbl_result.choose_device tbody tr:last-child td {
+  border-color: #fff;
+}
+.tbl_result.choose_device b {
+  display: block;
+  line-height: 1.2;
+}
+.tbl_result.choose_device b.no_label {
+  color: #888;
+}
+.tbl_result.choose_device .no_support em {
+  display: inline-block;
+  padding: 10px 0;
+  font: italic 12px/1 "Trebuchet MS", Helvetica, Arial;
+  color: #888;
+}
+
+/* --- Option for AD User List --- */
+
+.tbl_result.headless {
+  border-top: 1px solid #ddd;
+}
+.tbl_result.headless td {
+  width: 155px;
+}
+.tbl_result.headless td:last-child{
+  text-align: center;
+  width: 30px;
+}
+.tbl_result.headless input[type="checkbox"]  {
+  border: 3px solid #d23;
+  width: 20px;
+  height: 20px;
+}
+
+.tbl_result .pin input[type="password"]  {
+  display: inline-block;
+  border: 2px solid #888;
+  vertical-align: middle;
+  width: 80px;
+  height: 24px;
+  padding: 0 10px;
+}
+.tbl_result .pin input[type="button"]  {
+  display: inline-block;
+  width: 25px;
+  height: 28px;
+  font: bold 14px/1 "Segoe UI", Helvetica, Arial;
+  text-transform: uppercase;
+  text-decoration: none;
+  border: 2px solid #888;
+  background-color: #fff;
+  color: #888;
+  vertical-align: middle;
+  cursor: pointer;
+  
+}
+
+.tbl_result .pin span  {
+  
+  vertical-align: middle;
+  font: italic 14px/1 "Segoe UI", Helvetica, Arial, sans-serif;
+  color: #d23;
+}
+
+
+
+
+/* ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+   Situations
+   --------------------------------------------------------------------------------
+   Исключения.
+
+   ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ */
+
+/* --------------------------------------------------------------------------------
+   Fix for MSIE7
+   -------------------------------------------------------------------------------- */
+
+*body {
+  overflow-y: auto;
+  overflow-x: auto;
+}
+
+/* --------------------------------------------------------------------------------
+   Клиент зашел с мобильного
+   -------------------------------------------------------------------------------- */
+
+/* --- скрываем «десктопный блок» блок и модифицируем «мобильный» --- */
+
+.m .widjets dl {
+  display: none;
+}
+.m .widjets dl:last-child {
+  float: none;
+  display: block;
+  width: auto;
+}
+.m .widjets dl:last-child div img {
+  margin: 0 auto;
+}
+.m .widjets dl:hover {
+  border-color: #ddd;
+  box-shadow: none;
+}
+
+.progress_600 {
+  display: inline-block;
+  margin: 0 auto;
+  text-align: center;
+  width: 600px;
+  height: 30px;
+  background: url('./images/layout/rutoken_vpn/progress_600.gif')  no-repeat center;
+}
+.progress {
+  display: inline-block;
+  margin: 0 auto;
+  text-align: center;
+  width: 410px;
+  height: 30px;
+  background: url('./images/layout/rutoken_vpn/progress_600.gif')  no-repeat center;
+}
+
+
+/* ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+  Firmware Update Table
+  --------------------------------------------------------------------------------
+  Легкая таблица для работы с обновлениями системного софта
+
+  ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ */
+
+.firmware_update {
+  clear: both;
+  padding: 15px 25px;
+  background-color: #f5f5f5;
+}
+.firmware_update table {
+  width: 100%;
+}
+.firmware_update table tbody tr th {
+  width: 140px;
+}
+.firmware_update table tbody tr th,
+.firmware_update table tbody tr td {
+  text-align: left;
+  padding: 15px 0;
+}
+.firmware_update table tbody tr:not(:last-child) th,
+.firmware_update table tbody tr:not(:last-child) td {
+  border-bottom: 1px dotted #aaa;
+}
+.firmware_update table tbody tr td:last-child {
+  text-align: right;
+}
+
+.firmware_update table tbody tr td em {
+  color: #888;
+}
+
+.logs_date_input{
+  display: flex;
+  justify-content: space-around;
+  width: 416px;
+}
+.logs_warn{
+  padding: 15px 25px;
+  background-color: #f5f5f5;
+  font-size: 14px;
+  color: #d23;
+}
+
+.logs_list {
+  padding: 15px 25px;
+  background-color: #f5f5f5;
+  border-top: 1px dotted #ddd;
+  border-bottom: 1px dotted #ddd;
+  font-size: 14px;
+}
+.logs_list :last-child{
+  padding-bottom: 0px;
+}
+.logs_list a{
+  color: #444;
+}
+.logs_list a:hover{
+  color: #d23;
+}
+
+.logs_table tbody tr{
+  height: 55px;
+}
+
+.logs_enable_btn {
+  width: 235px;
+}

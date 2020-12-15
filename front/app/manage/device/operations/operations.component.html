@@ -1,0 +1,22 @@
+<header class="page_title">
+    <h1>Операции</h1>
+</header>
+<!-- content -->
+
+<div class="text">
+
+    <p>Любая из доступных ниже операций с устройством устройства {{ 'VPN_FULLNAME' | translate }} приведет к сбросу текущих пользовательских подключений.
+        Администратор также на некоторое время потеряет связь с устройством. </p>
+
+    <p>После выполнения операции выключения будет необходим физический доступ к устройству для его повторного включения. Сброс
+        настроек вернет устройство {{ 'VPN_FULLNAME' | translate }} к заводскому состоянию. Будут удалены все учетные данные пользователей и их
+        сертификаты.</p>
+</div>
+
+<div class="frm_compact air">
+    <form>
+        <button class="b_fill red show_modal" (click)="reboot(0)" type="submit">Перезагрузить</button>
+        <button class="b_fill red show_modal" (click)="reboot(1)" type="submit">Выключить</button>
+    </form>
+</div>
+<div #modal></div>

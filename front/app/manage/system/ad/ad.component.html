@@ -1,0 +1,80 @@
+<header class="page_title">
+    <h1>Настройка Active Directory</h1>
+</header>
+<!-- content -->
+
+<div class="text">
+    <p>Чтобы получить возможность импортировать учетные записи пользователей из домена Windows, необходимо произвести настройку
+        параметров Active Directory. Укажите IP-адрес контроллера домена и основное имя домена, а также реквизиты учетной
+        записи для формирования списка пользователей Active Directory.</p>
+</div>
+
+<div class="tbl_settings no_cross chk_this" *ngIf="model">
+    <form #domainForm="ngForm" (ngSubmit)="onSubmit()" novalidate>
+        <table>
+            <thead class="warning" [ngClass]="{'error': domainForm.form.invalid && !domainForm.form.pristine}">
+                <tr>
+                    <td colspan="2" *ngIf="domainForm.form.invalid && !domainForm.form.pristine">
+                        Проверьте корректность введенных данных
+                    </td>
+                    <td colspan="2" *ngIf="domainForm.form.valid || domainForm.form.pristine">
+                        Обязательно для заполнения
+                    </td>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <th>Контроллер домена</th>
+                    <td>
+                        <span class="required" [ngClass]="{'error': domain_server.invalid && !domain_server.pristine}">
+                            <input class="chk" type="text" [(ngModel)]="model.domain_server" name="domain_server" #domain_server="ngModel"
+                            pattern="^(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])$"
+                            autocomplete="off" placeholder="___.___.___.___" required />
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <th>Основое имя домена</th>
+                    <td>
+                        <span class="required" [ngClass]="{'error': ldap_base_dn.invalid && !ldap_base_dn.pristine}">
+                            <input class="chk" type="text" [(ngModel)]="model.ldap_base_dn" name="ldap_base_dn" #ldap_base_dn="ngModel"
+                            pattern="^(([a-zA-Z0-9]|[a-zA-Z0-9][a-zA-Z0-9\-]*[a-zA-Z0-9])\.)*([A-Za-z0-9]|[A-Za-z0-9][A-Za-z0-9\-]*[A-Za-z0-9])$"
+                            autocomplete="off" placeholder="domain.zone" required />
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <th>Логин</th>
+                    <td>
+                        <span class="required" [ngClass]="{'error': name.invalid && !name.pristine}">
+                            <input class="chk" type="text" [(ngModel)]="model.name" name="name"   #name="ngModel"
+                            pattern="^([A-Za-z0-9.]{1,15})([A-Za-z0-9]{1,15})$"
+                            autocomplete="off" placeholder="" required />
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <th>Пароль</th>
+                    <td>
+                        <span class="required" [ngClass]="{'error': password.invalid && !password.pristine}">
+                            <input class="chk" type="password" [(ngModel)]="model.password" name="password" #password="ngModel"
+                                pattern="^[^\s]+$"  autocomplete="off" placeholder="" required />
+                        </span>
+                    </td>
+                </tr>
+            </tbody>
+            <tfoot>
+                <th></th>
+                <td>
+                    <p *ngIf="done">Настройки сохранены </p>
+                    <button *ngIf="!done"
+                            class="b_fill red"
+                            type="submit"
+                            [disabled]="disabled || !domainForm.form.valid || domainForm.form.pristine">
+                        Сохранить настройки
+                    </button>
+                </td>
+            </tfoot>
+        </table>
+    </form>
+</div>

@@ -1,0 +1,44 @@
+<div *ngIf="data == 'enable'" class="modal">
+    <header class="hgroup">
+        <h2>Обратите внимание!</h2>
+    </header>
+    <div class="text center">
+        <p>Сохранение настроек приведет к сбросу текущих подключений.</p>
+    </div>
+    <div class="control">
+        <ul>
+            <li><a class="b_cell gray" (click)="closeModal(false)">Отмена</a></li>
+            <li><a class="show_modal b_fill red" (click)="closeModal(true)">Продолжить</a></li>
+        </ul>
+    </div>
+</div>
+<div *ngIf="data == 'clear'" class="modal">
+    <header class="hgroup">
+        <h2>Обратите внимание!</h2>
+    </header>
+    <div class="text center">
+        <p>Все лог-файлы будут удалены.</p>
+    </div>
+    <div class="control">
+        <ul>
+            <li><a class="b_cell gray" (click)="closeModal(false)">Отмена</a></li>
+            <li><a class="show_modal b_fill red" (click)="closeModal(true)">Продолжить</a></li>
+        </ul>
+    </div>
+</div>
+<div *ngIf="data == 'clear_when_enabled'" class="modal">
+    <header class="hgroup">
+        <h2>Обратите внимание!</h2>
+    </header>
+    <div class="text center">
+        <p>Очищение логов требует отключения логирования.</p>
+        <p>Все лог-файлы будут удалены.</p>
+    </div>
+    <div class="control">
+        <ul>
+            <li><a class="b_cell gray" (click)="closeModal(false)">Отмена</a></li>
+            <li><a class="show_modal b_fill red" (click)="closeModal(true)">Продолжить</a></li>
+        </ul>
+    </div>
+</div>
+<div class="fade"></div>

@@ -1,0 +1,25 @@
+<div class="modal">
+    <header class="hgroup">
+        <h2>Настройка компьютера или ноутбука</h2>
+    </header>
+
+    <div class="text">
+        <p>Для настройки компьютера необходимо создать файл с настройками подключения (конфигурацию VPN) и подготовить USB-токен.
+            Для этого нужно:</p>
+        <ol class="break">
+            <li><span>Подключить Рутокен ЭЦП к USB-порту данного компьютера, выбрать его в списке устройств и дождаться окончания процесса подготовки.</span></li>
+            <li><span>Перенести файл конфигурации VPN на компьютер, который будет использоваться для подключения к VPN. Используйте сменный носитель или электронную почту.</span></li>
+            <li><span>На том же компьютере установить приложение <a href="https://rutokenvpn.ru/client/" target="_blank"><span>{{ 'VPN_SHORTNAME' | translate }} Клиент</span></a>
+                для Windows или Mac OS и загрузить в него файл конфигурации. <strong class="name">Поздравляем, Вы в сети!</strong></span>
+            </li>
+        </ol>
+    </div>
+    <div class="control">
+        <ul>
+            <li><a class="b_cell gray" (click)="closeModal(false)">Отмена</a></li>
+            <li><a class="show_modal b_fill red" (click)="closeModal(true)">Продолжить</a></li>
+        </ul>
+    </div>
+
+</div>
+<div class="fade"></div>

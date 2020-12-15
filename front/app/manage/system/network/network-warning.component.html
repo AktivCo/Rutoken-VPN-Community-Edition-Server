@@ -1,0 +1,13 @@
+<div class="modal">
+    <header class="hgroup">
+        <h2>Обратите внимание!</h2>
+    </header>
+    <div class="text">
+        <p>Вы изменили начальный IP-адрес. Теперь web-сервис {{ 'VPN_FULLNAME' | translate }} находится по адресу {{data}}. Если Вы меняли настройки
+            сетевого подключения, верните их в исходное состояние и перейдите по <a href="https://{{data}}" target="_blank">ссылке</a>. </p>
+    </div>
+    <div class="control center">
+        <a class="b_cell gray" (click)="closeModal(false)">Отмена</a>
+    </div>
+</div>
+<div class="fade"></div>

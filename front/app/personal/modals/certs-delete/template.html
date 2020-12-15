@@ -1,0 +1,15 @@
+<div class="modal">
+    <header class="hgroup">
+        <h2>Удалить сертификат</h2>
+    </header>
+    <div class="text">
+        <p>Обратите внимание, что в случае отзыва сертификата пользователь <strong class="name">{{model.username}}</strong>            потеряет доступ к сервису. Удалить?</p>
+    </div>
+    <div class="control">
+        <ul>
+            <li><a class="b_cell gray" (click)="closeModal()">Отмена</a></li>
+            <li><a class="b_fill red" (click)="delete()">Удалить сертификат</a></li>
+        </ul>
+    </div>
+</div>
+<div class="fade"></div>

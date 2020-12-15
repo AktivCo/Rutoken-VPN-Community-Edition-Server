@@ -1,0 +1,61 @@
+<header class="page_title">
+    <h1>Сертификат VPN сервера</h1>
+</header>
+<!-- content -->
+
+<div class="text">
+    <p>
+        Действующий сертификат VPN необходим для организации канала связи клиент - сервер.
+    </p>
+    <p>
+        Cрок действия сертификата - 2 года. После истечения этого срока, сертификат необходимо обновить. 
+        При этом срок действия и работоспособность сертификатов клиентов не изменится.
+    </p>
+
+
+</div>
+
+<div class="firmware_update" *ngIf="vpncertinfo">
+    <table>
+        <tbody>
+            <tr>
+                <th> Серийный номер</th>
+                <td>
+                    <em> {{ vpncertinfo.serial}}</em>
+                </td>
+            </tr>
+            <tr>
+                <th> Отпечаток </th>
+                <td>
+                    <em> {{ vpncertinfo.fingerprint}}</em>
+                </td>
+            </tr>
+            <tr>
+                <th> Дата создания </th>
+                <td>
+                    <em> {{ vpncertinfo.startdate | date:"dd-MM-yyyy"}}</em>
+                </td>
+            </tr>
+            <tr>
+                <th> Дата истечения срока действия </th>
+                <td class="text">
+                    <em> {{ vpncertinfo.enddate | date:"dd-MM-yyyy"}} </em>
+                </td>
+            </tr>
+            <tr *ngIf="vpncertinfo.needRequest">
+                <th></th>
+                <td class="text">
+                    <span class="status error">Срок действия сертификата истекает. </span>
+                </td>
+            </tr>
+
+            <tr>
+                <th></th>
+                <td>
+                    <button class="b_fill red" type="submit" [disabled]="disabled" (click)="startUpdateCert()">Обновить</button>
+                </td>
+
+            </tr>
+        </tbody>
+    </table>
+</div>

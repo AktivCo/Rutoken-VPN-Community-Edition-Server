@@ -1,0 +1,49 @@
+<header class="page_title">
+    <h1>Логи</h1>
+</header>
+<!-- content -->
+<div class="tbl_settings no_cross">
+    <form>
+        <table class="logs_table">
+            <tbody>
+                <tr>
+                    <th>Уровень логирования</th>
+                    <td>
+                        <span>
+                            <select name="logs_level" class="frm_switch" [(ngModel)]="level" (ngModelChange)="onChange($event)" [disabled]="is_enabled">
+                                <option [value]="3">Стандартный(Рекомендуемый)</option>
+                                <option [value]="6">Расширенный</option>
+                                <option [value]="11">Максимальный</option>
+                            </select>
+                        </span>
+                    </td>
+                </tr>
+            </tbody>
+            <tfoot>
+            </tfoot>
+        </table>
+        <div class="text center">
+            <button *ngIf="!is_enabled" class="b_fill red show_modal logs_enable_btn" (click)="logs(0)" type="submit">Включить логирование</button>
+            <button *ngIf="is_enabled"  class="b_fill red show_modal logs_enable_btn" (click)="logs(1)" type="submit">Выключить логирование</button>
+            <button class="b_fill red show_modal" (click)="logs(2)" type="submit">Просмотр логов</button>
+            <button class="b_fill red show_modal" (click)="logs(3)" type="submit">Очистить логи</button>
+        </div>
+        <div class="text">
+            <div *ngIf="!is_enabled && warning" class="logs_warn">
+                <p>Внимание! Повышенный уровень логирования создает значительный  объем лог-файлов.<br/>
+                   Это существенно влияет на свободный объем и ресурс накопителя.<br/>
+                   Рекомендуем включать повышенный уровень исключительно на момент отладки.</p>
+            </div>
+        </div>
+        <div *ngIf="!is_empty_logs_list && logs_list != null" class="logs_list">
+            <p *ngFor="let log_file of logs_list">
+                <a href="/media/{{log_file}}">{{log_file}}</a>
+            </p>
+        </div>
+        <div *ngIf="is_empty_logs_list" class="logs_list text center">
+            <p>Лог-файлов не найдено.</p>
+        </div>
+    </form>
+</div>
+
+<div #modal></div>

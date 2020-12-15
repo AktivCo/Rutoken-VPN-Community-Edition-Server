@@ -1,0 +1,25 @@
+<div class="modal">
+    <header class="hgroup">
+        <h2>Настройка планшета или смартфона</h2>
+    </header>
+
+    <div class="text">
+        <p>Для настройки планшета или смартфона, работающих под управлением операционных систем iOS и Android, необходимо выполнить
+            следующие действия:</p>
+        <ol class="break">
+            <li><span>Создать файл c настройками подключения (конфигурацию VPN) мобильного устройства.</span></li>
+            <li><span>Перенести этот файл на мобильное устройство любым доступным способом. Проще всего это сделать, отправив его по электронной почте.</span></li>
+            <li><span>Установить на планшете или смартфоне <a href="https://openvpn.net/" target="_blank"><span>мобильное приложение OpenVPN</span></a>
+                и загрузить в него файл конфигурации. <strong class="name">Поздравляем, вы в сети!</strong></span>
+            </li>
+        </ol>
+    </div>
+    <div class="control">
+        <ul>
+            <li><a class="b_cell gray" (click)="closeModal(false)">Отмена</a></li>
+            <li><a class="show_modal b_fill red" (click)="closeModal(true)">Продолжить</a></li>
+        </ul>
+    </div>
+
+</div>
+<div class="fade"></div>

@@ -1,0 +1,134 @@
+<header class="page_title">
+    <h1>Настройка VPN-сервиса</h1>
+</header>
+<!-- content -->
+
+<div class="text">
+    <p>После изменения настроек сервиса VPN-сервиса пользователям необходимо будет вручную обновить конфигурационный файл с
+        настройками клиентского приложения {{ 'VPN_FULLNAME' | translate }} Клиент.</p>
+</div>
+
+<div class="tbl_settings no_cross chk_this" *ngIf="model">
+    <form #vpnForm="ngForm" (ngSubmit)="onSubmit()" novalidate>
+        <table>
+            <thead class="warning" [ngClass]="{'error': vpnForm.form.invalid && !vpnForm.form.pristine}">
+                <tr>
+                    <td colspan="2" *ngIf="vpnForm.form.invalid && !vpnForm.form.pristine">Проверьте корректность введенных данных</td>
+                    <td colspan="2" *ngIf="vpnForm.form.valid || vpnForm.form.pristine">Обязательно для заполнения</td>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <th>Внешний адрес сервера</th>
+                    <td>
+                        <span class="required" [ngClass]="{'error': external_ip.invalid && !external_ip.pristine}">
+                        <input class="chk"
+                                type="text"
+                                autocomplete="off"
+                                [(ngModel)]="model.external_ip"
+                                name="external_ip"
+                                #external_ip="ngModel"
+                                pattern="^[A-Za-z0-9.-]{1,30}[^\s.]$"
+                                placeholder="0.0.0.0 или my.company.domain"
+                                required/>
+                      </span>
+                    </td>
+                </tr>
+                <tr>
+                    <th>Адресация VPN-сети</th>
+                    <td>
+                        <span>
+                            <select class="chk" [(ngModel)]="model.server_name" name="server_name" required>
+                                <option *ngFor="let n of options.network" [value]="n">{{n}}</option>
+                            </select>
+                      </span>
+                    </td>
+
+                </tr>
+                <tr>
+                    <th> Отправлять весь трафик через VPN</th>
+                    <td>
+                        <input type="checkbox" value="" [(ngModel)]="routing" name="routing" />
+                    </td>
+                </tr>
+                <tr *ngIf="!routing">
+                    <td colspan="100%">
+                        <div class="text accent_lite">
+                            <p>
+                                При неправильной настройке соединение VPN может быть неработоспособно.
+                            </p>
+                            <p>
+                                Расширенная настройка позволяет задать подсеть, 
+                                до узлов которой трафик будет направляться через {{ 'VPN_FULLNAME' | translate }} сервер.
+                            </p>
+                        </div>
+                        <div class="routing text accent_lite" *ngFor="let item of routingTable; let i = index;">
+                            <label class="routing-item"> IP-АДРЕС: </label>
+                            <span [ngClass]="{'error': routeip.invalid && !routeip.pristine}">
+                                <input class="routing-item" type="text" [value]="item.ip" disabled />
+                            </span>
+                            <label class="routing-item"> МАСКА: </label>
+                            <span>
+                                <input class="routing-item" type="text" [value]="item.mask" disabled/>
+                            </span>
+                            <a class="b_sign delete" (click)="vpnForm.form.markAsDirty(); removeRouteFromTable(i)"></a>
+                        </div>
+
+                        <div class="routing">
+                            <label class="routing-item"> IP-АДРЕС: </label>
+                            <span [ngClass]="{'error': routeip.invalid && !routeip.pristine}">
+                                <input class="routing-item" type="text"
+                                [(ngModel)]="routingIp"
+                                    #routeip="ngModel" name="routeip"
+                                    pattern="^(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])$"
+                                    placeholder="___.___.___.___" />
+                            </span>
+                            <label class="routing-item"> МАСКА: </label>
+                            <span [ngClass]="{'error': routemask.invalid && !routemask.pristine}">
+                                <input class="routing-item" type="text" [(ngModel)]="routingMask"
+                                    #routemask="ngModel" name="routemask"
+                                    pattern="^(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])$"
+                                    placeholder="___.___.___.___" />
+                            </span>
+
+                            <a class="b_sign add" (click)="addRouteToTable()"></a>
+                        </div>
+                    </td>
+                </tr>
+                <tr *ngIf="!routing && !isDns && routingTable.length > 0">
+                    <th> Добавить DNS-сервер в маршрут </th>
+                    <td>
+                        <input type="checkbox" value="" [(ngModel)]="setDns" name="dns" />
+                    </td>
+                </tr>
+                <tr *ngIf="!routing && !setDns && !isDns">
+                    <td colspan="100%">
+                        <div class="text accent_lite">
+                            <p>
+                                Обратите внимание на настройки.
+                            </p>
+                            <p>
+                                Рекомендуется добавлять маршрут до указанных в настройках DNS-серверов. 
+                                Иначе у клиентов могут возникнуть трудности при работе
+                                с сетью.
+                            </p>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+            <tfoot>
+                <th></th>
+                <td>
+                    <p *ngIf="done">Настройки сохранены </p>
+                    <button *ngIf="!done"
+                            class="b_fill red"
+                            type="submit"
+                            [disabled]="disabled || !vpnForm.form.valid  ||  (routingTable.length === 0 && !routing)">
+                    Сохранить настройки
+                    </button>
+                </td>
+            </tfoot>
+        </table>
+    </form>
+</div>
+<div #modal></div>

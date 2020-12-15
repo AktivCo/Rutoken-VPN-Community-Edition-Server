@@ -1,0 +1,85 @@
+<header class="page_title">
+    <h1>Список пользователей</h1>
+</header>
+
+<div class="tbl_control">
+    <dl>
+        <dt>
+            <button class="b_icon red add show_modal" (click)="addUser()"><span>Локальный пользователь</span></button>
+            <a class="b_icon red add" [routerLink]="['/manage/users/ad']"><span>Импорт из Active Directory</span></a>
+        </dt>
+        <dd>
+            <select (change)="onChange($event.target.value)">
+                <option value="0" selected="true">Все</option>
+                <option value="1">Локальные</option>
+                <option value="2">Active Directory</option>
+            </select>
+        </dd>
+    </dl>
+</div>
+
+<table class="tbl_result" *ngIf="users.length > 0 && done">
+    <thead>
+        <tr>
+            <th>Логин</th>
+            <td>Пользователь</td>
+            <td>Генерация</td>
+            <td>Запрет</td>
+            <td>&nbsp;</td>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let item of users; let i = index" [ngClass]="{ 'domain': item.isDomain, 'local': '!item.isDomain'}">
+            <th>{{item.username}}</th>
+            <td>{{item.fullname}}</td>
+            <td>
+                <button *ngIf="settings.settings.pkiType === 'rsa'"
+                        class="b_icon navy mobile-empty"
+                        data-toggle="tooltip" data-placement="bottom"
+                        title="Выписать сертификат для мобильных устройств"
+                        [disabled]="requesting"
+                        (click)="requestMobileCert(item)">
+                </button>
+                <button class="b_icon navy device-empty"
+                        data-toggle="tooltip" data-placement="bottom"
+                        title="Выписать сертификат для ключа"
+                        [disabled]="requesting"
+                        (click)="requestTokenCert(item)">
+                </button>
+            </td>
+            <td>
+                <button *ngIf="settings.settings.pkiType==='rsa'"
+                        class="b_icon mobile-empty"
+                        [ngClass]="item.canGenereateMobileCert ? 'navy' : 'force-red'"
+                        data-toggle="tooltip" data-placement="bottom"
+                        [title]="(item.canGenereateMobileCert ? 'Запретить' : 'Разрешить')
+                        + ' пользователю выписывание сертификатов для мобильных устройств'"
+                        [disabled]="requesting"
+                        (click)="setUserCertGeneratingAccess(item, certTypes.mobile)">
+                </button>
+                <button class="b_icon device-empty"
+                        [ngClass]="item.canGenereateCertOnToken ? 'navy' : 'force-red'"
+                        data-toggle="tooltip" data-placement="bottom"
+                        [title]="(item.canGenereateCertOnToken ? 'Запретить' : 'Разрешить')
+                        + ' пользователю выписывание сертификатов для ключей'"
+                        [disabled]="requesting"
+                        (click)="setUserCertGeneratingAccess(item, certTypes.token)">
+                </button>
+            </td>
+            <td>
+                <a class="show_modal b_sign delete" (click)="removeUser(item)"></a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+<div class="text" *ngIf="users.length === 0 && done">
+    <div class="accent_lite">
+        <p>
+            В группе {{ 'VPN_SHORTNAME' | translate }} пока нет ни одного пользователя. Добавьте пользователей вручную или импортируйте учетные записи из Active
+            Directory.
+            <a class="need_config show_modal" href="#show_Need_Config"></a>
+        </p>
+    </div>
+</div>
+<div #usermodal></div>

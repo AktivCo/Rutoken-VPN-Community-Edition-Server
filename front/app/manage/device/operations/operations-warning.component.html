@@ -1,0 +1,21 @@
+<div class="modal">
+    <header class="hgroup">
+        <h2>Обратите внимание!</h2>
+    </header>
+    <div class="text" *ngIf="model == 0">
+        <p>Перезагрузка устройства {{ 'VPN_SHORTNAME' | translate }} приведет к сбросу текущих подключений. Также в течение некоторого времени не
+            будет доступен кабинет администратора.</p>
+    </div>
+    <div class="text" *ngIf="model == 1">
+        <p>Выключение устройства {{ 'VPN_SHORTNAME' | translate }} приведет к сбросу текущих подключений. Для повторного включения будет необходим
+            физический доступ к устройству.</p>
+    </div>
+    <div class="control">
+        <ul>
+            <li><a class="b_cell gray" (click)="closeModal(false)">Отмена</a></li>
+            <li><a class="show_modal b_fill red" (click)="closeModal(true)">Продолжить</a></li>
+        </ul>
+    </div>
+</div>
+<div class="fade"></div>
+

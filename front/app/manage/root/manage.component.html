@@ -1,0 +1,22 @@
+<page-header 
+    (onUpdateSystemEvent)="onUpdateSystem($event)" (onUpdateVpnCertEvent)="onUpdateVpnCert($event)" (onLogoutEvent)="onLogout($event)"
+    [(username)]="username" [(updateinfo)]="updateinfo" [(vpncertinfo)]="vpncert.settings">
+
+
+</page-header>
+
+
+
+<section class="content wide">
+
+    <navigation></navigation>
+    <div class="wrap">
+        <router-outlet name="sidemenu"></router-outlet>
+        <article class="data">
+            <router-outlet></router-outlet>
+        </article>
+
+    </div>
+</section>
+
+<page-footer></page-footer>

@@ -1,0 +1,51 @@
+<header class="page_title">
+    <h1>Пользователи Active Directory</h1>
+</header>
+<!-- content -->
+
+<div class="tbl_control">
+    <dl>
+        <dt><input type="text" placeholder="Поиск" [(ngModel)]="search" (ngModelChange)="searchInputChanged($event)" /></dt>
+        <dd><button class="b_icon red add" id="add_user_group" (click)="importSelected()">Добавить выделенных</button></dd>
+    </dl>
+</div>
+
+<table class="tbl_result" *ngIf="users.length > 0">
+    <thead>
+        <tr>
+            <th class="login">Логин</th>
+            <td class="fullname">Пользователь</td>
+            <td>
+                <button [disabled]="imported.length == 0"
+                        class="b_icon navy refresh"
+                        (click)="syncWithAD()"
+                        data-toggle="tooltip"
+                        data-placement="right"
+                        title="Синхронизировать данные пользователей с AD">
+                    Обновить
+                </button>
+            </td>
+            <td></td>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let item of users;" class="user" [ngClass]="{'ready': item.imported}">
+            <th class="login">{{item.username}}</th>
+            <td class="fullname">{{item.fullname}}</td>
+            <td>
+                <button class="b_icon navy add_once"
+                        *ngIf="!item.imported"
+                        [disabled]="importing"
+                        (click)="importUser(item)">
+                    Добавить
+                </button>
+                <span *ngIf="item.imported">добавлен</span>
+            </td>
+            <td><input type="checkbox" [disabled]="item.imported" [(ngModel)]="item.selected" /></td>
+        </tr>
+    </tbody>
+</table>
+
+<div class="center" *ngIf="users.length === 0">
+    <div class="progress"></div>
+</div>

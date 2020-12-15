@@ -1,0 +1,15 @@
+<section class="sign_in chk_this">
+    <h1>Авторизация</h1>
+    <form #loginForm="ngForm" (ngSubmit)="onSubmit()">
+        <dl>
+            <dt>{{welcomeMessage}}</dt>
+            <dt *ngIf="error" class="error">Неверный логин или пароль!</dt>
+            <dd><input class="chk" type="text" name="login" [(ngModel)]="model.login" placeholder="Логин" autocomplete="off" maxlength="40" required autofocus /></dd>
+            <dd><input class="chk" type="password" name="password" [(ngModel)]="model.password" placeholder="Пароль" autocomplete="off" maxlength="40" required /></dd>
+            <dd><button [disabled]="disabled || !loginForm.form.valid" type="submit">Авторизоваться</button></dd>
+        </dl>
+    </form>
+</section>
+<section class="about">
+    <strong>{{ 'VPN_FULLNAME' | translate }}</strong> {{year}} 
+</section>

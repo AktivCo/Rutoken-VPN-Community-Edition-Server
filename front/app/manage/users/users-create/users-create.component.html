@@ -1,0 +1,69 @@
+<div class="modal">
+    <header class="hgroup">
+        <h2>Новый пользователь</h2>
+    </header>
+
+    <div class="tbl_settings chk_this" *ngIf="model">
+        <form #userForm="ngForm" (ngSubmit)="onSubmit()" novalidate>
+            <table>
+                <thead class="warning" [ngClass]="{'error': userForm.form.invalid && !userForm.form.pristine}" *ngIf="!error">
+                    <tr>
+                        <td colspan="2" *ngIf="userForm.form.valid || userForm.form.pristine">
+                            Введите логин и пароль нового пользователя
+                        </td>
+                        <td colspan="2" *ngIf="userForm.form.invalid && !userForm.form.pristine">
+                            Проверьте корректность введенных данных
+                        </td>
+                    </tr>
+                </thead>
+                <thead class="warning error" *ngIf="error">
+                    <tr>
+                        <td colspan="2">{{error}}</td>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <th>Логин</th>
+                        <td>
+                            <span class="required" [ngClass]="{'error': name.invalid && !name.pristine}">
+                                <input class="chk" [(ngModel)]="model.name" name="username" #name="ngModel"
+                                 pattern="^[A-Za-z0-9]{1,30}$" type="text" required />
+                            </span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>Имя пользователя</th>
+                        <td>
+                            <span [ngClass]="{'error': fullname.invalid && !fullname.pristine}">
+                                <input class="chk" [(ngModel)]="model.fullname" name="fullname" #fullname="ngModel"
+                                 pattern="^[A-Za-z0А-Яа-я-9 ]{1,30}$" type="text"  />
+                            </span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>Пароль</th>
+                        <td>
+                            <span class="required" [ngClass]="{'error': password.invalid && !password.pristine}">
+                                <input class="chk" [(ngModel)]="model.password" name="password" #password="ngModel"
+                                 pattern="^[A-Za-z0-9]{1,30}$" type="password" required />
+                            </span>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="control center">
+                <ul>
+                    <li><button class="b_cell gray" type="button" (click)="closeModal()">Отмена</button></li>
+                    <li>
+                        <button class="b_fill red "
+                                [disabled]="disabled || !userForm.form.valid || userForm.form.pristine"
+                                type="submit">
+                            Добавить пользователя
+                        </button>
+                    </li>
+                </ul>
+            </div>
+        </form>
+    </div>
+</div>
+<div class="fade"></div>

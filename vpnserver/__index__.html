@@ -1,0 +1,22 @@
+﻿
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <base href="/" />
+
+    <title>VPN</title>
+
+    <link rel="stylesheet" type="text/css" href="/static/styles.css" />
+    <link rel="icon" href="/static/vpn.ico" />
+</head>
+
+<body>
+{% csrf_token %}
+<vpn></vpn>
+
+<script src="/static/app.bundle.js?v={% now "U" %}"></script>
+</body>
+</html>

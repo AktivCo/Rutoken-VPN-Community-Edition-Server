@@ -1,0 +1,345 @@
+<div class="modal" *ngIf="viewSteps.step == viewStepsStatus.INIT">
+    <header class="hgroup">
+        <h2>{{viewSteps.statusText}}</h2>
+    </header>
+    <div class="text">
+        <span class="progress_600"></span>
+    </div>
+    <div class="control center">
+        <a class="b_cell gray" (click)="closeModal()">Отмена</a>
+    </div>
+</div>
+
+<div class="modal" *ngIf="viewSteps.step == viewStepsStatus.DEVICE_LIST">
+    <header class="hgroup">
+        <h2>{{viewSteps.statusText}}</h2>
+    </header>
+    <div class="text" *ngIf="deviceList.length == 0">
+        <div class="accent_lite">
+            <p>Не обнаружено ни одного подходящего устройства. <br/> <a class="show_modal" (click)="getDeviceList()"><span>Обновить список устройств</span></a></p>
+        </div>
+    </div>
+
+    <div class="text break" *ngIf="deviceList.length > 0">
+        <p>Выберите из списка USB-токен, который будет использоваться для подключения к VPN.</p>
+        <table class="tbl_result choose_device">
+            <thead>
+                <tr>
+                    <th>Модель</th>
+                    <td>ID и имя</td>
+                    <td>&nbsp;</td>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="device" *ngFor="let item of deviceList; let i = index;">
+                    <th>{{item.model}}</th>
+                    <td>
+                        <b>{{item.serial}}</b>
+                        <b>{{item.label}}</b>
+                    </td>
+                    <td class="pin" *ngIf="!item.isPinCached">
+                        <b *ngIf="!item.pinError">
+                            <input  type="password" placeholder="PIN-код" [(ngModel)]="item.pin"  />
+                            <input  type="button" (click)="enterPin(i, item)" value="&crarr;" />
+                        </b>
+                        <b *ngIf="item.pinError">
+                            <span   class="error">{{item.pinError}}</span>
+                            <input  type="button" (click)="resetEnterPin(item)" value="&#x21BA;" />
+                        </b>
+                    </td>
+                    <td *ngIf="item.isPinCached">
+                        <a class="show_modal b_icon red choice" (click)="generatePkcs10(i)"><span>Выбрать</span></a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="control center">
+        <a class="b_cell gray" (click)="closeModal()">Отмена</a>
+    </div>
+</div>
+
+<div class="modal" *ngIf="viewSteps.step == viewStepsStatus.PKCS10_REQUEST">
+    <header class="hgroup">
+        <h2>{{viewSteps.statusText}}</h2>
+    </header>
+
+    <div class="text">
+        <p> Подготовка USB-токена. Процесс, в зависимости от модели устройства, может занять от 1 до 5 минут. Пожалуйста, подождите!
+        </p>
+        <p>
+            <span class="progress_600"></span>
+            <span class="status">Статус: <b>{{ viewSteps.additionalStatusText}}</b></span>
+        </p>
+    </div>
+</div>
+
+
+<div class="modal" *ngIf="viewSteps.step == viewStepsStatus.CERTREQ_FINISHED">
+    <header class="hgroup">
+        <h2>{{viewSteps.statusText}}</h2>
+    </header>
+
+    <div class="text center">
+        <p>Сертификат {{ 'VPN_FULLNAME' | translate }} Клиент для пользователя <strong class="name">{{username}}</strong> был успешно сгенерирован.</p>
+    </div>
+    <div class="control center">
+        <a class="b_cell gray" (click)="closeModal()">Закрыть</a>
+    </div>
+</div>
+
+<div class="modal" *ngIf="viewSteps.step == viewStepsStatus.INSTALL_SAFARI_PLUGIN">
+    <header class="hgroup">
+        <h2>{{viewSteps.statusText}}</h2>
+    </header>
+    <div class="text">
+        <p> {{viewSteps.additionalStatusText}} </p>
+        <ul class="break">
+            <li>
+                <span>
+                    <a href="https://www.rutoken.ru/support/download/get/rtPlugin-mac.html" target="_blank">
+                    <span>Рутокен Плагин </span> </a> для браузера Safari</span>
+            </li>
+        </ul>
+    </div>
+    <div class="control center">
+        <a class="show_modal b_fill red" (click)="closeModal()">Все понятно</a>
+    </div>
+</div>
+
+<div class="modal" *ngIf="viewSteps.step == viewStepsStatus.INSTALL_CHROME_ADAPTER">
+    <header class="hgroup">
+        <h2>{{viewSteps.statusText}}</h2>
+    </header>
+    <div class="text">
+        <p> {{viewSteps.additionalStatusText}} </p>
+        <ul class="break">
+            <li>
+                <span>
+                    <a href="https://chrome.google.com/webstore/detail/%D0%B0%D0%B4%D0%B0%D0%BF%D1%82%D0%B5%D1%80-%D1%80%D1%83%D1%82%D0%BE%D0%BA%D0%B5%D0%BD-%D0%BF%D0%BB%D0%B0%D0%B3%D0%B8%D0%BD/ohedcglhbbfdgaogjhcclacoccbagkjg" target="_blank">
+                    <span>Адаптер Рутокен Плагин </span> </a> для браузера Google Chrome</span>
+            </li>
+        </ul>
+    </div>
+    <div class="control center">
+        <a class="show_modal b_fill red" (click)="closeModal()">Все понятно</a>
+    </div>
+</div>
+
+<div class="modal" *ngIf="viewSteps.step == viewStepsStatus.INSTALL_EDGE_ADAPTER">
+    <header class="hgroup">
+        <h2>{{viewSteps.statusText}}</h2>
+    </header>
+    <div class="text">
+        <p> {{viewSteps.additionalStatusText}} </p>
+        <ul class="break">
+            <li>
+                <span>
+                    <a href="https://www.microsoft.com/en-us/p/adapter-rutoken-plugin/9p4kb5pz2vvx" target="_blank">
+                    <span>Адаптер Рутокен Плагин </span> </a> для браузера Microsoft Edge</span>
+            </li>
+        </ul>
+    </div>
+    <div class="control center">
+        <a class="show_modal b_fill red" (click)="closeModal()">Все понятно</a>
+    </div>
+</div>
+
+<div class="modal" *ngIf="viewSteps.step == viewStepsStatus.INSTALL_FIREFOX_ADAPTER">
+    <header class="hgroup">
+        <h2>{{viewSteps.statusText}}</h2>
+    </header>
+    <div class="text">
+        <p>{{viewSteps.additionalStatusText}}</p>
+        <ul class="break" *ngIf="checkOsByShortName('windows') || checkOsByShortName('macOS')">
+            <li>
+                <span *ngIf="checkOsByShortName('windows')">
+                    <a href="https://www.rutoken.ru/support/download/get/rtPlugin-win.html" target="_blank">
+                        <span>Рутокен Плагин</span>
+                </a>
+                </span>
+                <span *ngIf="checkOsByShortName('macOS')">
+                    <a href="https://www.rutoken.ru/support/download/get/rtPlugin-mac.html" target="_blank">
+                        <span>Рутокен Плагин</span>
+                </a>
+                </span>
+            </li>
+        </ul>
+    </div>
+    <div class="control center">
+        <a class="show_modal b_fill red" (click)="closeModal()">Все понятно</a>
+    </div>
+</div>
+<div class="modal" *ngIf="viewSteps.step == viewStepsStatus.INSTALL_OPERA_ADAPTER">
+    <header class="hgroup">
+        <h2>{{viewSteps.statusText}}</h2>
+    </header>
+    <div class="text">
+        <p> {{viewSteps.additionalStatusText}} </p>
+        <ul class="break">
+            <li>
+                <span>
+                    <a href="https://addons.opera.com/ru/extensions/details/adapter-rutoken-plagin/?display=en" target="_blank">
+                    <span>Адаптер Рутокен Плагин </span> </a> для браузера Opera</span>
+            </li>
+        </ul>
+    </div>
+    <div class="control center">
+        <a class="show_modal b_fill red" (click)="closeModal()">Все понятно</a>
+    </div>
+</div>
+<div class="modal" *ngIf="viewSteps.step == viewStepsStatus.INSTALL_PLUGIN">
+    <header class="hgroup">
+        <h2>{{viewSteps.statusText}}</h2>
+    </header>
+    <div class="text">
+        <p>{{viewSteps.additionalStatusText}}</p>
+        <ul class="break" *ngIf="checkOsByShortName('windows') || checkOsByShortName('macOS')">
+            <li>
+                <span *ngIf="checkOsByShortName('windows')">
+                    <a href="https://www.rutoken.ru/support/download/get/rtPlugin-win.html" target="_blank">
+                        <span>Рутокен Плагин</span>
+                </a>
+                </span>
+                <span *ngIf="checkOsByShortName('macOS')">
+                    <a href="https://www.rutoken.ru/support/download/get/rtPlugin-mac.html" target="_blank">
+                        <span>Рутокен Плагин</span>
+                </a>
+                </span>
+            </li>
+        </ul>
+    </div>
+    <div class="control center">
+        <a class="show_modal b_fill red" (click)="closeModal()">Все понятно</a>
+    </div>
+</div>
+<div class="modal" *ngIf="viewSteps.step == viewStepsStatus.UPDATE_PLUGIN">
+    <header class="hgroup">
+        <h2>{{viewSteps.statusText}}</h2>
+    </header>
+    <div class="text">
+        <p>{{viewSteps.additionalStatusText}}</p>
+        <ul class="break" *ngIf="checkOsByShortName('windows') || checkOsByShortName('macOS')">
+            <li>
+                <span *ngIf="checkOsByShortName('windows')">
+                    <a href="https://www.rutoken.ru/support/download/get/rtPlugin-win.html" target="_blank">
+                        <span>Рутокен Плагин</span>
+                </a>
+                </span>
+                <span *ngIf="checkOsByShortName('macOS')">
+                    <a href="https://www.rutoken.ru/support/download/get/rtPlugin-mac.html" target="_blank">
+                        <span>Рутокен Плагин</span>
+                </a>
+                </span>
+            </li>
+        </ul>
+    </div>
+    <div class="control center">
+        <a class="show_modal b_fill red" (click)="closeModal()">Все понятно</a>
+    </div>
+</div>
+<div class="modal" *ngIf="viewSteps.step == viewStepsStatus.BROWSER_IS_NOT_SUPPORTED">
+    <header class="hgroup">
+        <h2>{{viewSteps.statusText}}</h2>
+    </header>
+
+    <div>
+        <table class="tbl_result">
+            <thead>
+                <tr>
+                    <td>Операционная система</td>
+                    <td>Версия</td>
+                    <td>Браузеры</td>
+                    <td></td>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Microsoft Windows</td>
+                    <td>
+                        <ul class="break">
+                            <li>
+                                <span> 10/8.1/2012R2/8<br/>2012/7/2008R2/2008</span>
+                            </li>
+                        </ul>
+                    </td>
+                    <td>
+                        <ul class="break">
+                            <li>
+                                <span> Google Chrome &#62; 40</span>
+                            </li>
+                            <li>
+                                <span> Internet Explorer &#62; 9</span>
+                            </li>
+                            <li>
+                                <span> Mozilla Firefox &#62; 51</span>
+                            </li>
+                            <li>
+                                <span> Opera &#62; 12</span>
+                            </li>
+                            <li>
+                                <span> Спутник &#62; 3</span>
+                            </li>
+                            <li>
+                                <span> Яндекс.Браузер &#62; 1</span>
+                            </li>
+                        </ul>
+                    </td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>Apple macOS/OSX </td>
+                    <td>
+                        <ul class="break">
+                            <li>
+                                <span> 10.12/10.11/10.10<br/>10.9/10.8/10.7/10.6 </span>
+                            </li>
+                        </ul>
+                    </td>
+                    <td>
+                        <ul class="break">
+                            <li>
+                                <span>Safari &#62; 9</span>
+                            </li>
+                            <li>
+                                <span>Google Chrome &#62; 40</span>
+                            </li>
+                            <li>
+                                <span>Mozilla Firefox &#62; 51</span>
+                            </li>
+                            <li>
+                                <span>Opera &#62; 12</span>
+                            </li>
+                            <li>
+                                <span>Яндекс.Браузер &#62; 1</span>
+                            </li>
+                        </ul>
+                    </td>
+                    <td></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="control center">
+        <a class="show_modal b_fill red" (click)="closeModal()">Все понятно</a>
+    </div>
+</div>
+
+
+<div class="modal" *ngIf="viewSteps.step == viewStepsStatus.ERROR">
+    <header class="hgroup">
+        <h2>{{viewSteps.statusText}}</h2>
+    </header>
+    <div class="text">
+        <p>
+            <span class="status error">Во время выполнения запроса на сертификат произошла ошибка. </span>
+        </p>
+
+    </div>
+    <div class="control center">
+        <a class="b_cell gray" (click)="closeModal()">Закрыть</a>
+    </div>
+</div>
+
+<div class="fade"></div>

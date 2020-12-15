@@ -1,0 +1,16 @@
+<div class="modal">
+    <header class="hgroup">
+        <h2>Удалить пользователя</h2>
+    </header>
+    <div class="text">
+        <p>При удалении пользователя, все его сертификаты будут отозваны.
+            Удалить пользователя <strong class="name">{{model.username}}</strong>?</p>
+    </div>
+    <div class="control">
+        <ul>
+            <li><a class="b_cell gray" (click)="closeModal()">Отмена</a></li>
+            <li><a class="b_fill red"  (click)="delete()">Удалить пользователя</a></li>
+        </ul>
+    </div>
+</div>
+<div class="fade"></div>

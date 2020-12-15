@@ -1,0 +1,54 @@
+<header class="page_title">
+    <h1>Сертификаты пользователей</h1>
+</header>
+<!-- content -->
+
+<div class="tbl_control">
+    <dl>
+        <dt>
+            <input type="text" placeholder="Поиск" [(ngModel)]="search" (ngModelChange)="searchInputChanged($event)" />
+        </dt>
+        <dd>
+            <select (change)="onChange($event.target.value)">
+                <option value="" selected="true">Все</option>
+                <option value="1">{{ 'VPN_SHORTNAME' | translate }} Клиент</option>
+                <option value="2">Мобильный клиент</option>
+            </select>
+        </dd>
+
+    </dl>
+</div>
+
+<table class="tbl_result" *ngIf="certs.length > 0 && done">
+    <thead>
+        <tr>
+            <th>Пользователь</th>
+            <td>Дата создания</td>
+            <td>Конфигурация</td>
+            <td>&nbsp;</td>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let item of certs; let i = index"
+            [ngClass]="{ 'mobile': item.type.indexOf('mobileClient') > -1, 'device' : item.type.indexOf('mobileClient') <= -1}">
+            <th>{{item.username}}</th>
+            <td>{{toLocaleString(item.date) }}</td>
+            <td>
+                <a class="b_icon navy save" (click)="getVpnConfig(item.cert)"><span>Загрузить</span></a>
+            </td>
+            <td>
+                <a class="show_modal b_sign delete" (click)="removeCert(item)"></a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+<div class="text" *ngIf="certs.length === 0 && done">
+    <div class="accent_lite">
+        <p>
+            Сертификаты пользователей не найдены.
+            <a class="need_config show_modal" href="#show_Need_Config"></a>
+        </p>
+    </div>
+</div>
+<div #usercerts></div>

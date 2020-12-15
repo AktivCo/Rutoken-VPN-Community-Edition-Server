@@ -1,0 +1,46 @@
+<header class="page_title">
+    <h1>Подключенные пользователи</h1>
+</header>
+<!-- content -->
+
+<div class="tbl_control">
+    <dl>
+        <dt>
+            <input type="text" placeholder="Поиск" [(ngModel)]="search" (ngModelChange)="searchInputChanged($event)" />
+
+        </dt>
+        <dd>
+            <button class="b_icon red refresh" (click)="refresh()"><span>Обновить </span></button>
+        </dd>
+
+    </dl>
+</div>
+
+<table class="tbl_result" *ngIf="done && connected.length > 0">
+    <thead>
+        <tr>
+            <th>Пользователь</th>
+            <td>Байт отправлено</td>
+            <td>Байт принято</td>
+            <td>IP</td>
+            <td></td>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let item of connected; let i = index" class="connected">
+            <th>{{item.username}}</th>
+            <td>{{item.bytesReceived }}</td>
+            <td>{{item.bytesSent}}</td>
+            <td>{{item.ip}}</td>
+            <td></td>
+        </tr>
+    </tbody>
+</table>
+
+<div class="text" *ngIf="done && connected.length === 0 ">
+    <div class="accent_lite">
+        <p>
+            Пользователи не подключены к сервису.
+        </p>
+    </div>
+</div>

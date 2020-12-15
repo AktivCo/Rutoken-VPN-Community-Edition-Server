@@ -1,0 +1,16 @@
+<div class="modal">
+    <header class="hgroup">
+        <h2>Обратите внимание!</h2>
+    </header>
+    <div class="text">
+        <p>Внимание! После изменения настроек VPN-сервиса пользователям необходимо будет заново скачать и вручную обновить конфигурационный
+            файл приложения {{ 'VPN_FULLNAME' | translate }} Клиент.</p>
+    </div>
+    <div class="control">
+        <ul>
+            <li><a class="b_cell gray" (click)="closeModal(false)">Отмена</a></li>
+            <li><a class="show_modal b_fill red" (click)="closeModal(true)">Продолжить</a></li>
+        </ul>
+    </div>
+</div>
+<div class="fade"></div>

@@ -1,0 +1,98 @@
+<page-header (onLogoutEvent)="onLogout($event)"
+    [(username)]="user.username"></page-header>
+
+<section class="content">
+    <header class="page_title">
+        <h1>Кабинет пользователя</h1>
+        <a class="action show_modal" (click)="downloadClient()">Загрузить VPN Клиент</a>
+    </header>
+
+    <div class="text">
+        <p>
+            Для подключения к VPN с использованием технологий Рутокен необходимо произвести настройку используемых устройств.
+            <br/> Выберите тип устройства, которое необходимо настроить для работы с {{ 'VPN_FULLNAME' | translate }}.
+        </p>
+    </div>
+
+    <div class="widjets" *ngIf="settings">
+        <dl [ngClass]="{'disabled': !user.canGenereateCertOnToken}">
+            <dt>
+                <span class="rvpn_desktop"></span>
+            </dt>
+            <dd>
+                <h4>Компьютер или ноутбук</h4>
+                <p>Для настройки потребуется ключевой носитель Рутокен ЭЦП и установленное приложение {{ 'VPN_FULLNAME' | translate }} Клиент.</p>
+            </dd>
+            <dd>
+                <a *ngIf="!user.canGenereateCertOnToken"
+                   class="b_icon settings grey" disabled data-toggle="tooltip" data-placement="bottom"
+                   title="Выписывание сертификатов для ключей отключено">
+                    <span>Подготовить USB-токен и конфигурацию</span>
+                </a>
+                <a *ngIf="user.canGenereateCertOnToken"
+                   (click)="requestTokenCert()" class="show_modal b_icon settings red">
+                    <span>Подготовить USB-токен и конфигурацию</span>
+                </a>
+            </dd>
+        </dl>
+        <dl *ngIf="settings.pkiType==='rsa'"
+            [ngClass]="{'disabled': !user.canGenereateMobileCert}">
+            <dt>
+                <span class="rvpn_mobile"></span>
+            </dt>
+            <dd>
+                <h4>Планшет или смартфон</h4>
+                <p>Для настройки потребуется установленное мобильное приложение OpenVPN для iOS или Android.</p>
+            </dd>
+            <dd>
+                <a *ngIf="!user.canGenereateMobileCert"
+                    class="b_icon settings grey" disabled data-toggle="tooltip" data-placement="bottom"
+                    title="Выписывание сертификатов для мобильных устройств отключено">
+                    <span>Подготовить конфигурацию</span>
+                </a>
+                <a *ngIf="user.canGenereateMobileCert" (click)="requestMobileCert()" class="show_modal b_icon red settings">
+                    <span>Подготовить конфигурацию</span>
+                </a>
+            </dd>
+        </dl>
+    </div>
+
+    <div class="text" *ngIf="done">
+        <h2 id="result">Доступные конфигурации</h2>
+
+        <table class="tbl_result" *ngIf="certs.length > 0 ">
+            <thead>
+                <tr>
+                    <th>Тип подключения</th>
+                    <td>Дата создания</td>
+                    <td>Конфигурация</td>
+                    <td>&nbsp;</td>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let item of certs; let i = index"
+                    [ngClass]="{'mobile': item.type.indexOf('mobileClient') > -1, 'device': item.type.indexOf('mobileClient') <= -1}">
+                    <th>
+                        <span *ngIf="item.type.indexOf('mobileClient') > -1">Мобильный клиент</span>
+                        <span *ngIf="item.type.indexOf('rutokenVpnClient') > -1">{{ 'VPN_SHORTNAME' | translate }} клиент</span>
+                    </th>
+                    <td>{{toLocaleString(item.date) }}</td>
+                    <td>
+                        <a class="b_icon navy save" (click)="getVpnConfig(item.cert)"><span>Загрузить</span></a>
+                    </td>
+                    <td>
+                        <a class="show_modal b_sign delete" (click)="removeCert(item)"></a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="accent_lite" *ngIf="certs.length === 0">
+            <p>Ничего нет. Конфигурации для клиента {{ 'VPN_SHORTNAME' | translate }} появятся здесь сразу после того, как будут подготовлены.</p>
+        </div>
+    </div>
+
+</section>
+
+<page-footer></page-footer>
+<div #modal></div>

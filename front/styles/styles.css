@@ -1,0 +1,4141 @@
+/* ================================================================================
+   ================================================================================
+
+   LAYOUT STYLES DIGEST
+   --------------------------------------------------------------------------------
+
+   01. Common
+   02. Article
+   02. Pagination
+   03. Wall
+   04. Grid Look View Cell
+   04. Images
+   05. Tabs
+   06. Sliders
+   07. Contacts
+   08. Forms
+   08. Buttons
+   09. Extras
+   09. Downloads
+   10. Tables
+   11. Press + Release List
+   12. Popup
+   13. Store
+
+   ================================================================================ */
+
+/* ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+   COMMON Styles
+   --------------------------------------------------------------------------------
+   Вступительная часть контентных страниц.
+
+   ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ */
+
+.common {
+  clear: both;
+  overflow: hidden;
+  padding: 0 0 40px;
+}
+.common.break {
+  padding: 0;
+}
+.common.norma {
+  padding: 0 0 20px;
+}
+.common dt {
+  float: left;
+  width: 500px;
+  padding: 0;
+}
+.common dd {
+  margin-left: 525px;
+}
+
+/* --- Для новостей и страниц продуктов --- */
+
+.common.sexy dt {
+  border: 1px solid #eee;
+  border-color: #eee #ddd #ddd;
+}
+.common.sexy dt img {
+  display: block;
+  border-bottom: 1px solid #aaa;
+}
+
+/* --- Для магазина и пресс-кита --- */
+
+.common.pure {
+  margin: -5px 0 0;
+  padding: 0 0 25px;
+}
+
+/* --------------------------------------------------------------------------------
+   Базовый контент
+   -------------------------------------------------------------------------------- */
+
+.common dt p {
+  padding: 0 0 10px;
+  font: italic 13px/1.5 "Trebuchet MS", Helvetica, Arial, sans-serif;
+  color: #888;
+}
+.common.columns dt p:last-child {
+  padding: 0;
+}
+.common dd p {
+  font: italic 12px/1.5 "Trebuchet MS", Helvetica, Arial;
+  color: #888;
+}
+
+/* --------------------------------------------------------------------------------
+   Элементы с иконками
+   -------------------------------------------------------------------------------- */
+
+/* --- Телефон --- */
+
+.common dd.phone {
+  background: transparent url("./images/layout/template/phone.png") no-repeat 0 5px;
+  padding-left: 40px;
+  font-style: italic;
+  color: #888;
+}
+.common dd.phone strong {
+  display: block;
+  font: bold 16px/1.25 "Segoe UI", Helvetica, Arial, sans-serif;
+  color: #444;
+}
+
+/* --- Прайс-лист --- */
+
+.common dd.price {
+  padding: 15px 0 0 40px;
+  background: transparent url("./images/layout/template/pdf.png") no-repeat 5px 20px;
+  font: bold 14px/1.25 "Segoe UI", Helvetica, Arial, sans-serif;
+}
+.common .price a,
+.common .price a:hover span {
+  color: #888;
+}
+.common dd.price a span {
+  color: #444;
+}
+
+/* --------------------------------------------------------------------------------
+   Блок «Перейти к заказу»
+   -------------------------------------------------------------------------------- */
+
+.jump_to_order {
+  margin: 0 0 25px;
+  padding: 10px 20px 11px;
+  border: 1px solid #ccc;
+  background: #f9f9f9 url("./images/layout/bgr_button_price.png") repeat-x left top;
+}
+.jump_to_order:hover {
+  background-position: left bottom;
+  border: 1px solid #bbb;
+}
+.jump_to_order a {
+  display: inline-block;
+  padding-right: 25px;
+  background: transparent url("./images/layout/template/bullet_wall.png") no-repeat right 6px;
+  font: bold 16px/1.5 "Segoe UI", Helvetica, Arial, sans-serif;
+  text-transform: uppercase;
+  text-decoration: none;
+}
+.jump_to_order a span {
+  border-bottom: 1px solid #888;
+  color: #888;
+}
+.jump_to_order:hover a span {
+  color: #444;
+}
+
+/* --------------------------------------------------------------------------------
+   Блок «Начало работы»
+   -------------------------------------------------------------------------------- */
+
+.jump_to_start {
+  margin: 25px 0 0;
+  padding: 10px 20px 11px;
+  background-color: #888;
+}
+.jump_to_start a {
+  display: inline-block;
+  padding-right: 25px;
+  background: transparent url("./images/layout/template/bullet_button_start.png") no-repeat right 4px;
+  font: bold 14px/1.5 "Segoe UI", Helvetica, Arial, sans-serif;
+  text-transform: uppercase;
+  text-decoration: none;
+}
+.jump_to_start a:hover {
+  background-position: right -30px;
+}
+.jump_to_start a span {
+  border-bottom: 1px dashed #fff;
+  color: #fff;
+}
+.jump_to_start a:hover span {
+  border-bottom: none;
+}
+
+/* --------------------------------------------------------------------------------
+   Блок «Загрузка»
+   -------------------------------------------------------------------------------- */
+
+.common .resource {
+  padding: 15px 20px;
+  background-color: #f9f9f9;
+  border: 1px solid #ddd;
+}
+.common .resource h6 {
+  padding: 0 0 15px 5px;
+  border-bottom: 1px dotted #aaa;
+  font: bold 15px/1 "Segoe UI", Helvetica, Arial, sans-serif;
+  text-transform: uppercase;
+  color: #444;
+}
+.common .resource ul {
+  padding: 15px 0 0;
+}
+.common .resource ul li {
+  padding: 10px 0 15px 30px;
+  font: bold 13px/1.3 "Trebuchet MS", Helvetica, Arial, sans-serif;
+}
+.common .resource ul li:last-child {
+  padding-bottom: 10px;
+}
+.common .resource ul li a {
+  text-decoration: none;
+  color: #444;
+}
+.common .resource ul li a:hover {
+  text-decoration: underline;
+}
+.common .resource .gear {
+  background: transparent url("./images/layout/template/download.png") no-repeat 0 8px;
+}
+.common .resource .soft {
+  background: transparent url("./images/layout/template/download.png") no-repeat 0 -32px;
+}
+.common .resource .docs {
+  background: transparent url("./images/layout/template/pdf.png") no-repeat 0 8px;
+}
+.common .resource .view {
+  background: transparent url("./images/layout/template/view.png") no-repeat 0 8px;
+}
+
+/* --------------------------------------------------------------------------------
+   Блок «Посмотреть» (раздел «Брендирование»)
+   -------------------------------------------------------------------------------- */
+
+.common .moreover ul {
+  padding: 5px 0 0;
+}
+.common .moreover ul li {
+  padding: 0 0 20px 30px;
+  font: bold 13px/1.3 "Segoe UI", Helvetica, Arial, sans-serif;
+}
+.common .moreover ul li a {
+  color: #aaa;
+}
+.common .moreover ul li a span {
+  color: #888;
+}
+.common .moreover ul li a:hover,
+.common .moreover ul li a:hover span {
+  color: #444;
+  text-decoration: none;
+}
+.common .moreover .docs {
+  background: transparent url("./images/layout/template/pdf.png") no-repeat 0 5px;
+}
+.common .moreover .view {
+  background: transparent url("./images/layout/template/view.png") no-repeat 0 5px;
+}
+
+/* --------------------------------------------------------------------------------
+   Блок «Информация» (корпоративный сайт)
+   -------------------------------------------------------------------------------- */
+
+.common .addition ul {
+  border-bottom: 1px dashed #ccc;
+}
+.common .addition ul li {
+  padding: 15px 0 15px 30px;
+  border-top: 1px dashed #ccc;
+  font: normal 12px/1 "Segoe UI", Helvetica, Arial, sans-serif;
+}
+.common .addition ul .site {
+  padding: 15px 0 15px 30px;
+  font: bold 13.5px/0.9 "Segoe UI", Helvetica, Arial, sans-serif;
+  text-transform: uppercase;
+  border-top: none;
+}
+.common .addition ul a span {
+  color: #444;
+}
+.common .addition ul a {
+  color: #ccc;
+}
+.common .addition ul a:hover span {
+  color: #888;
+}
+.common .addition .site,
+.common .addition .link {
+  background: transparent url("./images/layout/template/link.png") no-repeat 0 12px;
+}
+.common .addition .docs {
+  background: transparent url("./images/layout/template/pdf.png") no-repeat 0 12px;
+}
+
+/* --------------------------------------------------------------------------------
+   Информационная карточка партнера
+   -------------------------------------------------------------------------------- */
+
+.common.card {
+  margin: 0 0 35px;
+  padding: 0 0 20px;
+  border-bottom: 1px dotted #aaa;
+}
+.common.card dt {
+  width: 200px;
+  text-align: center;
+}
+.common.card dt img {
+  width: 150px;
+  display: block;
+  margin: 0 auto;
+}
+.common.card dd {
+  margin-left: 225px;
+  line-height: 2;
+}
+.common.card h3 {
+  padding: 0 0 10px;
+  font: bold 15px/1 "Segoe UI", Helvetica, Arial;
+  color: #444;
+}
+.common.card dd ul li strong {
+  display: inline-block;
+  font-weight: normal;
+  font-size: 12px;
+  text-transform: none;
+  color: #888;
+}
+
+.common.card.standard dd ul li strong {
+  width: 60px;
+}
+.common.card.solutions dd ul li strong {
+  width: 85px;
+}
+.common.card.solutions ul > li:first-child {
+  font: bold 14px/2 "Segoe UI", Helvetica, Arial;
+  color: #444;
+  text-transform: uppercase;
+}
+
+
+/* ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+   Text Article
+   --------------------------------------------------------------------------------
+   Стили для текстовых блоков.
+
+   ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ */
+
+.text {
+  clear: both;
+  padding: 0 0 25px;
+}
+.text.short {
+  padding: 0 0 45px;
+}
+.text.break {
+  padding: 0;
+}
+
+/* --------------------------------------------------------------------------------
+   Заголовки уровя 2 и ниже
+   -------------------------------------------------------------------------------- */
+
+.text h2 {
+  padding: 35px 0 20px;
+  font: bold 24px/1 "Segoe UI", Helvetica, Arial, sans-serif;
+}
+.text h2.start {
+  padding: 0 0 20px;
+}
+.text p + h2 {
+  padding-top: 25px;
+}
+
+.text h3 {
+  padding: 20px 0 15px;
+  font: bold 18px/1 "Segoe UI", Helvetica, Arial, sans-serif;
+}
+
+.text > h3 {
+  padding-top: 0;
+}
+
+
+.text h3.start {
+  padding: 10px 0 20px;
+}
+.text h2.hedge,
+.text h3.hedge {
+  margin-top: 10px;
+  padding-top: 35px;
+  border-top: 1px dashed #ccc;
+}
+
+.text hr {
+  height: 1px;
+  padding: 5px 0 10px;
+  border: 1px dotted #ccc;
+  border-width: 1px 0 0;
+}
+
+/* --------------------------------------------------------------------------------
+   Параграфы
+   -------------------------------------------------------------------------------- */
+
+.text p {
+  font-size: 14px;
+  padding: 0 0 20px;
+}
+.text p:last-child {
+  padding: 0;
+}
+.text p.speech em {
+  color: #888;
+}
+.text.strong strong {
+  font: bold 14px "Segoe UI", Helvetica, Arial;
+}
+
+/* Выделение названий продуктов */
+
+.text strong.name {
+  font-family: "Segoe UI", Helvetica, Arial;
+}
+
+/* Ссылка ZOOM */
+
+a.zoom {
+  text-decoration: none;
+  border-bottom: 1px dashed #aaa;
+}
+a.zoom:hover,
+.store a.zoom {
+  border-bottom: none;
+}
+
+/* --- Мягкие акценты --- */
+
+/* Увеличенный шрифт */
+.accent_soft {
+  margin: 0 0 20px;
+  padding: 15px 25px;
+  background-color: #f5f5f5;
+  border-top: 1px dotted #ddd;
+  border-bottom: 1px dotted #ddd;
+  font-size: 14px;
+}
+.accent_soft h3 {
+  padding-top: 5px;
+}
+.accent_soft p {
+  padding: 0 0 10px;
+  font-size: 14px;
+}
+.accent_soft.italic {
+  font-style: italic;
+}
+
+/* Шрифт параграфа */
+.accent_lite {
+  padding: 15px 25px;
+  background-color: #f5f5f5;
+}
+.accent_lite p {
+  padding: 0 !important;
+  font-style: italic;
+  color: #888;
+}
+
+/* --- Жесткие акценты --- */
+
+.accent_hard {
+  padding: 0 20px 15px;
+  background-color: #f9f9f9;
+	box-shadow:       0 2px 5px rgba(0, 0, 0, 0.2),
+              inset 0 2px 5px rgba(0, 0, 0, 0.2);
+  border: 3px solid #bbb;
+}
+.accent_hard h5 {
+  font: bold 14px/3 "Segoe UI";
+  text-transform: uppercase;
+  text-align: center;
+  color: #000;
+}
+.accent_hard h5 span {
+  background-color: #f9f9f9;
+  padding: 0 15px;
+}
+.accent_hard div {
+  border-top: 1px dotted #aaa;
+  margin-top: -20px;
+  padding-top: 20px;
+}
+
+
+/* --- Формат «интервью» --- */
+
+.text.interview strong {
+  font: bold 14px "Segoe UI", Helvetica, Arial;
+  text-transform: uppercase;
+}
+.text.interview em {
+  color: #888;
+}
+
+
+/* --------------------------------------------------------------------------------
+   Формат семинара: секция и содержание
+   -------------------------------------------------------------------------------- */
+
+.seminar {
+  border-top: 1px dotted #ddd;
+}
+.seminar.short {
+  padding: 0 0 25px;
+}
+.seminar dl {
+  clear: both;
+  overflow: hidden;
+  padding: 20px 25px;
+  border-bottom: 1px dotted #ddd;
+}
+.seminar dl:last-child {
+  border-bottom: none;
+}
+.seminar dl.last_child {
+  border-bottom: none;
+}
+.seminar dl.dark {
+  background-color: #f9f9f9;
+  border-top: 1px dotted #ccc;
+  border-bottom: 1px dotted #ccc;
+}
+.seminar dl dt {
+  float: left;
+  width: 160px;
+  font: bold 13px/1.5 "Segoe UI", Helvetica, Arial;
+}
+.seminar dl dd {
+  padding: 0 0 10px 200px;
+}
+.seminar dl dd:last-child {
+	padding-bottom: 0;
+}
+.seminar dl dd:before {
+  float: left;
+  display: block;
+  position: relative;
+  margin-left: -15px;
+  content: "▪";
+  font: normal 20px/0.9 "Trebuchet MS", Helvetica, Arial;
+  color: #aaa;
+}
+
+
+/* --------------------------------------------------------------------------------
+   Формат таймлайна: время и содержание
+   -------------------------------------------------------------------------------- */
+
+.seminar_timeline {
+  padding: 0 0 35px;
+  border-top: 1px dotted #ddd;
+}
+.seminar_timeline dl {
+  overflow: hidden;
+  clear: both;
+}
+.seminar_timeline dl.dark {
+  border-top: 1px dotted #ccc;
+  border-bottom: 1px dotted #ccc;
+  background-color: #f9f9f9;
+}
+.seminar_timeline dl dt {
+  float: left;
+  width: 80px;
+  padding: 15px;
+  font: italic 12px/1.6 "Trebuchet MS", Helvetica, Arial;
+  color: #888;
+}
+.seminar_timeline dl dd {
+  padding: 15px 15px 15px 115px;
+  font: normal 13px/1.5 "Segoe UI", Helvetica, Arial;
+}
+
+/* Для объявления докладчиков */
+
+.seminar_timeline dl dd span {
+  display: block;
+  padding: 5px 0 0;
+  font: normal 12px "Trebuchet MS", Helvetica, Arial;
+}
+.seminar_timeline dl dd span span {
+  display: inline;
+}
+
+/* Нестандартная разметка. H4-P Почти нигде не используется */
+/* Только на корпоративном вот тут: /press-center/events/2015-12-04.html */
+
+.seminar_timeline dl dd h4 {
+  padding: 0 0 5px;
+  font: bold 16px/1.3 "Segoe UI", Helvetica, Arial;
+}
+
+
+
+
+
+
+/* --------------------------------------------------------------------------------
+   Блок имитации консоли
+   -------------------------------------------------------------------------------- */
+
+.syntax_highligh {
+  margin: 0 0 25px;
+  padding: 10px 15px;
+  border-top: 1px dotted #aaa;
+  border-bottom: 1px dotted #aaa;
+  background-color: #f8f8f8;
+  font: normal 13px/1.7 "Consolas", "Courier New";
+  white-space: pre;
+  color: #000;
+}
+
+
+/* --------------------------------------------------------------------------------
+   Нумерованный список. Только одноуровневый!!!
+   -------------------------------------------------------------------------------- */
+
+.text ul.break,
+.text ol.break {
+  padding-bottom: 0;
+}
+.text ul.half,
+.text ol.half {
+  padding-bottom: 15px;
+}
+.text p + ol {
+  margin-top: -10px;
+}
+.text ol {
+	padding: 0 0 25px;
+}
+.text ol li {
+	padding: 0 0 10px;
+  font-size: 14px;
+}
+.text ol {
+  padding-left: 20px;
+}
+.text ol li {
+  margin-left: 0;
+  color: #888;
+}
+.text ol li span {
+  color: #444;
+}
+.text ol.half li {
+	padding: 0 0 5px;
+}
+/* --------------------------------------------------------------------------------
+   Маркированный список. Маркер по умолчанию — длинное тире
+   -------------------------------------------------------------------------------- */
+
+.text p + ul {
+  margin-top: -10px;
+}
+.text ul {
+	padding: 0 0 25px 45px;
+}
+.text ul.break {
+  padding-bottom: 10px;
+}
+.text ul li {
+	padding: 0 0 10px;
+  font-size: 14px;
+}
+
+.text ul.dotted {
+	padding-left: 20px;
+}
+.text ul.dotted li:before {
+  margin: 0 0 0 -15px;
+  font: normal 20px/1 "Segoe UI", Helvetica, Arial;
+  content: "▪";
+}
+.text ul.string li {
+	padding: 0;
+}
+.text ul li:before {
+  float: left;
+  display: block;
+  position: relative;
+  margin: 0 10px 0 -25px;
+  font: bold 14px/1.2 "Segoe UI", Helvetica, Arial;
+  content: "—";
+}
+
+/* --- Маркеры дефисы --- */
+
+.text ul.dashed {
+	padding: 0 0 25px 45px;
+}
+.text ul.dashed  li:before {
+  float: left;
+  display: block;
+  position: relative;
+  margin: 0 10px 0 -25px;
+  font: bold 14px/1.2 "Segoe UI", Helvetica, Arial;
+  content: "—";
+}
+
+/* --- Маркеры квардраты --- */
+
+.text ul.dotted {
+	padding: 0 0 25px 20px;
+}
+.text ul.dotted li:before {
+  margin: 0 0 0 -15px;
+  font: normal 20px/1 "Segoe UI", Helvetica, Arial;
+  content: "▪";
+}
+
+/* --- Маркеры кавычки --- */
+.text ul.quote {
+	padding: 0 0 25px 35px;
+}
+.text ul.quote li:before {
+  margin: 0 0 0 -17px;
+  font: normal 20px/0.8 "Segoe UI", Helvetica, Arial;
+  content: "»";
+}
+
+
+/* --- Список к подзаголовком --- */
+
+.text ul.strong li {
+  padding-bottom: 15px;
+}
+.text ul li:last-child {
+	padding: 0;
+}
+.text ul.strong li strong,
+.text ul.strong li strong {
+  display: block;
+  font: bold 15px/1.5 "Segoe UI", Helvetica, Arial;
+  padding-bottom: 3px;
+}
+
+/* --- Базовый цвет маркеров --- */
+
+.text ul li:before,
+.text ul.gray li:before {
+  color: #aaa;
+}
+
+/* --- Двухуровневый список --- */
+
+/* Маркер + маркер */
+
+.text ul ul {
+  padding: 10px 0 0 25px;
+}
+.text ul ul.string {
+  padding: 5px 0 0 25px;
+}
+
+/* Номер + маркер */
+
+.text ol ul {
+  padding: 10px 0 0 35px;
+}
+.text ol ul.dotted {
+  padding: 5px 0 0 25px;
+}
+.text ol ul li {
+  color: #444;
+}
+.text ol li:last-child,
+.text ul li:last-child {
+  padding-bottom: 0;
+}
+
+
+/* --------------------------------------------------------------------------------
+   Двухколоночный список
+   -------------------------------------------------------------------------------- */
+
+/* --- Flexible — натуральное обтекание --- */
+/*     Требует тщательной работы с контентом */
+
+.text ul.flexible {
+  clear: both;
+  overflow: hidden;
+  padding: 10px 0 10px 35px;
+}
+.text ul.flexible li {
+  float: left;
+  width: 310px;
+  padding-right: 25px;
+  padding-bottom: 15px;
+}
+
+/* --- Floating — разбиение объектов на два незавасимых списка --- */
+
+.text .floating {
+  clear: both;
+  overflow: hidden;
+  padding: 0 0 10px 35px;
+}
+.text .floating ul {
+  float: left;
+  width: 310px;
+  padding: 0 25px 0 0;
+}
+.text .floating ul:last-child {
+  float: right;
+}
+.text .floating ul li {
+  padding-bottom: 15px;
+}
+.text .floating ul li:before {
+  float: left;
+  display: block;
+  position: relative;
+  margin: 0 10px 0 -15px;
+  font: bold 20px/1 "Segoe UI", Helvetica, Arial;
+  content: "▪";
+}
+.text .floating.break {
+  padding-bottom: 0;
+}
+.text .floating.break ul li:last-child {
+  padding-bottom: 0;
+}
+
+
+/* --- Cols — разбиение объектов на два незавасимых списка — еще один вариант --- */
+
+.text .cols {
+  clear: both;
+  overflow: hidden;
+  padding: 10px 0 10px 35px;
+}
+.text .cols ul {
+  float: left;
+  width: 315px;
+  padding: 0 30px 0 0;
+}
+.text .cols ul:last-child {
+  padding: 0;
+}
+.text .cols ul li {
+	padding: 0 0 15px 0;
+  font-size: 14px;
+}
+.text .cols ul li:before {
+  float: left;
+  display: block;
+  position: relative;
+  margin: 0 10px 0 -15px;
+  font: bold 20px/1 "Segoe UI", Helvetica, Arial;
+  content: "▪";
+  color: #d23;
+}
+
+/* --------------------------------------------------------------------------------
+   Трехколоночный список
+   -------------------------------------------------------------------------------- */
+
+.text ul.boxy {
+  overflow: hidden;
+  padding: 10px 25px 25px;
+  margin: 15px 0 25px;
+  background-color: #f6f6f6;
+}
+.text ul.boxy li {
+  float: left;
+  width: 330px;
+  padding: 0 0 0 0;
+  margin: 0 10px 0 0;
+
+}
+.text ul.boxy li:last-child {
+  float: right;
+  padding: 0;
+  margin: 0;
+}
+.text ul.boxy li:before {
+  content: none;
+}
+.text ul.boxy li > h3 {
+  padding-top: 10px;
+}
+
+.text ul.boxy li p {
+  font-size: 13px;
+}
+
+/* --------------------------------------------------------------------------------
+   Блок акцентного выделения
+   -------------------------------------------------------------------------------- */
+
+.accent {
+  margin: 25px 0;
+  padding: 0 20px 15px;
+  background-color: #f9f9f9;
+	box-shadow: 0 2px 2px #ccc, inset 0 2px 2px #ccc;
+  border: 3px solid #aaa;
+}
+.accent h5 {
+  font: bold 14px/3 "Segoe UI", Helvetica, Arial;
+  text-transform: uppercase;
+  text-align: center;
+  color: #000;
+}
+.accent h5 span {
+  background-color: #f9f9f9;
+  padding: 0 15px;
+}
+.accent div {
+  border-top: 1px dotted #aaa;
+  margin-top: -20px;
+  padding-top: 20px;
+}
+.accent div p {
+  padding-bottom: 10px;
+}
+.accent div p a:hover {
+  text-decoration: none;
+}
+.accent.inline {
+  margin-bottom: 25px;
+}
+
+/* --- Акцент внутри текстовой статьи --- */
+.text .accent {
+  margin-top: 15px;
+}
+
+
+
+/* --------------------------------------------------------------------------------
+   Цитаты
+   -------------------------------------------------------------------------------- */
+
+/* Если фото цитируемого отсутствует, цитата оформляется в виде блока DIV */
+
+.citation {
+  clear: both;
+  overflow: hidden;
+  margin: 25px 0 45px;
+  padding: 25px 25px 35px;
+  background-color: #f5f5f5;
+  border-top: 1px dotted #aaa;
+  border-bottom: 1px dotted #aaa;
+	box-shadow: 0 2px 2px rgba(0, 0, 0, 0.1);
+}
+.citation.break {
+  margin: 25px 0 15px;
+}
+.citation h4 {
+  font: bold 18px/1.5 "Segoe UI", Helvetica, Arial;
+}
+.citation h5 {
+  font: italic 13px/1.3 "Trebuchet MS", Helvetica, Arial;
+  padding: 0 0 25px;
+}
+.citation blockquote {
+  padding: 0 15px 0 30px;
+  background: transparent url("./images/layout/guote_left.png") no-repeat 0 3px;
+  font-size: 14px;
+}
+.close_quotes {
+  width: 20px;
+  height: 17px;
+  position: absolute;
+  margin: 5px 0 0 5px;
+  background: transparent url("./images/layout/guote_right.png") no-repeat 0 0;
+  font-size: 0;
+}
+
+/* --- Если есть фото, то цитата оформляется в виде контейнера DL --- */
+
+.citation dt {
+  float: left;
+  border: 1px solid #ddd;
+  border-color: #eee #ddd #ddd #ddd;
+}
+.citation dt img {
+  display: block;
+  border-bottom: 1px solid #aaa;
+}
+.citation dd {
+  padding-left: 145px;
+}
+.citation dd p {
+  padding-bottom: 10px;
+}
+
+
+
+
+
+
+/* ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+   Pagination
+   --------------------------------------------------------------------------------
+   Описание.
+
+   ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ */
+
+.pager.air {
+  padding: 45px 0 0;
+}
+.pager ul {
+	position: relative;
+	margin: 0 0 50px;
+  border-bottom: 1px solid #ddd;
+	font: normal 14px "Trebuchet MS", Helvetica, Arial;
+	text-align: center;
+	color: #aaa;
+}
+.pager li {
+	display: inline-block;
+	margin: 0 0 -1px;
+	padding: 0 10px 10px;
+	border-bottom: 3px solid transparent;
+}
+.pager li.empty {
+	padding: 0 0 10px;
+}
+
+/* --- Prev/Next --- */
+
+.pager .prev,
+.pager .next {
+	position: absolute;
+	bottom: -30px;
+	margin: 0;
+	height: 16px;
+	border-bottom: none;
+	background: transparent url("./images/layout/template/paging.png") no-repeat;
+	font: italic 12px/1 "Trebuchet MS", Helvetica, Arial;
+	color: #888;
+}
+
+/* Prev */
+
+.pager .prev {
+	left: 0;
+	padding: 1px 0 0 22px;
+	background-position: left -100px;
+}
+.pager .prev.disabled,
+.pager .prev.disabled:hover {
+	background-position: left 0;
+}
+
+/* Next */
+
+.pager .next {
+	right: 0;
+	padding: 1px 22px 0 0;
+	background-position: right -150px;
+}
+.pager .next.disabled,
+.pager .next.disabled:hover {
+	background-position: right -50px;
+}
+
+/* --- Current --- */
+
+.pager .current {
+	border-bottom: 3px solid #888;
+}
+.pager .range span {
+  width: 15px;
+  display: block;
+}
+
+/* --- Links --- */
+
+.pager a,
+.pager li a:hover,
+.pager a:hover span {
+	color: #888;
+}
+.pager li a span {
+	color: #444;
+}
+
+/* --------------------------------------------------------------------------------
+   Footnote — сноски
+   -------------------------------------------------------------------------------- */
+
+/* --- Для вписывания в TFOOT на витрине --- */
+
+.footnote {
+  padding: 15px 25px 0;
+}
+.footnote.border_top {
+  border-top: 1px solid #eee;
+}
+.footnote p {
+  font-size: 12px;
+  padding-left: 15px;
+  background: transparent url("./images/layout/template/tick_comment.png") no-repeat  left 5px;
+}
+
+/* --- В виде параграфов в отдельном блоке  --- */
+
+.text.footnote {
+  padding: 25px 0 0;
+  border-top: 1px dashed #ddd;
+}
+.text.footnote p {
+  padding: 0 0 15px 15px;
+  font-size: 12px;
+  color: #888;
+}
+.text.footnote p:last-child {
+  padding-bottom: 0;
+}
+
+/* --- Скрыть маркеры  --- */
+
+.footnote.no_marker p {
+  background-image: none;
+  padding: 0 0 15px;
+}
+
+
+
+/* ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+   Wall
+   --------------------------------------------------------------------------------
+   Описание.
+
+   ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ */
+
+.wall {
+  clear: both;
+}
+
+/* --------------------------------------------------------------------------------
+   Highlight Options
+   -------------------------------------------------------------------------------- */
+
+/* --- Manual and jQuery --- */
+
+.wall .dark {
+  background-color: #f9f9f9;
+  border-top: 1px dotted #ccc;
+  border-bottom: 1px dotted #ccc;
+}
+
+/* --- CSS Only --- */
+
+.highlight_odd dl:nth-child(odd) {
+  background-color: #f9f9f9;
+  border-top: 1px dotted #ccc;
+  border-bottom: 1px dotted #ccc;
+}
+
+.highlight_even dl:nth-child(even) {
+  background-color: #f9f9f9;
+  border-top: 1px dotted #ccc;
+  border-bottom: 1px dotted #ccc;
+}
+
+
+/* --------------------------------------------------------------------------------
+   Wall Massive
+   -------------------------------------------------------------------------------- */
+
+/* --- Container --- */
+
+.wall.massive dl {
+  padding: 25px;
+  overflow: hidden;
+}
+.wall.massive dl dt {
+  float: left;
+  width: 155px;
+  border: 1px solid #eee;
+  border-color: #eee #ddd #ddd #ddd;
+}
+.wall.massive dl dt img {
+  display: block;
+  border-bottom: 1px solid #aaa;
+}
+.wall.massive dl dd {
+  margin-left: 180px;
+}
+
+/* --- Positions --- */
+
+.wall.massive .first_start {
+  border-top: 1px dotted #ccc;
+}
+.wall.massive dl:first-child {
+  padding-top: 0;
+}
+.wall.massive dl:last-child {
+  border-bottom: 1px dotted #ccc;
+}
+
+/* --- Text Styles --- */
+
+.wall.massive dd h2 {
+  padding-left: 20px;
+  font: bold 20px/1 "Segoe UI", Helvetica, Arial, sans-serif;
+}
+.wall.massive dd h2 a {
+  padding: 0 25px 0 0;
+  background: transparent url("./images/layout/template/bullet_wall.png") no-repeat right 8px;
+  color: #888;
+}
+.wall.massive dd h2 a:hover {
+  background-position: right -26px;
+  text-decoration: none;
+  color: #444;
+}
+.wall.massive dd ul {
+  padding: 15px 0 0 20px;
+}
+.wall.massive dd ul li {
+	padding: 0 0 5px;
+  font-size: 12px;
+  color: #888;
+}
+.wall.massive dd li:before {
+  float: left;
+  display: block;
+  margin-left: -20px;
+  margin-right: 10px;
+  content: "—";
+  font: bold 14px/1.1 "Trebuchet MS", Helvetica, Arial;
+  color: #888;
+}
+
+/* --- OEM Version --- */
+
+.wall.massive.oem dd h2 {
+  padding-left: 0;
+}
+.wall.massive.oem dd p {
+  padding-top: 15px;
+}
+
+
+
+/* --------------------------------------------------------------------------------
+   Wall Lifeline
+   -------------------------------------------------------------------------------- */
+
+/* --- Container --- */
+
+.wall.lifeline h2 {
+  padding: 35px 0 20px;
+  font: bold 24px/1 "Segoe UI", Helvetica, Arial, sans-serif;
+  border-top: 1px dotted #aaa;
+}
+.wall.lifeline dl {
+  padding: 25px;
+  overflow: hidden;
+}
+.wall.lifeline dl dt {
+  float: left;
+  width: 155px;
+  height: 155px;
+  background-color: #ccc;
+  font: normal 40px/155px "Segoe UI", Helvetica, Arial;
+  text-align: center;
+  color: #444;
+}
+.wall.lifeline dl dd {
+  margin-left: 180px;
+}
+
+/* --- Text Styles --- */
+.wall.lifeline dl dd h3 {
+  padding: 0 0 10px;
+  font: bold 18px/1 "Segoe UI", Helvetica, Arial;
+  color: #888;
+}
+.wall.lifeline dd h3 a {
+  padding-right: 23px;
+  background: transparent url("./images/layout/template/bullet_wall_small.png") no-repeat right 8px;
+  color: #888;
+}
+.wall.lifeline dd h3 a:hover {
+  background-position: right -28px;
+  text-decoration: none;
+  color: #444;
+}
+.wall.lifeline dd p {
+  padding: 0 0 10px;
+}
+.wall.lifeline dd p:last-child {
+  padding: 0;
+}
+.wall.lifeline dd ul {
+  padding: 0 0 0 20px;
+}
+.wall.lifeline dd ul li {
+	padding: 0 0 5px;
+}
+.wall.lifeline dd li:before {
+  float: left;
+  display: block;
+  margin-left: -20px;
+  margin-right: 10px;
+  content: "—";
+  font: bold 14px/1 "Trebuchet MS", Helvetica, Arial;
+  color: #888;
+}
+
+
+
+/* --------------------------------------------------------------------------------
+   Wall Solutions
+   -------------------------------------------------------------------------------- */
+
+.wall.solutions h2 {
+  padding: 25px 0 25px;
+  font: bold 24px/1 "Segoe UI", Helvetica, Arial, sans-serif;
+}
+.wall.solutions h2.hedge {
+  padding-top: 45px;
+  border-top: 1px dotted #ccc;
+}
+
+/* --- Container --- */
+
+.wall.solutions dl {
+  padding: 25px 15px 25px 25px;
+  overflow: hidden;
+  clear: both;
+}
+.wall.solutions h2 + dl,
+.wall.solutions dl:first-child {
+  border-top: 1px solid #eee;
+}
+.wall.solutions dl:last-child {
+  border-bottom: 1px solid #eee;
+}
+.wall.solutions dt {
+  float: left;
+  width: 225px;
+}
+.wall.solutions dd {
+  padding-left: 235px;
+}
+
+.wall.solutions.thin dt {
+  width: 200px;
+}
+.wall.solutions.thin dd {
+  padding-left: 215px;
+}
+
+/* --- Text Styles --- */
+
+.wall.solutions dt h3 {
+  padding: 0 0 10px;
+  font: bold 16px/1 "Segoe UI", Helvetica, Arial, sans-serif;
+  color: #888;
+}
+.wall.solutions dt h3 a {
+  padding-right: 25px;
+  background: transparent url("./images/layout/template/bullet_wall_small.png") no-repeat right 6px;
+  color: #888;
+}
+.wall.solutions dt h3 a:hover {
+  background-position: right -30px;
+  color: #444;
+}
+.wall.solutions dd p {
+  font-size: 12px;
+  line-height: 1.5;
+  padding: 0 0 10px;
+}
+.wall.solutions dd p:last-child {
+  padding: 0;
+}
+.wall.solutions dt p {
+  font: italic 12px "Trebuchet MS", Helvetica, Arial;
+  color: #888;
+}
+.wall.solutions dd {
+    font-size: 12px;
+}
+.wall.solutions dd p {
+  font-size: 12px;
+}
+
+/* --------------------------------------------------------------------------------
+   Wall Slim
+   -------------------------------------------------------------------------------- */
+
+.wall.slim h2 {
+  padding: 45px 0 25px;
+  border-top: 1px dotted #ccc;
+  font: bold 24px/1 "Segoe UI", Helvetica, Arial, sans-serif;
+}
+.wall.slim h2.bottom_break {
+  padding: 45px 0 10px;
+}
+
+/* --- Container --- */
+.wall.slim {
+  padding: 0;
+}
+.wall.slim dl {
+  padding: 25px;
+  overflow: hidden;
+}
+
+/*
+.wall.slim dl:nth-child(even) {
+  background-color: #f9f9f9;
+  border-top: 1px dotted #ccc;
+  border-bottom: 1px dotted #ccc;
+}
+*/
+.wall.slim dl:last-child {
+  border-bottom: none;
+}
+.wall.border_bottom dl:last-child {
+  border-bottom: 1px dotted #ccc;
+}
+
+.wall.slim dl dt {
+  float: left;
+  width: 100px;
+  border: 1px solid #ddd;
+  border-top-color: #eee;
+}
+.wall.slim dl dt img {
+  display: block;
+  border-bottom: 1px solid #aaa;
+}
+.wall.slim dl dd {
+  margin-left: 125px;
+}
+.wall.slim dl dd h3 {
+  padding: 0 0 10px;
+  font: bold 16px/1 "Segoe UI", Helvetica, Arial;
+  color: #888;
+}
+.wall.slim dl dd h3 a {
+  padding-right: 23px;
+  background: transparent url("./images/layout/template/bullet_wall_small.png") no-repeat right 6px;
+  color: #888;
+}
+.wall.slim dl dd h3 a:hover {
+  background-position: right -30px;
+  text-decoration: none;
+  color: #444;
+}
+.wall.slim dl dd p {
+  font-size: 13px;
+}
+
+
+/* --------------------------------------------------------------------------------
+   Tab Wall
+   -------------------------------------------------------------------------------- */
+
+/*
+  See in Tabs Section
+*/
+
+
+/* ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+   Псевдоколоночные сетки
+   --------------------------------------------------------------------------------
+   Элементы для конструирования табличных галерей и инфоблоков.
+
+   ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ */
+
+/* --------------------------------------------------------------------------------
+   Grid — трехколоночная сетка изображений
+   -------------------------------------------------------------------------------- */
+
+.grid {
+  padding: 0 0 25px;
+}
+.grid ul {
+  padding: 25px 0 0;
+  overflow: hidden;
+}
+.grid ul li {
+  float: left;
+  padding: 0 20px 10px;
+  text-align: center;
+}
+.grid ul li.last_child,
+.grid ul li:last-child,
+.grid.gallery_border ul li:last-child {
+  padding-right: 0;
+}
+.grid ul li a {
+  display: block;
+}
+.grid ul li img {
+  display: block;
+}
+.grid ul li h2,
+.grid ul li p a,
+.grid ul li p strong {
+  display: block;
+  padding: 15px 0 0;
+  text-align: center;
+  font: bold 14px/1 "Segoe UI", Helvetica, Arial;
+}
+.grid ul li a:hover {
+  text-decoration: none;
+}
+
+/* --- Сетка 155x255 — квадраты --- */
+
+.grid.square ul:first-child {
+  padding: 5px 0 0;
+}
+.grid.square ul li a {
+  width: 155px;
+  margin: 0 auto;
+}
+.grid.square ul li p a {
+  width: 200px;
+}
+
+/* --- Сетка 200x150 — прямоугольники --- */
+/* Используется для представления сетки брендов на корпоративном сайте */
+
+.grid.badjes {}
+
+.grid.badjes h2 {
+  text-transform: uppercase;
+}
+.grid.badjes p {
+  padding-top: 10px;
+  max-width: 200px;
+	font: normal 12px/1.3 "Segoe UI", Helvetica, Arial;
+  color: #888;
+}
+
+
+/* --- Сетка 200x150 — прямоугольники --- */
+/* Фиксированный размер ячейки и уменьшенный размер изображения
+   Используется для сеток партнерских логотипов */
+
+.grid.tile {
+  padding: 0;
+}
+.grid.tile ul {
+  padding-bottom: 5px;
+}
+.grid.tile ul li {
+  width: 200px;
+  text-align: center;
+}
+.grid.tile ul li img {
+  width: 150px;
+  display: block;
+  margin: 0 auto;
+}
+
+/* --------------------------------------------------------------------------------
+   Tile — сетка фиксированных квадратных плиток
+   Стиль требует переименования, опробования и адаптации
+   Пока нигде не используется
+   -------------------------------------------------------------------------------- */
+/*
+.tile {
+  padding: 0 0 25px;
+}
+.tile ul {
+  padding: 25px 0 0;
+  overflow: hidden;
+ border-bottom: 1px dotted #aaa;
+}
+.tile ul:first-child {
+  padding: 5px 0 0;
+}
+.tile ul li {
+  float: left;
+  width: 240px;
+  padding: 0 0 10px;
+  text-align: center;
+}
+.tile ul li .product_view {
+  width: 155px;
+  margin: 0 auto;
+  display: block;
+  border: 1px solid #ddd;
+  border-color: #eee #ddd #ddd #ddd;
+}
+.tile ul li .product_view img {
+  display: block;
+  border-bottom: 1px solid #aaa;
+}
+.tile ul li .product_name {
+  display: block;
+  padding: 15px 0;
+  text-align: center;
+  font: bold 14px/1 "Segoe UI", Helvetica, Arial;
+}
+*/
+
+
+/* --- Сетка 140x200 — документы --- */
+
+.grid.papers ul li {
+  padding: 0 0 25px;
+}
+.grid.papers ul li a {
+  width: 140px;
+}
+.grid.papers ul li h2 {
+  padding: 15px 0 5px;
+}
+.grid.papers ul li p {
+	font: italic 12px/1 "Segoe UI", Helvetica, Arial;
+  color: #888;
+}
+
+/* --- Панель загрузки для раздела «Пресс-кит» --- */
+
+.grid .download,
+.grid.object_border .download {
+  border: none;
+  display: inline-block;
+  padding: 10px 0 5px 30px;
+  background: transparent url("./images/layout/template/download.png") no-repeat left 10px;
+  font: bold 14px/1.4 "Segoe UI", Helvetica, Arial;
+  text-transform: uppercase;
+}
+.grid .download:hover {
+  background-position: left -30px;
+}
+.grid .formats {
+  display: block;
+  text-align: center;
+  font: italic 12px/1.2  "Trebuchet MS", Helvetica, Arial !important;
+  color: #888;
+}
+.grid .status {
+  display: block;
+  padding: 5px 0 0;
+  text-align: center;
+  font: italic 12px/1.2  "Trebuchet MS", Helvetica, Arial !important;
+  color: #888;
+}
+
+
+/* --- Горизонтальные разделители уровней --- */
+
+.grid.gallery_border ul {
+ border-top: 1px dotted #aaa;
+}
+.grid.gallery_border ul:last-child {
+  border-bottom: 1px dotted #aaa;
+}
+.grid.gallery_border ul.last_child {
+  border-bottom: 1px dotted #aaa;
+}
+.grid.gallery_border ul li {
+  padding: 0 20px 20px;
+}
+/* ...исключая первую и последнюю строки */
+
+.grid.gallery_border.fl ul:first-child {
+  border-top: none;
+}
+.grid.gallery_border.fl ul:last-child {
+  border-bottom: none;
+}
+/* только верхний бордер */
+.grid.border_top {
+  border-top: 1px dashed #eee;
+}
+
+
+/* --- Декоративная обводка (pамка-тень) объектов --- */
+
+.grid.object_border ul li a {
+  border: 1px solid #ddd;
+  border-color: #eee #ddd #ddd #ddd;
+}
+.grid.object_border ul li img {
+  border-bottom: 1px solid #aaa;
+}
+.grid.object_border ul li p a,
+.grid.object_border ul li h2 a {
+  border: none;
+}
+
+
+/* --------------------------------------------------------------------------------
+   Превью-блок для продуктовых страниц
+   -------------------------------------------------------------------------------- */
+
+.look {
+  margin: 45px 0 25px;
+  background: #f9f9f9 url("./images/layout/bgr_gallery.png") no-repeat top center;
+  border-bottom: 1px solid #ddd;
+}
+.look.break {
+  margin-bottom: 0;
+}
+
+.look header {
+  position: relative;
+}
+.look header h5 {
+  position: absolute;
+  left: 300px;
+  top: -8px;
+	font: bold 16px/1 "Segoe UI", Helvetica, Arial;
+	text-transform: uppercase;
+}
+.look article {
+  position: relative;
+  padding: 30px 0 25px 35px;
+  overflow: hidden;
+}
+.look article ul li {
+  float: left;
+  padding-right: 25px;
+}
+.look article ul li:last-child {
+  padding-right: 0;
+}
+.look article ul li.last_child {
+  padding-right: 0;
+}
+.look article ul li a {
+  display: block;
+  border: 1px solid #ddd;
+  border-top-color: #eee;
+}
+.look article ul li a img {
+  display: block;
+  border-bottom: 1px solid #aaa;
+}
+
+/* --- Опция для многорядных галерей --- */
+
+.look.multirow article ul {
+  overflow: hidden;
+  padding: 0 0 25px;
+}
+.look.multirow article ul:last-child {
+  padding: 0;
+}
+
+/* --------------------------------------------------------------------------------
+   Резервная галерея из простого буллит-списка. Требует доработки.
+   -------------------------------------------------------------------------------- */
+
+.view ul {
+  overflow: hidden;
+  padding: 20px 0 0;
+}
+.view li {
+  float: left;
+  padding: 0 0 35px;
+  margin-right: 45px;
+  text-align: center;
+}
+.view li.last_child {
+  margin-right: 0;
+}
+.view li a {
+  display: block;
+  border: 1px solid #ddd;
+  border-top-color: #eee;
+}
+.view li a img {
+  display: block;
+  border-bottom: 1px solid #aaa;
+}
+
+/* --------------------------------------------------------------------------------
+   Cell — двухколоночная сетка информационных блоков
+   -------------------------------------------------------------------------------- */
+
+.cell ul {
+  clear: both;
+  overflow: hidden;
+  padding: 25px 0 25px;
+  border-bottom: 1px dotted #aaa;
+}
+.cell ul:last-child {
+  border-bottom: 0;
+}
+.cell ul.last_child {
+  border-bottom: 0;
+}
+.cell.sdk ul {
+  padding: 35px 0 35px;
+}
+.cell ul.first_child {
+  padding-top: 0;
+}
+.cell ul li {
+  float: left;
+  width: 340px;
+}
+.cell ul li:last-child {
+  float: right;
+}
+.cell ul li.last_child {
+  float: right;
+}
+
+/* --- Container --- */
+
+.cell dl {
+  overflow: hidden;
+}
+.cell dl dt {
+  float: left;
+  width: 100px;
+  display: block;
+  border: 1px solid #ddd;
+  border-color: #eee #ddd #ddd #ddd;
+  background-color: #ddd;
+  border-radius: 0 0 2px 2px;
+}
+.cell dl dt img {
+  display: block;
+  border-bottom: 1px solid #aaa;
+}
+.cell dl dd {
+  margin-left: 125px;
+  overflow: hidden;
+}
+
+/* --- Content --- */
+
+.cell h3 {
+  padding: 0 0 10px;
+  font: bold 16px/1 "Segoe UI", Helvetica, Arial;
+}
+.cell h3 a {
+  border-bottom: 1px dashed #888;
+  text-decoration: none;
+  color: #444;
+}
+.cell h3 a:hover {
+  border-bottom: none;
+  color: #888;
+}
+.cell h4 {
+  padding: 0 0 10px;
+  font: 600 13px/1.3 "Segoe UI", Helvetica, Arial;
+}
+.cell p {
+  font-size: 12px;
+}
+
+/* --- Options for Store --- */
+
+/* Message for Two or More SDK */
+
+.store_warning {
+  margin: 0 0 25px;
+  padding: 15px 25px;
+  background-color: #f5f5f5;
+}
+.store_warning p {
+  padding: 0 0 5px;
+  font: normal 14px/1.5 "Segoe UI", Helvetica, Arial;
+}
+
+/* Price: Full and Sale */
+
+.choose .price_history {
+  display: block;
+  float: left;
+  padding:  0;
+  font: bold 16px/1 "Segoe UI", Helvetica, Arial;
+  text-transform: uppercase;
+}
+.choose .price_history span {
+  display: block;
+}
+.choose .price_history .full {
+  font: bold 13px/1 Arial, Helvetica;
+  text-decoration: line-through;
+  color: #ccc;
+}
+.choose .price_history .sale {
+  font: bold 16px/1 "Segoe UI", Helvetica, Arial;
+  color: #888;
+}
+
+/* Price: Sale Only */
+
+.choose .price {
+  display: block;
+  float: left;
+  padding: 8px 0;
+  font: bold 16px/1 "Segoe UI", Helvetica, Arial;
+  text-transform: uppercase;
+  color: #888;
+}
+
+/* Add to Cart */
+
+.choose {
+  padding: 15px 0 0;
+  overflow: hidden;
+}
+.choose a,
+.choose button {
+  float: right;
+}
+.choose a {
+  display: block;
+  padding: 10px 0 10px 17px;
+  background: transparent url("./images/layout/template/bullet_store_modify.png") no-repeat left 12px;
+  font: bold 14px/1 "Segoe UI", Helvetica, Arial;
+  text-transform: uppercase;
+  text-decoration: underline;
+  color: #aaa;
+}
+.choose a:hover {
+  background-position: left -27px;
+}
+.choose a span {
+  color: #444;
+}
+.choose a strong {
+  display: none;
+}
+
+/* --------------------------------------------------------------------------------
+   Gorizontal Slider Gallery
+   -------------------------------------------------------------------------------- */
+
+.browse {
+  margin: 35px 0 40px;
+  background: #f9f9f9 url('./images/layout/bgr_gallery.png') no-repeat top center;
+  border: 1px solid #ddd;
+  border-top: none;
+}
+
+/* --- Header --- */
+
+.browse header {
+  position: relative;
+}
+.browse header h5 {
+  top: -8px;
+  left: 300px;
+  position: absolute;
+	font: bold 16px/1 "Segoe UI", Helvetica, Arial;
+	text-transform: uppercase;
+	color: #444;
+}
+
+/* Certificate Slider Option */
+
+.browse.certify header h5 {
+  left: 296px;
+}
+
+/* --- Container --- */
+
+.browse article {
+  position: relative;
+  padding: 35px 0 10px;
+}
+.browse article div {
+  overflow: hidden;
+  margin: 0 35px;
+}
+.browse article div ul {
+  list-style: none;
+  overflow: hidden;
+}
+.browse article div li {
+  float: left;
+}
+.browse article div li a {
+  display: block;
+  margin: 0 15px 10px;
+  border: 1px solid #ddd;
+  border-top-color: #eee;
+}
+.browse article div li a img {
+  display: block;
+  border-bottom: 1px solid #aaa;
+}
+.browse article div li span {
+  display: block;
+  width: 100px;
+  padding: 0 15px;
+	font: normal 11px/1.2 "Segoe UI", Helvetica, Arial;
+  font-style: italic;
+  text-align: center;
+	color: #444;
+}
+
+/* --- Controls --- */
+
+.browse span.control {
+	display: block;
+	width: 15px;
+	height: 40px;
+	position: absolute;
+	top: 50%;
+  margin-top: -20px;
+  background-color: #aaa;
+}
+.browse .control.prev {
+	left: -1px;
+}
+.browse .control.next {
+	right: -1px;
+}
+.browse .control:hover {
+	width: 25px;
+}
+.browse .control:after,
+.browse .control:before {
+  width: 0;
+  height: 0;
+  display: block;
+  position: absolute;
+  content: "";
+  bottom: 50%;
+  margin-bottom: -7px;
+  border-top: 7px solid transparent;
+  border-bottom: 7px solid transparent;
+}
+.browse .control.prev:before {
+  right: 0;
+  border-right: 7px solid #f5f5f5;
+}
+.browse .control.next:after {
+  left: 0;
+  border-left: 7px solid #f5f5f5;
+}
+.browse .control.disabled,
+.browse .control.disabled:hover {
+	width: 15px;
+  background-color: #ddd;
+}
+
+/* --- Pagination --- */
+
+.browse .roll {
+  margin: 15px auto 0;
+  text-align: center;
+}
+.browse .roll span {
+	display: inline-block;
+	width: 6px;
+	height: 6px;
+  margin: 2px 4px;
+	background-color: #ccc;
+  border: 1px solid #f5f5f5;
+	cursor: pointer;
+}
+.browse .roll span.selected {
+	background-color: #aaa;
+  border: 1px solid #aaa;
+}
+
+
+
+
+
+
+/* ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+   Images
+   --------------------------------------------------------------------------------
+   Описание.
+
+   ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ */
+
+/* --- Inline Center --- */
+
+.image_center {
+  clear: both;
+  margin: 35px 0 0;
+  padding: 20px 0 15px;
+  border-top: 1px dotted #888;
+  border-bottom: 1px dotted #888;
+  background-color: #f5f5f5;
+  text-align: center;
+	box-shadow: 0 2px 2px #eee;
+}
+
+.image_center.position_after {
+  margin: 5px 0 0;
+}
+.image_center.position_inline {
+  margin: 5px 0 25px;
+}
+.image_center.position_tab_after {
+  margin: 5px 0 0;
+}
+.image_center.position_tab_inline {
+  margin: 5px 0 25px;
+}
+
+/* In Tab Conditions */
+
+.image_center.intab {
+  margin: 5px auto 25px;
+}
+.image_center.alone {
+  margin: 5px auto 0;
+}
+
+/* Fullsize */
+
+.image_center.fullsize {
+  margin: 25px 0;
+  padding: 15px;
+  text-align: left;
+}
+.image_center.fullsize img {
+  display: block;
+  margin: 0 auto;
+}
+.image_center.fullsize p {
+  font-size: 12px;
+  font-style: italic;
+  padding: 10px 0 0;
+  text-align: center;
+}
+
+/* --- Inline Float --- */
+
+/* Truecolor */
+
+.image_float {
+  margin-bottom: 15px;
+  border-bottom: 1px solid #ddd;
+  border-radius: 3px;
+  font-size: 0;
+}
+.image_float img {
+  margin-top: 5px;
+  vertical-align: top;
+  display: block;
+  border: 1px solid #ddd;
+  border-color: #eee #ddd #aaa #ddd;
+}
+
+/* Whiteback */
+
+.image_float.whiteback {
+  border: none;
+}
+.image_float.whiteback img {
+  border: none;
+}
+
+/* Floating */
+
+.image_float.left {
+  float: left;
+  margin-right: 15px;
+}
+.image_float.right {
+  float: right;
+  margin-left: 15px;
+}
+
+
+
+
+
+/* ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+   FOOTER Customize
+   --------------------------------------------------------------------------------
+   Для показа заказных токенов на страницах партнеров.
+
+   ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ */
+
+.footer_customize {
+  padding: 0;
+}
+.footer_customize h2 {
+  padding: 0 0 25px;
+  font: bold 22px/1 "Segoe UI", Helvetica, Arial, sans-serif;
+}
+.footer_customize h2.hedge {
+  margin-top: 10px;
+  padding: 35px 0 25px;
+  border-top: 1px dashed #ccc;
+}
+.footer_customize dl {
+  border-top: 1px dotted #aaa;
+  border-bottom: 1px dotted #aaa;
+  overflow: hidden;
+}
+.footer_customize dl dt {
+  float: left;
+}
+.footer_customize dt .zoom {
+  border: none;
+}
+.footer_customize dl dd {
+  padding: 25px 0 25px 225px;
+  font-style: italic;
+  font-size: 14px;
+}
+
+
+
+
+
+/* ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+   Tabs
+   --------------------------------------------------------------------------------
+   Описание.
+
+   ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ */
+
+.tabs {
+  clear: both;
+}
+
+/* --- Navigation --- */
+
+.tabs .tab_head {
+  clear: both;
+  overflow: hidden;
+  background: transparent url("./images/layout/bgr_tabs_gray.png") repeat-x center bottom;
+}
+.tabs .tab_head li {
+  float: left;
+	padding: 10px 15px 15px;
+	border: 3px solid transparent;
+  border-bottom: none;
+	color: #888;
+}
+.tabs .tab_head li span {
+  cursor: pointer;
+	border-bottom: 1px dashed #aaa;
+	font: bold 14px/1 "Segoe UI", Helvetica, Arial, sans-serif;
+	text-transform: uppercase;
+  color: #888;
+}
+.tabs .tab_head li.current {
+	background-color: #fff;
+	border-color: #ddd;
+	color:#888;
+}
+.tabs .tab_head li.current span,
+.tabs .tab_head li span:hover {
+  color: #444;
+}
+
+/* --- Content --- */
+
+.tabs .tab_body {
+  clear: both;
+	display: none;
+  background-color: #fff;
+	border: 3px solid #ddd;
+  border-top: none;
+}
+.tab_body.current {
+  display: block;
+}
+
+/* Empty Tab for Tests */
+
+.tab_body.tmp_empty {
+  padding: 25px;
+}
+.tab_body.tmp_empty p {
+  padding-bottom: 15px;
+}
+.tab_body.tmp_empty p:last-child {
+  padding-bottom: 0;
+}
+
+
+/* --------------------------------------------------------------------------------
+   Tabs in Tab
+   -------------------------------------------------------------------------------- */
+
+.tabs_child {
+  clear: both;
+}
+.tabs_child .tabs_child_head {
+  clear: both;
+  overflow: hidden;
+  padding: 10px 0 0 0;
+  margin: 0 25px;
+  background: transparent url("./images/layout/bgr_tabs_child.png") repeat-x center bottom;
+}
+.tabs_child .tabs_child_head li {
+  float: left;
+  width: auto;
+  padding: 0 0 25px;
+  font: bold 15px/1 "Segoe UI", Helvetica, Arial, sans-serif;
+  text-align: center;
+  position: relative;
+  border-bottom: 2px solid transparent;
+}
+.tabs_child .tabs_child_head li span {
+  cursor: pointer;
+  border-bottom: 1px dashed #888;
+}
+.tabs_child .tabs_child_head li span:hover {
+  color: #888;
+}
+.tabs_child .tabs_child_head li.current {
+  border-bottom: 2px solid #444;
+}
+.tabs_child .tabs_child_head li.current span {
+  border-bottom: none;
+  color: #444;
+}
+.tabs_child_body {
+  display: none;
+}
+.tabs_child_body.current {
+  display: block;
+}
+
+/* --------------------------------------------------------------------------------
+   Tab Content: Wall
+   -------------------------------------------------------------------------------- */
+
+.tab_body.wall {
+  padding: 10px 0 0;
+}
+.tab_body.wall dl {
+  padding: 25px;
+  overflow: hidden;
+}
+.tab_body.wall dl:last-child {
+  border-bottom: none;
+}
+.tab_body.wall dl.last_child {
+  border-bottom: none;
+}
+.tab_body.wall dl dt {
+  float: left;
+  width: 100px;
+  border: 1px solid #ddd;
+  border-top-color: #eee;
+}
+.tab_body.wall dl dt img {
+  display: block;
+  border-bottom: 1px solid #aaa;
+}
+.tab_body.wall dl dd {
+  margin-left: 125px;
+}
+
+/* For Model List */
+
+.tab_body.wall dl dd h2 {
+  padding: 0 0 10px;
+  font: bold 16px/1 "Segoe UI", Helvetica, Arial;
+  color: #888;
+}
+.tab_body.wall dd h2 a {
+  padding-right: 23px;
+  background: transparent url("./images/layout/template/bullet_wall_small.png") no-repeat right 6px;
+  color: #888;
+}
+.tab_body.wall dd h2 a:hover {
+  background-position: right -30px;
+  text-decoration: none;
+  color: #444;
+}
+
+/* For browse List */
+
+.tab_body.wall dd h3 {
+  padding: 0 0 10px;
+  font: bold 16px/1 "Segoe UI", Helvetica, Arial;
+  color: #888;
+}
+.tab_body.wall dd h3 a {
+  border-bottom: 1px dashed #888;
+  text-decoration: none;
+  color: #444;
+}
+.tab_body.wall dd h3 a:hover {
+  border-bottom: none;
+  color: #888;
+}
+
+/* --------------------------------------------------------------------------------
+   Tab Content: Specification
+   -------------------------------------------------------------------------------- */
+
+.tab_body.spec {
+	padding: 15px 0 0;
+}
+
+.spec dl {
+  clear: both;
+  overflow: hidden;
+  padding: 20px 25px;
+}
+.spec dl.dark {
+  background-color: #f9f9f9;
+  border-top: 1px dotted #ccc;
+  border-bottom: 1px dotted #ccc;
+}
+.spec dl:last-child {
+  border-bottom: none;
+}
+.spec dl.last_child {
+  border-bottom: none;
+}
+.spec dl dt {
+  float: left;
+  width: 160px;
+  font-weight: bold;
+}
+.spec dl dd {
+  padding: 0 0 10px 200px;
+}
+.spec dl dd:last-child {
+	padding-bottom: 0;
+}
+.spec dl dd:before {
+  float: left;
+  display: block;
+  position: relative;
+  margin-left: -15px;
+  content: "▪ ";
+  font: normal 20px/0.9 "Trebuchet MS", Helvetica, Arial;
+  color: #aaa;
+}
+
+/* --- NO DOTTED: Общее и избранное --- */
+
+.spec.no_dotted dl dd:before,
+.spec dl dd.no_dotted:before {
+  content: "";
+}
+
+.spec dl dd.no_dotted ol {
+  padding-left: 20px;
+}
+.spec dl dd.no_dotted ol li {
+  padding-bottom: 10px;
+  color: #000;
+}
+.spec dl dd.no_dotted ol li span {
+  color: #444;
+}
+
+
+
+/* --------------------------------------------------------------------------------
+   Tab Content: List for Rutoken Solutions
+   -------------------------------------------------------------------------------- */
+	 
+.tab_body.list {
+  margin: 0 0 45px;
+}
+
+.tab_body.list ul {
+  overflow: hidden;
+  padding-left: 15px;
+  list-style-type: none;
+}
+.tab_body.list ul li {
+  float: left;
+}
+.tab_body.list ul li:before {
+  float: left;
+  display: block;
+  margin-left: -15px;
+  font: normal 20px/0.9 "Trebuchet MS", Helvetica, Arial;
+  content: "▪";
+  color: #aaa;
+}
+
+/* --- Links --- */
+
+.tab_body.list a {
+  text-decoration: none;
+}
+.tab_body.list a:hover {
+  text-decoration: underline;
+}
+
+/* --- For Categories List --- */
+
+.tab_body.list#categories {
+	padding: 25px 0 25px 50px;
+}
+.tab_body.list#categories li {
+  width: 270px;
+  margin-right: 75px;
+  padding: 7px 0;
+}
+.tab_body.list#categories li:nth-child(even) {
+  clear: right;
+  margin-right: 0;
+}
+
+/* --- For Vendors List --- */
+
+.tab_body.list#vendors {
+	padding: 25px 0 25px 25px;
+}
+.tab_body.list#vendors ul li {
+  width: 120px;
+  padding: 7px 10px 7px 0;
+  white-space: nowrap;
+}
+.tab_body.list#vendors ul li:nth-child(5n) {
+  padding-right: 0;
+}
+
+/* --- For tasks List --- */
+
+.tab_body.list#tasks {
+	padding: 25px 0 25px 50px;
+}
+.tab_body.list#tasks li {
+  width: 270px;
+  margin-right: 75px;
+  padding: 7px 0;
+}
+.tab_body.list#tasks li:nth-child(even) {
+  clear: right;
+  margin-right: 0;
+}
+
+/* --------------------------------------------------------------------------------
+   Tab Content: Table 
+   -------------------------------------------------------------------------------- */
+
+.tab_body.table {
+  padding: 25px 15px 15px;
+  margin: 0 0 45px;
+}
+.tab_body.table .empty {
+  padding: 15px;
+  margin: 0 0 10px;
+  background-color: #f5f5f5;
+}
+.tab_body.table .empty p {
+  font: italic 14px/1.5 "Trebuchet MS", Helvetica, Arial, sans-serif;
+}
+.tab_body.table .empty p a {
+  text-decoration: underline;
+}	 
+
+/* --------------------------------------------------------------------------------
+   Tab Content: Form 
+   -------------------------------------------------------------------------------- */
+	 
+.tab_body.form {
+  padding: 35px 15px 25px;
+}
+
+
+/* --------------------------------------------------------------------------------
+   Tab Content: Text (Tale)
+   -------------------------------------------------------------------------------- */
+
+.tabs .tab_body.tale {
+	padding: 35px 40px 40px;
+}
+
+/* --- Headers --- */
+
+.tab_body.tale h2 {
+  font: bold 18px/1 "Segoe UI", Helvetica, Arial, sans-serif;
+  padding: 20px 0 20px;
+}
+.tab_body.tale h2.start {
+  padding-top: 0;
+}
+
+.tab_body.tale h3 {
+  font: bold 16px/1 "Segoe UI", Helvetica, Arial, sans-serif;
+  padding: 10px 0 20px;
+}
+
+.tab_body.tale h4 {
+  font: bold 14px/1 "Segoe UI", Helvetica, Arial, sans-serif;
+  padding: 5px 0 20px;
+}
+
+/* --- Plain Text --- */
+
+.tab_body.tale p {
+  padding: 0 0 20px;
+}
+.tab_body.tale p:last-child,
+.tab_body.tale p.before_list {
+  padding: 0;
+}
+
+/* --- Asterix Text Marker --- */
+
+.tab_body.tale .asterix {
+  font: bold 14px Verdana, Tahoma, Arial, sans-serif;
+  color: #888;
+}
+.tab_body.tale .asterix_note {
+  padding-top: 15px !important;
+  border-top: 1px dotted #aaa;
+  font-style: italic;
+}
+
+
+/* --- Number List --- */
+
+.tab_body.tale ol {
+  padding: 10px 0 20px 40px;
+}
+.tab_body.tale ol li {
+	padding: 0 0 10px;
+  color: #888;
+}
+.tab_body.tale ol li:last-child {
+	padding: 0;
+}
+.tab_body.tale ol li span {
+  color: #444;
+}
+.tab_body.tale ol.single {
+	padding-top: 5px;
+}
+.tab_body.tale ol.single li {
+	padding: 0;
+}
+
+/* --- Marker List --- */
+
+.tab_body.tale ul li {
+	padding: 0 0 10px;
+}
+.tab_body.tale ul.single li {
+	padding: 0 0 5px;
+}
+.tab_body.tale ul li:last-child {
+	padding: 0;
+}
+
+/* --- Marker Dashed --- */
+
+.tab_body.tale p + ul,
+.tab_body.tale p + ol  {
+  margin-top: -10px;
+  padding-top: 0;
+}
+.tab_body.tale h4 + ul,
+.tab_body.tale h4 + ol   {
+  margin-top: -5px;
+  padding-top: 0;
+}
+.tab_body.tale h2 + ul,
+.tab_body.tale h2 + ol  {
+  margin-top: 0;
+  padding-top: 0;
+}
+
+.tab_body.tale ul {
+  padding: 10px 0 20px 45px;
+  list-style: none outside none;
+}
+.tab_body.tale ul li:before,
+.tab_body.tale ul.dashed li:before {
+  float: left;
+  display: block;
+  position: relative;
+  margin: 0 10px 0 -25px;
+  content: "—";
+  font: bold 14px/1 "Segoe UI", Helvetica, Arial;
+}
+
+.tab_body.tale ol.strong > li strong,
+.tab_body.tale ul.strong > li strong  {
+  font: bold 14px "Segoe UI", Helvetica, Arial;
+}
+
+/* --- Sublist --- */
+
+.tab_body.tale ul ul {
+  padding-left: 20px;
+  padding-bottom: 5px;
+}
+.tab_body.tale ul ul.string {
+  padding-bottom: 0;
+  padding-top: 5px;
+}
+.tab_body.tale ul ul li:before {
+  float: left;
+  display: block;
+  position: relative;
+  margin: 0 10px 0 -20px;
+  content: "–";
+  font: bold 16px/0.8 "Segoe UI", Helvetica, Arial;
+}
+
+/* --- Marker Dotted --- */
+
+.tab_body.tale ul.dotted {
+  padding-left: 30px;
+  list-style: none outside none;
+}
+.tab_body.tale ul ul.dotted {
+  padding-left: 20px;
+}
+.tab_body.tale ul ul.dashed {
+  padding-left: 30px;
+}
+.tab_body.tale .dotted li:before {
+  float: left;
+  display: block;
+  position: relative;
+  margin-left: -20px;
+  content: "▪";
+  font: normal 20px/0.9 "Trebuchet MS", Helvetica, Arial;
+}
+
+/* --- Floating Lists --- */
+
+.tab_body.tale .floating {
+  clear: both;
+  overflow: hidden;
+}
+.tab_body.tale .floating ul {
+  float: left;
+  width: 275px;
+  padding: 10px 25px 10px 15px;
+}
+.tab_body.tale .floating ul li {
+  padding-bottom: 15px;
+}
+.tab_body.tale .floating ul:last-child {
+  float: right;
+}
+.tab_body.tale .floating ul li:before {
+  float: left;
+  display: block;
+  position: relative;
+  margin-left: -15px;
+  content: "▪";
+  font: normal 20px/0.9 "Trebuchet MS", Helvetica, Arial;
+}
+
+/* --- Flexible — натуральное обтекание --- */
+/*     Требует тщательной работы с контентом */
+
+.tab_body.tale ul.flexible {
+  clear: both;
+  overflow: hidden;
+  padding: 15px 0 10px 35px;
+}
+.tab_body.tale ul.flexible li {
+  float: left;
+  width: 310px;
+  padding-right: 35px;
+  padding-bottom: 15px;
+}
+
+/* --- Single Strings --- */
+
+.tab_body.tale ul.string li {
+	 padding-bottom: 2px;
+}
+.tab_body.text ul ul.string {
+  padding-bottom: 0;
+}
+
+/* --- Bullet Colors --- */
+
+.tab_body.tale ul li:before {
+  color: #aaa;
+}
+
+
+
+
+
+
+
+/* --------------------------------------------------------------------------------
+   Multifile Field
+   -------------------------------------------------------------------------------- */
+
+li.input_img {
+  padding: 0 0 25px;
+  margin-top: -5px;
+}
+li.input_img > div {
+  padding: 0 0 7px;
+  line-height: 1;
+}
+li.input_img input[type='file'] {
+  height: 24px;
+  width: 518px;
+  opacity: 0.7;
+}
+li.input_img .mf_field {
+  cursor: pointer;
+  padding-bottom: 10px;
+}
+li.input_img .mf_control {
+  padding: 0;
+  margin-top: -5px;
+}
+.input_img {
+  cursor:pointer;
+  padding-bottom: 5px;
+}
+
+/* --------------------------------------------------------------------------------
+   Submit Button
+   -------------------------------------------------------------------------------- */
+
+.feedback .submit {
+  clear: both;
+  padding-bottom: 0;
+}
+
+
+/* --------------------------------------------------------------------------------
+  Switcher for Store
+   -------------------------------------------------------------------------------- */
+
+.form_switch {
+  padding: 10px;
+}
+.form_switch li {
+  padding: 0;
+}
+.form_switch label {
+  margin-left: 5px;
+  font: bold 14px/2 'Segoe UI', Helvetica, Arial;
+}
+
+/* --------------------------------------------------------------------------------
+  Branding Options
+   -------------------------------------------------------------------------------- */
+
+.branding_type {
+  clear: both;
+}
+.branding_type dl {
+  overflow: hidden;
+  padding: 15px;
+  background-color: #f5f5f5;
+}
+
+.branding_type label {
+  display: inline-block;
+  padding: 0 0 0 5px;
+  vertical-align: 3px;
+  font-size: 12px;
+}
+.branding_type label a {
+  text-decoration: none;
+  border-bottom: 1px dashed #aaa;
+  font-size: 13px;
+}
+.branding_type label a:hover {
+  color: #d23;
+  border-bottom: none;
+}
+
+/* --- Info Block --- */
+
+.branding_type dl dt {
+  float: right;
+  padding-right: 35px;
+  width: 280px;
+}
+.branding_type dl dt p {
+  padding: 0;
+  font: italic 12px/1.5 "Segoe UI", Helvetica, Arial;
+  color: #888;
+}
+
+
+/* --- Option Block --- */
+
+.branding_type dl dd {
+  width: 350px;
+  padding: 0 0 5px;
+}
+.branding_type dl dd:last-child {
+  padding: 0;
+}
+
+/* --------------------------------------------------------------------------------
+  Delivery Options
+   -------------------------------------------------------------------------------- */
+
+.delivery_type {
+  clear: both;
+}
+.delivery_type a {
+  padding-left: 25px;
+  font: bold 12px/2 "Segoe UI", Helvetica, Arial;
+  text-transform: uppercase;
+}
+.delivery_type .express,
+.delivery_type .majorex {
+  display: none;
+}
+
+/* --------------------------------------------------------------------------------
+   Placeholder
+   -------------------------------------------------------------------------------- */
+
+/* --- MSIE --- */
+
+.placeholder {
+  color: #888;
+  font-style: italic !important;
+}
+:-ms-input-placeholder {
+  color: #888;
+  font-style: italic !important;
+}
+
+/* --- Firefox --- */
+
+input::-moz-placeholder {
+  color: #888;
+  font-style: italic;
+}
+textarea::-moz-placeholder {
+  color: #888;
+  font-style: italic;
+}
+
+/* --- Chrome --- */
+
+input::-webkit-input-placeholder {
+  color: #888;
+  font-style: italic;
+}
+textarea::-webkit-input-placeholder {
+  color: #888;
+  font-style: italic;
+}
+
+/* --- No clear cross in IE --- */
+
+.feedback .no_cross input::-ms-clear {
+	display: none;
+}
+
+
+/* ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+   Admin Table Form
+   --------------------------------------------------------------------------------
+   Простые табличные формы для админки.
+
+   ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ */
+
+.tbl_settings {
+  clear: both;
+  margin: 0;
+}
+.tbl_settings table {
+  width: 100%;
+}
+
+/* --------------------------------------------------------------------------------
+   Table Head & Rules
+   -------------------------------------------------------------------------------- */
+
+.tbl_settings thead td {
+  padding: 0 15px 25px;
+}
+.tbl_settings thead td {
+  font-style: italic;
+  color: #888;
+}
+.tbl_settings thead.warning td:before {
+  content: "*";
+  float: left;
+  display: block;
+  padding: 6px 5px 0 0;
+  font: bold 16px/0.7 Verdana, Helvetica, Arial, sans-serif;
+  color: #888;
+}
+
+/* --- Error --- */
+
+.tbl_settings thead.error td {
+  color: #d23;
+}
+.tbl_settings thead.warning.error td:before {
+  content: "";
+  display: none;
+}
+
+/* --------------------------------------------------------------------------------
+   Table Body
+   -------------------------------------------------------------------------------- */
+
+.tbl_settings table tbody th {
+  width: 150px;
+  font: bold 13px/1 "Segie UI", Helvetica, Arial, sans-serif;
+  text-transform: uppercase;
+  white-space: nowrap;
+  text-align: left;
+}
+.tbl_settings table tbody th,
+.tbl_settings table tbody td {
+  padding: 15px 0 15px 15px;
+  vertical-align: middle;
+}
+
+.tbl_settings table tbody tr:last-child th,
+.tbl_settings table tbody td:last-child td {
+  padding-bottom: 25px !important;
+}
+
+
+
+/* --------------------------------------------------------------------------------
+   Table Foot
+   -------------------------------------------------------------------------------- */
+
+.tbl_settings table tfoot th,
+.tbl_settings table tfoot td {
+  padding: 25px 0 0 15px;
+  border-top: 1px solid #ddd;
+}
+
+/* --------------------------------------------------------------------------------
+   Fields
+   -------------------------------------------------------------------------------- */
+
+.tbl_settings select,
+.tbl_settings textarea,
+.tbl_settings input[type='text'],
+.tbl_settings input[type='password'] {
+  float: left;
+  display: inline-block;
+  border: 1px solid;
+  border-color: #aaa #ccc #ddd #ccc;
+  font: normal 13px/1 "Trebuchet MS", Helvetica, Arial;
+  background: #f9f9f9 url("./images/layout/bgr_field.png") repeat-x top left;
+}
+
+.tbl_settings input[type='text'],
+.tbl_settings input[type='password'] {
+  width: 400px;
+  height: 28px;
+  padding: 0 7px;
+}
+.tbl_settings select {
+  width: 416px;
+  height: 30px;
+  padding: 5px;
+}
+.tbl_settings textarea {
+  width: 500px;
+  height: 100px;
+  padding: 7px;
+}
+
+
+/* --- Options --- */
+
+.tbl_settings input:focus,
+.tbl_settings textarea:focus {
+  background-image: none;
+  border-color: #aaa;
+  outline: none;
+}
+.no_cross input::-ms-clear {
+   display: none;
+}
+
+.tbl_settings input[readonly=readonly] {
+  border-color: #ccc;
+  background-image: none !important;
+  color: #aaa;
+}
+
+/* --- Containers --- */
+
+.tbl_settings span {
+  display: block;
+  float: left;
+  margin-right: 10px;
+}
+
+/* --- Required --- */
+
+.tbl_settings .required:after {
+  float: left;
+  display: block;
+  content: "*";
+  width: 15px;
+  height: 15px;
+  padding: 10px 0 0;
+  font: bold 16px/1 Verdana, Helvetica, Arial, sans-serif;
+  color: #888;
+  margin-left: -25px;
+}
+.tbl_settings .required.error:after {
+  color: #d23;
+}
+.tbl_settings .error select,
+.tbl_settings .error textarea,
+.tbl_settings .error input[type='text'],
+.tbl_settings .error input[type='password'] {
+  border-color: #d23;
+}
+
+
+
+/* ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+   Buttons
+   --------------------------------------------------------------------------------
+   Описание.
+
+   ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ */
+
+/* --------------------------------------------------------------------------------
+   Кнопки для продуктовых сайтов
+   -------------------------------------------------------------------------------- */
+	 
+.button {
+  display: block;
+  padding: 10px 15px;
+  font: bold 14px/1 "Segoe UI", Helvetica, Arial;
+  text-transform: uppercase;
+  background-color: #888;
+  border: none;
+  color: #fff;
+}
+.button:hover {
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+/* --- Disabled --- */
+
+.button.red[disabled],
+.button.red:hover[disabled],
+.button.navy[disabled],
+.button.navy:hover[disabled],
+.button.blue[disabled],
+.button.blue:hover[disabled],
+.button.green[disabled],
+.button.green:hover[disabled] {
+  background-color: #ddd;
+  background-image: none;
+  text-decoration: none;
+  cursor: text;
+  color: #999;
+}
+
+/* --- White --- */
+
+.button.white {
+  text-decoration: underline;
+  font: bold 14px/1 "Segoe UI", Helvetica, Arial;
+  color: #aaa;
+}
+.button.white span {
+  color: #444;
+}
+
+/* --- Add --- */
+
+.button.white.add {
+  padding-left: 17px;
+  background: transparent url("./images/layout/template/bullet_store_add.png") no-repeat left 12px;
+}
+.button.white.add:hover {
+  background-position: left -27px;
+}
+
+/* --- Modify --- */
+
+.button.white.modify {
+  padding-left: 17px;
+  background: transparent url("./images/layout/template/bullet_store_modify.png") no-repeat left 12px;
+}
+.button.white.modify:hover {
+  background-position: left -27px;
+}
+
+
+/* --------------------------------------------------------------------------------
+   Кнопки для сервисных сайтов
+   -------------------------------------------------------------------------------- */
+
+/* --- Links like Classic Button --- */
+
+.b_fill {
+  display: inline-block;
+  padding: 10px 15px;
+  font: bold 14px/1 "Segoe UI", Helvetica, Arial;
+  text-transform: uppercase;
+  text-decoration: none;
+  background-color: #888;
+  border: none;
+  color: #fff;
+  margin-right: 4px;
+}
+.b_fill:hover {
+  cursor: pointer;
+  text-decoration: underline;
+  color: #fff;
+}
+
+/* --- Links with Border --- */
+
+.b_cell {
+  display: inline-block;
+  padding: 8px 15px;
+  font: bold 14px/1 "Segoe UI", Helvetica, Arial;
+  text-transform: uppercase;
+  text-decoration: none;
+  border: 2px solid #888;
+  background-color: #fff;
+  color: #888;
+}
+.b_cell:hover {
+  text-decoration: underline;
+  background-color: #444;
+  border-color: #444;
+  color: #fff ;
+}
+
+
+
+/* --- Links with Border and Icon --- */
+
+.b_icon {
+  display: inline-block;
+  padding: 8px 10px 8px 30px;
+  font: bold 12px/1 "Segoe UI", Helvetica, Arial;
+  text-transform: uppercase;
+  text-decoration: none;
+  background: #fff url("./images/layout/template/button_symbol.png") no-repeat 7px top ;
+  border: 2px solid #888;
+  color: #888;
+  margin-right: 4px;
+}
+.b_icon:hover {
+  text-decoration: underline;
+  background: #888 url("./images/layout/template/button_symbol.png") no-repeat 7px bottom ;
+  color: #fff ;
+}
+
+/* link Option — no border */
+/* Rutoken VPN —  предложение скачать и загрузить плагин */
+
+.b_icon.link {
+  border-color: #fff;
+  text-decoration: underline;
+  color: #aaa;
+}
+.b_icon.link span {
+  color: #178;
+}
+.b_icon.link:hover,
+.b_icon.link:hover span {
+  background-color: #fff;
+  color: #d23;
+}
+
+/* Disabled Option */
+
+button.b_icon[disabled],
+button.b_icon:hover[disabled] {
+  border-color: #ccc;
+  background-color: #eee;
+  background: #eee url("./images/layout/template/button_symbol.png") no-repeat 7px top ;
+  text-decoration: none;
+  cursor: text;
+  color: #888;
+}
+
+/* --- Links with Border and Icon --- */
+
+.b_sign {
+  display: block;
+  float: right;
+  width: 16px;
+  height: 32px;
+  border: none;
+  background: transparent url("./images/layout/template/button_symbol.png") no-repeat center 2px ;
+}
+.b_sign:hover {
+  background-position: center -34px;
+}
+
+/* --- Submit Disabled Options --- */
+
+button[type='submit'][disabled],
+button[type='submit']:hover[disabled] {
+  background-color: #ddd;
+  background-image: none;
+  text-decoration: none;
+  cursor: text;
+  color: #999;
+}
+
+
+/* ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+   Extras
+   --------------------------------------------------------------------------------
+   Описание.
+
+   ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ */
+
+/* --------------------------------------------------------------------------------
+   Колонка контактов техподдержки
+   -------------------------------------------------------------------------------- */
+
+.extra_support {
+  clear: both;
+  padding: 5px 0 0;
+  background-color: #888;
+  color: #fff;
+}
+.extra_support li {
+  padding: 15px 0 15px 15px;
+  border-bottom: 1px dashed #ddd;
+}
+.extra_support li:last-child {
+  border: none;
+}
+.extra_support li strong {
+  display: block;
+  font: bold 16px/1.25 "Segoe UI", Helvetica, Arial;
+}
+.extra_support li a {
+  color: #fff;
+}
+.extra_support li a:hover {
+  text-decoration: none;
+}
+
+/* --------------------------------------------------------------------------------
+   Блок внешних ссылок
+   -------------------------------------------------------------------------------- */
+
+.extra_outlink {
+  padding: 25px 0 0;
+}
+.extra_outlink a {
+  display: block;
+  padding-left: 30px;
+  margin: 0 0 25px;
+  font: bold 16px/1.1 "Segoe UI", Helvetica, Arial;
+  color: #aaa;
+}
+.extra_outlink a:hover {
+  text-decoration: none;
+}
+.extra_outlink a span {
+  color: #444;
+}
+.extra_outlink a:hover span {
+  color: #888;
+}
+.extra_outlink a.forum {
+  background: transparent url("./images/layout/template/forum.png") no-repeat 0 40%;
+}
+.extra_outlink a.docportal {
+  background: transparent url("./images/layout/template/docportal.png") no-repeat 0 40%;
+}
+
+/* --------------------------------------------------------------------------------
+   Колонка: ссылки на документацию
+   -------------------------------------------------------------------------------- */
+
+.extra_download {
+  clear: both;
+  overflow: hidden;
+  padding: 0 0 15px;
+}
+.extra_download dt {
+  margin: 0 0 15px;
+  padding: 10px 10px;
+  border-left: 4px solid #888;
+  font: bold 16px/1 "Segoe UI", Helvetica, Arial;
+  text-transform: uppercase;
+}
+.extra_download dd {
+  padding: 5px 0  5px 15px;
+}
+.extra_download dd.docs {
+  padding: 5px 0 20px 40px;
+  background: transparent url("./images/layout/template/pdf.png") no-repeat 10px 10px;
+}
+.extra_download dd.docs_online {
+  padding: 5px 0 20px 40px;
+  background: transparent url("./images/layout/template/docportal_direct.png") no-repeat 10px 10px;
+}
+.extra_download dd a {
+  display: block;
+  color: #aaa;
+}
+
+/* --------------------------------------------------------------------------------
+   Колонка: ссылки на бета-версию
+   -------------------------------------------------------------------------------- */
+
+.extra_software {
+  padding: 15px 5px 15px 40px;
+  border: 2px solid transparent;
+  background: transparent url('./images/layout/template/download_single.png') no-repeat 10px 15px;
+}
+.extra_software.norm {
+  border-color: #ddd;
+}
+.extra_software.warn {
+  border-color: #d23;
+}
+.extra_software a,
+.extra_software a:hover span {
+  color: #888;
+}
+.extra_software a span {
+  color: #444;
+}
+
+/* --------------------------------------------------------------------------------
+   Блок ссылок на интернет-магазины
+   -------------------------------------------------------------------------------- */
+
+.extra_also {
+  padding: 0 15px;
+  border: 4px solid #ddd;
+  background-color: #f9f9f9;
+}
+.extra_also dt {
+  margin: 0 0 5px;
+  padding: 15px 0 15px 10px;
+  border-bottom: 1px dotted #888;
+  font: bold 14px "Segoe UI", Helvetica, Arial;
+  text-transform: uppercase;
+}
+.extra_also dd {
+  padding: 5px 0 0 10px;
+}
+.extra_also dd:last-child {
+  padding-bottom: 10px;
+}
+.extra_also dd:before {
+  float: left;
+  display: block;
+  padding-right: 7px;
+  font: normal 20px/0.8 "Segoe UI", Helvetica, Arial;
+  color: #aaa;
+  content: "▪";
+}
+
+/* --------------------------------------------------------------------------------
+   Блок ссылок загрузки для разработчика
+   -------------------------------------------------------------------------------- */
+
+.extra_resource {
+  padding: 0 15px;
+  border: 4px solid #ddd;
+  background-color: #f9f9f9;
+}
+.extra_resource dt {
+  margin: 0 0 5px;
+  padding: 15px 0 15px 10px;
+  border-bottom: 1px dotted #888;
+  font: bold 14px "Segoe UI", Helvetica, Arial;
+  text-transform: uppercase;
+}
+.extra_resource dd {
+  padding: 10px 0 15px 30px;
+  font: bold 13px/1.3 "Trebuchet MS", Helvetica, Arial, sans-serif;
+  background: transparent url("./images/layout/template/download.png") no-repeat 0 -32px;
+}
+.extra_resource dd a {
+  text-decoration: none;
+  color: #444;
+}
+.extra_resource dd a:hover {
+  text-decoration: underline;
+}
+
+
+/* ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+   Downloads
+   --------------------------------------------------------------------------------
+   Описание.
+
+   ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ */
+
+/* --------------------------------------------------------------------------------
+   Download Slider
+   -------------------------------------------------------------------------------- */
+
+.download_list dl {
+  padding-bottom: 25px;
+  overflow: hidden;
+}
+
+.download_list dl dt h2 {
+  display: inline-block;
+  font: bold 18px/1 "Segoe UI", Helvetica, Arial;
+	background: transparent url("./images/layout/template/tick_slip.png") no-repeat right 10px;
+  padding-right: 25px;
+}
+.download_list dl dt h2 span {
+  border-bottom: 1px dashed #888;
+  cursor: pointer;
+}
+.download_list dl dt h2 span:hover {
+  color: #888;
+  border-bottom: none;
+}
+
+.download_list dl dd {
+  padding: 0;
+  border-bottom: 1px dotted #888;
+}
+.download_list dl dd p {
+  font-size: 14px;
+  padding: 0 0 15px;
+}
+
+/* --- Show Condition --- */
+
+.download_list dl dt.show h2 {
+	background-position: right -10px;
+}
+.download_list dl dd.show {
+  display: block;
+}
+.download_list dl dd.download {
+  padding-bottom: 25px;
+}
+
+/* --------------------------------------------------------------------------------
+   Download Wall for Guardant (without Sliders)
+   -------------------------------------------------------------------------------- */
+.download {
+  padding: 0 0 25px;
+}
+.download.break {
+  padding: 0;
+}
+.download dl {
+  padding: 20px 0 0;
+}
+.download dl:first-child {
+  padding: 25px 0 0;
+}
+.download dl dt a {
+  display: inline-block;
+  padding: 0 0 5px 30px;
+  background: transparent url("./images/layout/template/download.png") no-repeat left 10px;
+  font: bold 17px/2 "Trebuchet MS", Helvetica, Arial;
+  color: #888;
+}
+.download dl dt a:hover {
+  background-position: left -30px;
+}
+.download dl dd {
+  padding: 5px 0 5px 30px;
+  font-size: 12px;
+  overflow: hidden;
+  border-bottom: none;
+}
+.download dl dd em {
+  display: inline-block;
+  width: 120px;
+  font-size: 11px;
+  float: left;
+  color: #888;
+}
+.download dl dd span {
+  display: block;
+  padding-left: 125px;
+}
+.download dl dd a span,
+.download.special dl dd a span {
+  display: inline;
+  padding-left: 0;
+}
+
+/* --- for Drivers History --- */
+.download.special dl dd em {
+  width: 140px;
+}
+.download.special dl dd span {
+  padding-left: 145px;
+}
+
+/* --- Current Download Backlink --- */
+.download_back {
+  padding: 35px 0 0 !important;
+  text-align: right;
+}
+
+
+/* --------------------------------------------------------------------------------
+   Manual Wall
+   -------------------------------------------------------------------------------- */
+
+.manual dl {
+  padding: 0 0 20px;
+}
+.manual dl dt {
+  font: bold 18px/1 "Segoe UI", Helvetica, Arial, sans-serif;
+  padding: 0 0 15px;
+}
+.manual dl dd {
+  padding: 10px 0 10px 30px;
+  background: transparent url("./images/layout/template/pdf.png") no-repeat left 10px;
+}
+.manual dl dd.zip {
+  background-image: url("./images/layout/template/zip.png");
+}
+
+/* --------------------------------------------------------------------------------
+   license_agreement
+   -------------------------------------------------------------------------------- */
+
+/* --- Common --- */
+
+.common.agree {
+  margin: -5px 0 0;
+  padding: 0 0 35px;
+}
+.common.agree dt {
+  float: left;
+  width: 500px;
+  padding: 0;
+  margin-right: 15px;
+  font: italic 13px/1.5 "Trebuchet MS", Arial, sans-serif;
+  color: #888;
+}
+.common.agree dd {
+  margin-left: 525px;
+  padding: 10px 0 0;
+}
+
+/* --- Content --- */
+
+.agree_body {
+  height: 250px;
+  padding: 15px 25px;
+  border: 2px solid #ddd;
+  overflow-y: scroll;
+  background-color: #f9f9f9;
+  text-align: justify;
+}
+.agree_body p {
+  padding-bottom: 10px;
+  font-size: 12px;
+  color: #000;
+}
+.agree_body .license_start {
+  font-weight: bold;
+  text-align: right;
+  padding-bottom: 25px;
+}
+.agree_body h4 {
+  font: bold 16px/1.5 "Segoe UI", Helvetica, Arial;
+  text-align: center;
+  padding-bottom: 25px;
+  color: #888;
+}
+.agree_body h4 span {
+  font-weight: normal;
+}
+.agree_body h5 {
+  font: bold 16px/1.5 "Segoe UI", Helvetica, Arial;
+  padding: 15px 0;
+  color: #888;
+}
+
+/* --- Form --- */
+
+.agree_form .form_rules {
+  margin-bottom: -30px;
+}
+.agree_form dl  {
+  overflow: hidden;
+  padding: 35px 0 25px;
+}
+.agree_form dl dt {
+  float: left;
+  width: 500px;
+}
+.agree_form dl dt label.error {
+  color: #444;
+}
+.agree_form dl dd {
+  float: right;
+}
+
+
+
+/* ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+   Tables
+   --------------------------------------------------------------------------------
+   Описание.
+
+   ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ */
+
+/* --------------------------------------------------------------------------------
+   Table for Content
+   -------------------------------------------------------------------------------- */
+
+.table_content {
+  width: 100%;
+  margin: 0 0 35px;
+}
+.table_content.break {
+  margin: 0;
+}
+.table_content th,
+.table_content td {
+  padding: 10px 15px;
+  text-align: left;
+}
+.table_content thead th {
+  border-bottom: 1px dotted #888;
+  font: bold 16px/1 "Segoe UI", Helvetica, Arial;
+  text-transform: uppercase;
+}
+.table_content tbody th,
+.table_content tbody td {
+  font-size: 13px;
+}
+.table_content.accent_th tbody th {
+  font: bold 14px/1.5 "Segoe UI", Helvetica, Arial;
+}
+.table_content .accent_td {
+  font: bold 14px/1.5 "Segoe UI", Helvetica, Arial;
+  color: #000;
+}
+.table_content tbody .dark th,
+.table_content tbody .dark td {
+  background-color: #f5f5f5;
+}
+
+/* --------------------------------------------------------------------------------
+   Table for Compare
+   -------------------------------------------------------------------------------- */
+
+.table_compare {
+  width: 100%;
+  margin: 0 0 25px;
+}
+.table_compare caption {
+  font: bold 18px/1 "Segoe UI", Helvetica, Arial, sans-serif;
+  padding: 15px 0 20px;
+  text-align: left;
+  border-bottom: 1px dotted #888;
+}
+.table_compare th,
+.table_compare td {
+  padding: 10px 5px;
+}
+.table_compare th {
+  text-align: left;
+}
+.table_compare td {
+  text-align: center;
+}
+.table_compare thead th,
+.table_compare thead td {
+  border-bottom: 1px dotted #888;
+  font: bold 14px/1.2 "Segoe UI", Helvetica, Arial;
+  vertical-align: middle;
+  text-align: center;
+}
+.table_compare.uppercase thead th,
+.table_compare.uppercase thead td {
+  text-transform: uppercase;
+}
+.table_compare tbody th,
+.table_compare tbody td {
+  font-size: 13px;
+}
+.table_compare tbody th {
+  padding-left: 15px;
+  font: bold 14px/1.5 "Segoe UI", Helvetica, Arial;
+}
+.table_compare.per_25 tbody td {
+  width: 180px;
+}
+.table_compare.per_20 tbody td {
+  width: 130px;
+}
+
+/* --- Option for Document Downloads --- */
+
+.table_compare.download thead tr th {
+  padding-left: 15px;
+  text-align: left;
+}
+.table_compare.download thead tr th,
+.table_compare.download thead tr td {
+  color: #888;
+}
+.table_compare.download tr td:last-child {
+  width: 125px;
+}
+.table_compare.download tr td:last-child a {
+  display: block;
+  width: 80px;
+  padding: 10px 15px;
+  font: bold 14px/1 "Segoe UI", Helvetica, Arial;
+  text-transform: uppercase;
+  text-decoration: none;
+  background-color: #888;
+  color: #fff;
+}
+.table_compare.download tr td:last-child a:hover {
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+/* --- Highight --- */
+
+.table_compare tbody .dark th,
+.table_compare tbody .dark td {
+  background-color: #f5f5f5;
+}
+.table_compare tbody tr:last-child th,
+.table_compare tbody tr:last-child td {
+  border-bottom: 1px dotted #888;
+}
+.table_compare tbody tr.dark th,
+.table_compare tbody tr.dark td {
+  border-bottom: none !important;
+}
+
+/* --- Highight CSS3 Version --- */
+.table_compare.hl tbody tr:nth-child(even) th,
+.table_compare.hl tbody tr:nth-child(even) td {
+  background: #f5f5f5;
+}
+
+/* --- Symbols --- */
+
+.table_compare .no {
+  background: transparent url("./images/layout/template/bullet_compare.png") no-repeat center 15px;
+}
+.table_compare .ok {
+  background: transparent url("./images/layout/template/bullet_compare.png") no-repeat center -25px;
+}
+.table_compare .ok span,
+.table_compare .no span {
+  display: none;
+}
+
+
+/* --------------------------------------------------------------------------------
+   Table for Events Common
+   -------------------------------------------------------------------------------- */
+
+.actuality {
+  margin: 25px 0 45px;
+  padding: 0 15px 0;
+  background-color: #f5f5f5;
+  border-top: 1px dotted #888;
+  border-bottom: 1px dotted #888;
+	box-shadow: 0 2px 2px #eee;
+}
+.actuality table {
+  width: 100%;
+}
+.actuality table th,
+.actuality table td {
+  padding: 15px;
+  border-bottom: 1px dotted #ccc;
+}
+.actuality table tr.last_child th,
+.actuality table tr.last_child td {
+  border-bottom: none;
+}
+.actuality table tr th {
+  width: 160px;
+  font: bold 14px "Segoe UI", Helvetica, Arial;
+  text-transform: uppercase;
+  text-align: left;
+}
+.actuality table tr td {
+  font-size: 14px;
+  padding: 10px 0;
+  text-align: left;
+}
+
+
+/* ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+   Press
+   --------------------------------------------------------------------------------
+   Описание.
+
+   ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ */
+
+/* --------------------------------------------------------------------------------
+   Timeline
+   -------------------------------------------------------------------------------- */
+
+.timeline {
+  margin-bottom: 50px;
+}
+
+.timeline.native {
+  min-height: 450px;
+}
+
+.timeline dt {
+  float: left;
+  padding: 0;
+  font: italic 12px/1.6 "Trebuchet MS", Helvetica, Arial;
+  color: #888;
+}
+.timeline dd {
+  clear: right;
+  margin: 0 0 25px 75px;
+  line-height: 1.5;
+}
+
+/* --------------------------------------------------------------------------------
+   Article Footer
+   -------------------------------------------------------------------------------- */
+
+.article_footer {
+  margin-top: 25px;
+  overflow: hidden;
+}
+
+/* --- Backlink --- */
+
+.article_footer .backlink {
+  float: right;
+  position: relative;
+  padding: 7px 20px;
+  font: bold 14px "Segoe UI", Helvetica, Arial;
+  background-color: #888;
+}
+.article_footer .backlink a {
+  text-transform: uppercase;
+  text-decoration: none;
+  color: #fff;
+}
+.article_footer .backlink a:hover {
+  text-decoration: underline;
+}
+.article_footer .backlink:after {
+  width: 0;
+  height: 0;
+  display: block;
+  position: absolute;
+  content: "";
+  right: 0;
+  bottom: 50%;
+  margin-bottom: -5px;
+  border-top: 5px solid transparent;
+  border-bottom: 5px solid transparent;
+  border-right: 5px solid #fff;
+}
+
+/* --- TagCloud and Sources --- */
+
+.article_footer dd {
+  float: left;
+  width: 450px;
+  padding: 5px 0 0 5px;
+  font-size: 11px;
+  border-top: 1px dotted #ccc;
+}
+.article_footer dd.break {
+  border-top: none;
+}
+.article_footer dd em {
+  line-height: 2;
+  color: #888;
+}
+
+/* --------------------------------------------------------------------------------
+   Presskit Content Block
+   -------------------------------------------------------------------------------- */
+
+.presskit h3 {
+  padding: 0 0 15px;
+  font: bold 18px/1 "Segoe UI", Helvetica, Arial, sans-serif;
+}
+.presskit h3.separated {
+  padding: 45px 0 10px;
+  border-top: 1px dotted #ddd;
+}
+.presskit dl {
+  padding: 0 0 25px;
+  overflow: hidden;
+}
+.presskit dt {
+  float: left;
+  clear: left;
+}
+.presskit dd {
+  clear: right;
+  padding-left: 300px;
+}
+.presskit dl a {
+  display: block;
+  padding: 10px 0 10px 30px;
+  background: transparent url("./images/layout/template/pdf.png") no-repeat left 10px;
+}
+
+
+
+
+
+/* ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+   Release
+   --------------------------------------------------------------------------------
+   Описание.
+
+   ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ */
+
+/* --------------------------------------------------------------------------------
+   Release History
+   -------------------------------------------------------------------------------- */
+
+.release_history {
+  padding: 0 0 20px;
+}
+
+
+
+
+/* ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+   Modal
+   --------------------------------------------------------------------------------
+   Описание.
+
+   ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ */
+
+.fade {
+    position: fixed;
+    left: 0;
+    top: 0;
+    background-color: #f9f9f9;
+    -moz-opacity: 0.7;
+    opacity: .70;
+    filter: alpha(opacity=70);
+    width: 100%;
+    height: 100%;
+    z-index: 90;
+}
+.modal {
+    /*min-width: 400px;*/
+    width: 600px;
+    padding: 40px;
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #fff;
+    z-index: 100;
+    -webkit-box-shadow: 0 0 25px rgba(0, 0, 0, 0.5);
+	   -moz-box-shadow: 0 0 25px rgba(0, 0, 0, 0.5);
+	        box-shadow: 0 0 25px rgba(0, 0, 0, 0.5);
+}
+
+
+
+.modal.compact {
+  width: 480px;
+}
+.modal.large {
+  width: 800px;
+}
+.modal .hgroup {
+  padding: 0 0 25px;
+}
+.modal .hgroup h2 {
+  font: bold 24px/1 "Segoe UI", Helvetica, Arial, sans-serif;
+  padding: 0 0 25px;
+  text-align: center;
+  text-transform: uppercase;
+  border-bottom: 1px  dotted;
+}
+
+/* --- Control Panel --- */
+
+.modal .control {
+  clear: both;
+  padding: 20px 0px 0;
+  border-top: 2px solid #ddd;
+}
+.modal .control.center {
+  text-align: center;
+}
+.modal .control ul {
+  overflow: hidden;
+}
+.modal .control ul li {
+  float: left;
+}
+.modal .control ul li:last-child {
+  float: right;
+}
+.modal .control ul li:last-child a:last-child {
+  margin-left: 10px;
+}
+	 
+	 
+
+
