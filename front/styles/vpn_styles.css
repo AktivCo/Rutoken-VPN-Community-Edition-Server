@@ -1231,3 +1231,7 @@ button.b_icon.mobile:hover[disabled] {
 .logs_enable_btn {
   width: 235px;
 }
+
+.logs_enable_btn--wider {
+  width: 238px;
+}

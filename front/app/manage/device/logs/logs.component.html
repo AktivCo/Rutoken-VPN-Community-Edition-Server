@@ -23,8 +23,8 @@
             </tfoot>
         </table>
         <div class="text center">
-            <button *ngIf="!is_enabled" class="b_fill red show_modal logs_enable_btn" (click)="logs(0)" type="submit">Включить логирование</button>
-            <button *ngIf="is_enabled"  class="b_fill red show_modal logs_enable_btn" (click)="logs(1)" type="submit">Выключить логирование</button>
+            <button *ngIf="!is_enabled" class="b_fill red show_modal logs_enable_btn logs_enable_btn--wider" (click)="logs(0)" type="submit">Включить логирование</button>
+            <button *ngIf="is_enabled"  class="b_fill red show_modal logs_enable_btn logs_enable_btn--wider" (click)="logs(1)" type="submit">Выключить логирование</button>
             <button class="b_fill red show_modal" (click)="logs(2)" type="submit">Просмотр логов</button>
             <button class="b_fill red show_modal" (click)="logs(3)" type="submit">Очистить логи</button>
         </div>

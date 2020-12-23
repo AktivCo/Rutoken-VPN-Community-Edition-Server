@@ -13,7 +13,7 @@ import { AuthService } from '../../services/auth.service';
 
 @Component({
     template: `
-        <page-header (onLogoutEvent)="onLogout($event)"></page-header>
+        <page-header [(username)]="username" [isInDemoMode]="isInDemoMode" (onLogoutEvent)="onLogout($event)"></page-header>
         <section class="content wide">
             <div #component></div>
         </section>
@@ -22,6 +22,10 @@ import { AuthService } from '../../services/auth.service';
 })
 export class ManageInitComponent implements OnInit {
     @ViewChild('component', { read: ViewContainerRef, static: true }) component: ViewContainerRef;
+
+    username: string;
+
+    isInDemoMode = false;
 
     constructor(
         private authService: AuthService,
@@ -35,6 +39,10 @@ export class ManageInitComponent implements OnInit {
             location.href = '/';
             return;
         }
+
+        const identity = this.authService.getIdentity();
+        this.username = identity.username;
+        this.isInDemoMode = identity.isDemoMode;
 
         const tasks = this.taskViewService.insertedData;
         const obs = of(0).pipe(
