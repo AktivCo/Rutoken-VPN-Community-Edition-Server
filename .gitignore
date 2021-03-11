@@ -40,3 +40,4 @@ celeryshell
 \.vscode/
 /venv/
 *.LICENSE.txt
+documentation/*
