@@ -1,7 +1,12 @@
 #!/bin/bash
 
+repositoryUrl="https://github.com/AktivCo/Rutoken-VPN-Community-Edition-Server.git"
+branch=public
 PROJECT_NAME=Rutoken-VPN-Community-Edition-Server
 ROOT_PROJECT_PATH=/opt/$PROJECT_NAME
+
+if [ -n "$1" ]; then repositoryUrl="$1" ; fi
+if [ -n "$2" ]; then branch="$2" ; fi
 
 sed -i s/\GRUB_CMDLINE_LINUX=\"\/GRUB_CMDLINE_LINUX=\"net.ifnames=0\ \/ /etc/default/grub
 update-grub
@@ -12,9 +17,9 @@ curl -sL https://deb.nodesource.com/setup_14.x | sudo -E bash -
 apt-get update
 apt-get install -y nodejs
 cd /opt
-git clone https://github.com/AktivCo/Rutoken-VPN-Community-Edition-Server.git
+git clone $repositoryUrl
 cd $ROOT_PROJECT_PATH
-git checkout public
+git checkout $branch
 python3 -m pip install django==1.9.6
 python3 -m pip install requests==2.10.0
 python3 -m pip install ldap3==1.2.2
