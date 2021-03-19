@@ -31,5 +31,13 @@ c) sudo apt-get install nodejs
 Сборка фронта   
 npm run webpack:opensource  
 
+Запуск линтера для бекэнда
+
+Установить pylint
+python -m pip install pylint
+
+Запуск линтера
+pylint ./**/*.py
+
 Запуск проекта  
 python manage.py runserver  
