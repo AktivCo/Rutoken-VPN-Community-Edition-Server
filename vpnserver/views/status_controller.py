@@ -1,3 +1,6 @@
+"""
+status controller module
+"""
 import json
 
 from datetime import datetime
@@ -17,7 +20,7 @@ def identity(request):
         if name in 'RutokenVpn':
             user = json.dumps(
                 {
-                    'username': request.user.username, 
+                    'username': request.user.username,
                     'isDemoMode': environment.is_demo_mode()
                 })
         else:
@@ -37,7 +40,7 @@ def init_status(request):
             data = json.dumps(struct[0]["fields"])
             response = data
             return HttpResponse(response, content_type="application/json")
-        except: 
+        except: #pylint: disable=bare-except
             return JsonResponse({'type': 0, 'status': 0})
     else:
         return HttpResponse('Unauthorized', status=401)
@@ -48,16 +51,20 @@ def set_task_init(request) :
         try:
             set_taskstatus_init()
             return HttpResponse(status=200,content_type="application/json")
-        except:
+        except: #pylint: disable=bare-except
             return HttpResponseBadRequest()
     else:
         return HttpResponse('Unauthorized', status=401)
 
 
-def check_time(request):
+def check_time(request): #pylint: disable=unused-argument
     """
     checking sever time and send it to /api/checktime
     """
     now = datetime.utcnow()
-    
-    return JsonResponse({'servertime': str(now), "unixtime": int((now - datetime(1970, 1, 1)).total_seconds())})
+    return JsonResponse(
+        {
+            'servertime': str(now),
+            "unixtime": int((now - datetime(1970, 1, 1)).total_seconds())
+        }
+    )

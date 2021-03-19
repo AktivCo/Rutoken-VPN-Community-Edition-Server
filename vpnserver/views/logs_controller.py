@@ -1,3 +1,6 @@
+"""
+logs controller module
+"""
 import os
 import json
 
@@ -20,7 +23,7 @@ def get_logs_list(request):
     if not request.user.is_authenticated() and request.user.username == "RutokenVpn":
         return HttpResponse('Unauthorized', status=401)
     if not request.method == "GET":
-        return HttpResponseBadRequest()    
+        return HttpResponseBadRequest()
     if environment.is_demo_mode():
         return JsonResponse({'logs_list': []})
     logs_list = os.listdir(logs_path.LOGS_PATH.LOGS_DIR)

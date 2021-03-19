@@ -1,3 +1,6 @@
+"""
+users controller module
+"""
 import json
 import time
 import os
@@ -28,8 +31,8 @@ def get_domainusers_list(request):
 def users(request):
     if request.user.is_authenticated() and request.user.username == "RutokenVpn":
         if request.method == "GET":
-            id = request.GET.get('id')
-            if id == None:
+            user_id = request.GET.get('id')
+            if user_id is None:
                 userslist = get_users_list(None)
                 response = json.dumps(userslist)
                 return HttpResponse(response, content_type="application/json")
@@ -48,22 +51,20 @@ def users(request):
             username = str(request.POST.get("name")).lower()
             password = str(request.POST.get("password"))
             fullname = str(request.POST.get("fullname"))
-            u = User(username=username, first_name=fullname)
+            current_user = User(username=username, first_name=fullname)
             if password == 'undefined':
-                u.set_unusable_password()
+                current_user.set_unusable_password()
             else:
-                u.set_password(password)
-            u.save()
+                current_user.set_password(password)
+            current_user.save()
             return HttpResponse(status=200, content_type="application/json")
-    else:
-        return HttpResponse('Unauthorized', status=401)
+    return HttpResponse('Unauthorized', status=401)
 
 def vpn_config_crl(request):
     if request.user.is_authenticated():
         if request.method == "POST":
             if time.time() < 1458893516.0:  # check time
                 return HttpResponseBadRequest()
-            
             if environment.is_demo_mode():
                 return HttpResponse(content_type="application/json", status=200)
 
@@ -75,12 +76,12 @@ def vpn_config_crl(request):
             os.system('sudo systemctl reload openvpn@openvpn')
             return HttpResponse(content_type="application/json", status=200)
         else:
-            st = []
+            crl_list = []
             if not environment.is_demo_mode():
                 if request.user.username == "RutokenVpn":
-                    st = clr_helper(None)
+                    crl_list = clr_helper(None)
                 else:
-                    st = clr_helper(request.user.username)
+                    crl_list = clr_helper(request.user.username)
             else:
                 model = {}
 
@@ -88,72 +89,72 @@ def vpn_config_crl(request):
                 model['date'] = 1458893516
                 model['type'] = "mobileClient"
                 model['cert'] = ""
-                st.append(model)
-            
-            response = json.dumps(st)
+                crl_list.append(model)
+            response = json.dumps(crl_list)
             return HttpResponse(response, content_type="application/json")
-    else:
-        return HttpResponse('Unauthorized', status=401)
+    return HttpResponse('Unauthorized', status=401)
 
 def vpn_config_connected_users(request):
     if request.user.is_authenticated() and request.user.username == "RutokenVpn":
         #type 0 - date from client
         #type 1 - ntp server
-        if request.method == "GET":   
-            connected_users = []      
-            if not environment.is_demo_mode():
-                try:
-                    t = Telnet('localhost', 7000)
-                    k = t.read_until(b"type 'help' for more info").decode('ascii')
-                    
-                    if "type 'help' for more info" in k:
-                        t.write('status\n'.encode('ascii'))
-                        status = t.read_until(b'ROUTING TABLE').decode('ascii')
-                        t.close()
-                        status_arr = status.split("\r\n")
-                        status_arr.pop(len(status_arr)-1)
-
-                        for counter in range(0,4):
-                            status_arr.pop(0)
-
-                        for item in status_arr:
-                            split = item.split(',')
-                            username = item.split('_')[0]
-                            connected = {'username': username, 'cert': split[0], 'ip': split[1],'bytesSent': split[2], 'bytesReceived': split[3], 'connectionTime': split[4]}
-                            connected_users.append(connected)
-                except:
-                    print("---cannot telnet to the openvpn management interface--")
-            else:
-                connected = {
-                    'username': 'test',
-                    'cert': 'test',
-                    'ip': '192.168.1.1',
-                    'bytesSent': 0,
-                    'bytesReceived': 0,
-                    'connectionTime': 0
-                }
-                connected_users.append(connected)
-
-            response = json.dumps(connected_users)
-            return HttpResponse(response, content_type="application/json")
-        else:
+        if request.method != "GET":
             return HttpResponseBadRequest()
-    else:
-        return HttpResponse('Unauthorized', status=401)
+
+        connected_users = []
+        if not environment.is_demo_mode():
+            try:
+                telnet_client = Telnet('localhost', 7000)
+                k = telnet_client.read_until(b"type 'help' for more info").decode('ascii')
+                if "type 'help' for more info" in k:
+                    telnet_client.write('status\n'.encode('ascii'))
+                    status = telnet_client.read_until(b'ROUTING TABLE').decode('ascii')
+                    telnet_client.close()
+                    status_arr = status.split("\r\n")
+                    status_arr.pop(len(status_arr)-1)
+
+                    for counter in range(0,4): #pylint: disable=unused-variable
+                        status_arr.pop(0)
+
+                    for item in status_arr:
+                        split = item.split(',')
+                        username = item.split('_')[0]
+                        connected = {
+                            'username': username,
+                            'cert': split[0],
+                            'ip': split[1],
+                            'bytesSent': split[2],
+                            'bytesReceived': split[3],
+                            'connectionTime': split[4]
+                        }
+                        connected_users.append(connected)
+            except: #pylint: disable=bare-except
+                print("---cannot telnet to the openvpn management interface--")
+        else:
+            connected = {
+                'username': 'test',
+                'cert': 'test',
+                'ip': '192.168.1.1',
+                'bytesSent': 0,
+                'bytesReceived': 0,
+                'connectionTime': 0
+            }
+            connected_users.append(connected)
+        response = json.dumps(connected_users)
+        return HttpResponse(response, content_type="application/json")
+    return HttpResponse('Unauthorized', status=401)
 
 
 def vpn_config_disconnect_user(request):
     if request.user.is_authenticated() and request.user.username == "RutokenVpn":
         #type 0 - date from client
         #type 1 - ntp server
-        if request.method == "GET":   
-            client = str(request.GET.get("client"))
-            disconnect_user(client)
-            return HttpResponse(status=200)
-        else:
+        if request.method != "GET":
             return HttpResponseBadRequest()
-    else:
-        return HttpResponse('Unauthorized', status=401)
+        client = str(request.GET.get("client"))
+        disconnect_user(client)
+        return HttpResponse(status=200)
+    return HttpResponse('Unauthorized', status=401)
 
 
 @require_POST
@@ -180,9 +181,9 @@ def sync_with_ad(request):
     if not users_list.exists():
         return HttpResponseBadRequest()
 
-    for id in ids:
-        user = users_list.get(pk=id)
-        user.first_name = users_to_update[id]
+    for user_id in ids:
+        user = users_list.get(pk=user_id)
+        user.first_name = users_to_update[user_id]
         user.save(update_fields=['first_name'])
     return HttpResponse(status=200)
 
@@ -211,10 +212,7 @@ def cert_access(request):
     if user.username is "RutokenVpn":
         return HttpResponseBadRequest()
 
-    if value == 'true':
-        value = True
-    else:
-       value = False
+    value = value == 'true'
 
     if not hasattr(user, 'cert_access'):
         user_access = AccessToCertGeneration()

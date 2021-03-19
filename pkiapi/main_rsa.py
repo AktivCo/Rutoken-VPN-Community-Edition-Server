@@ -1,3 +1,6 @@
+"""
+RSA modudle unit tests
+"""
 import os
 import unittest
 
@@ -8,8 +11,7 @@ os.environ["OPENSSL_CONF"] = os.path.join(current_dir, 'bin', 'openssl', 'openss
 os.environ["PKI"] = os.path.join(current_dir, 'pki')
 
 
-from .pki_methods_spec import TestPkiMethodsRSA
+from .pki_methods_spec import TestPkiMethodsRSA # pylint: disable=unused-import, wrong-import-position
 
 if __name__ == '__main__':
-
     unittest.main(verbosity=2)

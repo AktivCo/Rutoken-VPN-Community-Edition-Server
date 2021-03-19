@@ -1,6 +1,8 @@
+"""
+setting controller module
+"""
 import json
 import os
-import platform
 
 from django.contrib import auth
 from django.contrib.auth.models import User
@@ -32,7 +34,9 @@ def vpn_config_admpwd(request):
                 current_user.set_password(password)
                 current_user.save()
                 if not environment.is_demo_mode():
-                    os.system('echo "ubuntu:%s" | sudo chpasswd' % password)  # change ubuntu password
+                    os.system(
+                        'echo "ubuntu:%s" | sudo chpasswd' % password
+                    )  # change ubuntu password
                 return HttpResponse(status=200)
             else:
                 return HttpResponse(json.dumps({
@@ -47,9 +51,7 @@ def vpn_config_admpwd(request):
 def settings(request):
     if not request.user.is_authenticated():
         return HttpResponse('Unauthorized', status=401)
-    
-    settings = {}
-    
+    current_settings = {}
     if ConfigPki.objects.exists():
         type_p = ConfigPki.objects.get(pk=1)
         data = serializers.serialize('json', [type_p])
@@ -58,20 +60,17 @@ def settings(request):
         pki_type = data
     else:
         pki_type = None
-    
-    settings["pkiType"] = pki_type
+    current_settings["pkiType"] = pki_type
 
     rsa = {}
     rsa['title'] = 'RSA'
     rsa['pkeyType'] = 'rsa'
     pki_options = [ rsa ]
-    
-    
-    settings["pkiOptions"] = pki_options
+    current_settings["pkiOptions"] = pki_options
 
     #current machine vpnserver cert settings
 
-    return HttpResponse(json.dumps(settings), status=200)
+    return HttpResponse(json.dumps(current_settings), status=200)
 
 
 
@@ -83,7 +82,6 @@ def manage_box(request):
             task_status.status = TaskStatus.FINISHED
             task_status.type = TaskStatus.REBOOT_TYPE
             task_status.save()
-            
         if action == 1:
             if not environment.is_demo_mode():
                 os.system("sudo shutdown -t 0")
@@ -101,40 +99,37 @@ def vpn_config_ntp(request):
         #type 0 - date from client
         #type 1 - ntp server
         if request.method == "POST":
-            type = int(request.POST.get("type"))
+            operation_type = int(request.POST.get("type"))
             data = str(request.POST.get("data"))
-            
-            if type == 0 or type == 1:
+            if operation_type == 0 or operation_type == 1:
                 if not environment.is_demo_mode():
-                    os.system("sudo chmod 776 /etc/rc.local") 
-                   
-                    with open('/etc/rc.local', "r+") as f:
-                        st = f.readlines()
-                        f.seek(0)
-                        f.truncate()
-                        
-                        if type == 0:
+                    os.system("sudo chmod 776 /etc/rc.local")
+                    with open('/etc/rc.local', "r+") as ntp_config_file:
+                        st_lines = ntp_config_file.readlines()
+                        ntp_config_file.seek(0)
+                        ntp_config_file.truncate()
+                        if operation_type == 0:
                             os.system("sudo date %s" % data)
-                            for i,item in enumerate(st):
+                            for i,item in enumerate(st_lines):
                                 if "ntpdate" in item or "ifup" in item:
                                     continue
-                                f.write(item)                    
+                                ntp_config_file.write(item)
                             data = None
-                            
-                        if type == 1:
+                        if operation_type == 1:
                             os.system("sudo ntpdate %s" % data)
                             change = False
-                            for i,item in enumerate(st):
+                            for i,item in enumerate(st_lines):
                                 if 'ntp' in item:
-                                    st[i] = "ifup eth0 \nntpdate %s\n" % data                            
+                                    st_lines[i] = "ifup eth0 \nntpdate %s\n" % data
                                     change = True
                                 if "ifup" in item:
-                                    st[i] = "\n"
+                                    st_lines[i] = "\n"
                             if not change:
-                                st.insert((len(st)-2), "ifup eth0 \nntpdate %s\n" % data)
-                            f.writelines(st)
-                        
-                    os.system("sudo chmod 771 /etc/rc.local")                     
+                                st_lines.insert(
+                                    (len(st_lines)-2), "ifup eth0 \nntpdate %s\n" % data
+                                )
+                            ntp_config_file.writelines(st_lines)
+                    os.system("sudo chmod 771 /etc/rc.local")
                 try:
                     config = ConfigNtp.objects.get(pk=1)
                 except ObjectDoesNotExist:
@@ -142,7 +137,6 @@ def vpn_config_ntp(request):
                 else:
                     config.ntp_server = data
                 config.save()
-                
                 return HttpResponse(status=200)
             else:
                 return HttpResponse(status=400)

@@ -1,3 +1,6 @@
+"""
+personal controller module
+"""
 import json
 import os
 import time
@@ -5,6 +8,7 @@ import time
 from urllib.parse import quote
 from django.http import HttpResponse, HttpResponseBadRequest
 
+from vpnserver import environment
 from vpnserver.models import (
     ConfigSettings,
     ConfigNetwork,
@@ -14,7 +18,7 @@ from vpnserver.models import (
 
 
 from pkiapi import executables_path, pki_methods, config_methods
-from vpnserver import environment
+
 
 def vpn_getclientvpnconf(request):
     if time.time() < 1458893516.0:  # check time
@@ -28,7 +32,9 @@ def vpn_getclientvpnconf(request):
         response_client_name = quote('test.ovpn')
         response = HttpResponse("this is test config")
         response['Content-Type'] = 'application/octet-stream'
-        response['Content-Disposition'] = u'attachment; filename*=UTF-8\'\'%s' % response_client_name
+        response['Content-Disposition'] = (
+            u'attachment; filename*=UTF-8\'\'%s' % response_client_name
+        )
         response['Content-Transfer-Encoding'] = 'binary'
         response['Accept-Range'] = 'bytes'
 
@@ -51,11 +57,14 @@ def vpn_getclientvpnconf(request):
     client_name = encodedname.decode('utf-8')
 
     if "rutokenVpnClient" not in client_name:
-        client_cert_path = os.path.join(executables_path.EXEC_PATHS.PKI_ISSUED_FOLDER,  "%s.crt" % client_name)
-        client_key_path  = os.path.join(executables_path.EXEC_PATHS.PKI_PRIVATE_FOLDER, "%s.key" % client_name)
+        client_cert_path = os.path.join(
+            executables_path.EXEC_PATHS.PKI_ISSUED_FOLDER,  "%s.crt" % client_name
+        )
+        client_key_path  = os.path.join(
+            executables_path.EXEC_PATHS.PKI_PRIVATE_FOLDER, "%s.key" % client_name
+        )
 
     pkey_type = ConfigPki.objects.get(pk=1).pki_type
-    
     client_config = config_methods.create_client_config(
         pkey_type,
         config_vpn.external_ip,
@@ -110,36 +119,29 @@ def personal(request):
     if request.POST.get("cert_req"):
         if not can_generate_cert_on_token:
             return HttpResponse('Unauthorized', status=401)
-        
         if environment.is_demo_mode():
             return HttpResponse(status=200, content_type="application/json")
 
         cert_req = str(request.POST.get("cert_req"))
-        
         os.system("sudo chown -R ubuntu:ubuntu %s" % executables_path.EXEC_PATHS.VPN_FOLDER)
 
         cert_file_path    = os.path.join(exec_paths.PKI_ISSUED_FOLDER, "%s.crt" % name)
         req_file_path     = os.path.join(exec_paths.PKI_REQS_FOLDER,   "%s.req" % name)
-                
         with open(req_file_path, 'w') as file:
             file.write(cert_req)
 
         pki_methods.sign_req_with_ca(
             req_file_path,
             cert_file_path,
-            exec_paths.OPENSSL_CONF,
             "client_exts",
             exec_paths.OPENSSL,
             True
         )
-        
         with open(cert_file_path, 'r') as file:
             cert_file = file.read()
             cert_file = cert_file[cert_file.find("-----BEGIN CERTIFICATE-----"):]
             print(cert_file)
-            
         date = json.dumps(str(cert_file))
-        
         os.system("sudo chown -R root:root %s" % executables_path.EXEC_PATHS.VPN_FOLDER)
 
         return HttpResponse(date, content_type="application/json")
@@ -148,22 +150,20 @@ def personal(request):
         if not can_generate_mobile_cert:
             return HttpResponse('Unauthorized', status=401)
 
-        if environment.is_demo_mode():          
+        if environment.is_demo_mode():
             return HttpResponse(status=200, content_type="application/json")
-        
         pkey_type = ConfigPki.objects.get(pk=1).pki_type
-        pki_methods.generate_req(pkey_type, 
+
+        pki_methods.generate_req(pkey_type,
             os.path.join(exec_paths.PKI_REQS_FOLDER,    "%s.req" % name),
             os.path.join(exec_paths.PKI_PRIVATE_FOLDER, "%s.key" % name),
             exec_paths.OPENSSL,
             name,
             True
         )
-        
         pki_methods.sign_req_with_ca(
             os.path.join(exec_paths.PKI_REQS_FOLDER,    "%s.req" % name),
             os.path.join(exec_paths.PKI_ISSUED_FOLDER,  "%s.crt" % name),
-            exec_paths.OPENSSL_CONF,
             "client_exts",
             exec_paths.OPENSSL,
             True

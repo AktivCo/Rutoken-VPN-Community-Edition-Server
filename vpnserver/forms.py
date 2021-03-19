@@ -1,7 +1,10 @@
-﻿from django import forms
+﻿"""
+Environment module
+"""
+from django import forms
 
 
-
+#pylint: disable=line-too-long
 class ConfigForm(forms.Form):
     TYPE = (("r", "RSA"))
 

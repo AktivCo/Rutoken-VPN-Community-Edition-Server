@@ -20,10 +20,8 @@ try:
     secret_file.close()
 
     SECRET_KEY = secrets['secret_key']
-except:
+except: #pylint: disable=bare-except
     SECRET_KEY = 'n02sg-3wxk$11f5i)ys6-&*#^9@*y)&)q36%9dxjk-o0(%4##('
-    
-    
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.7/howto/deployment/checklist/
 

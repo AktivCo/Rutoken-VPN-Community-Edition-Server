@@ -1,15 +1,16 @@
+"""
+Project urls module
+"""
 from django.conf.urls import url, include
 from django.contrib import admin
-from vpnserver import views
 from django.conf import settings
+from vpnserver import views
 
 urlpatterns = [
     # index_controller
     url(r'^$', views.index, name='index'),
 
-    
     # status_controller
-
     url(r'^api/identity', views.identity, name='identity'),
     url(r'^api/initstatus', views.init_status, name='init_status'),
     url(r'^api/checktime', views.check_time, name='check_time'),
@@ -27,7 +28,6 @@ urlpatterns = [
     url(r'^api/disconnectuser', views.vpn_config_disconnect_user, name='disconnect_user'),
     url(r'^api/sync', views.sync_with_ad, name='sync_with_ad'),
     url(r'^api/cert_access', views.cert_access, name='forbid_generate_certs'),
-    
 
     #system_controller
     url(r'^api/network', views.vpn_config_network, name='config_getnetwork'),

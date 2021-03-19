@@ -1,4 +1,6 @@
-import os
+"""
+Environment module
+"""
 from django.conf import settings
 
 def is_demo_mode():

@@ -1,3 +1,6 @@
+"""
+system controller module
+"""
 import json
 import time
 import re
@@ -8,6 +11,8 @@ from django.core import serializers
 from django.core.exceptions import ObjectDoesNotExist
 from django.http import HttpResponse, HttpResponseBadRequest, JsonResponse
 
+
+from vpnserver import environment
 from vpnserver.models import (
     ConfigSettings,
     ConfigNetwork,
@@ -17,10 +22,11 @@ from vpnserver.models import (
     ConfigPki,
     ConfigRouting,
 )
+from vpnserver.tasks import setnewpki, set_new_ip, setnewvpn
 
 from pkiapi import executables_path, pki_methods
-from vpnserver.tasks import setnewpki, setNewIp, setnewvpn
-from vpnserver import environment
+
+
 
 def vpn_config_network(request):
     if request.user.is_authenticated() and request.user.username == "RutokenVpn":
@@ -38,7 +44,7 @@ def vpn_config_network(request):
                         server_dns1=str(request.POST.get("server_dns1")),
                         server_dns2=str(request.POST.get("server_dns2"))
                     )
-                except:
+                except: #pylint: disable=bare-except
                     return HttpResponseBadRequest()
 
             else:
@@ -53,7 +59,7 @@ def vpn_config_network(request):
 
             config.save()
             if not environment.is_demo_mode():
-                setNewIp()
+                set_new_ip()
             return HttpResponse(status=200)
         else:
             try:
@@ -85,7 +91,7 @@ def vpn_config_pki(request):
         common_name = str(request.POST.get("common_name"))
         pki_type = str(request.POST.get("pki_type"))
 
-        if not re.match("^[А-Яа-я,Ё,ё,\w,\s,\",\',\.,\,,\-]+$", common_name):  # check common name for wrong symbol
+        if not re.match("^[А-Яа-я,Ё,ё,\w,\s,\",\',\.,\,,\-]+$", common_name):  # check common name for wrong symbol pylint: disable=line-too-long, anomalous-backslash-in-string
             return HttpResponseBadRequest()
         try:
             config = ConfigPki.objects.get(pk=1)
@@ -97,20 +103,17 @@ def vpn_config_pki(request):
 
         try:
             task_status = TaskStatus.objects.get(pk=1)
-        except:
+        except: #pylint: disable=bare-except
             task_status = TaskStatus(status=TaskStatus.STARTED, type = TaskStatus.PKI_TYPE)
         else:
             task_status.status = TaskStatus.STARTED
             task_status.type = TaskStatus.PKI_TYPE
-            
         task_status.save()
-    
         if not environment.is_demo_mode():
-            newtask = setnewpki.delay(common_name, pki_type)
+            newtask = setnewpki.delay(common_name, pki_type) #pylint: disable=unused-variable
         else:
             task_status.status = TaskStatus.FINISHED
             task_status.save()
-        
         config.save()
 
         return HttpResponse(status=200)
@@ -152,11 +155,15 @@ def vpn_config_vpn(request):
 
             config_network = ConfigNetwork.objects.get(pk=1)
             config_ca = ConfigPki.objects.get(pk=1)
-            
             routing_table = ConfigRouting.objects.all()
             if not environment.is_demo_mode():
-                setnewvpn(config_ca.pki_type, server_name, config_network.server_dns1, config_network.server_dns2, routing_table)
-
+                setnewvpn(
+                    config_ca.pki_type,
+                    server_name,
+                    config_network.server_dns1,
+                    config_network.server_dns2,
+                    routing_table
+                )
             config.save()
             return HttpResponse(status=200)
         else:
@@ -232,7 +239,6 @@ def vpn_config_routing(request):
 
     if time.time() < 1458893516.0:  # check time
         return HttpResponseBadRequest()
-    
     if request.method == "POST":
         routing_list_ip = request.POST.getlist("ip")
         routing_list_mask = request.POST.getlist("mask")
@@ -252,7 +258,7 @@ def vpn_config_routing(request):
                 routing_list_ip.append(dns)
                 routing_list_mask.append('255.255.255.255')
 
-        for i, ip in enumerate(routing_list_ip):
+        for i, ip in enumerate(routing_list_ip): #pylint: disable=invalid-name, unused-variable
             ConfigRouting.objects.create(
                 ip=routing_list_ip[i],
                 mask=routing_list_mask[i]
@@ -263,23 +269,26 @@ def vpn_config_routing(request):
     if request.method == "GET":
         routing_table = ConfigRouting.objects.all()
         dns = ConfigNetwork.objects.get(pk=1).server_dns1
-        
-        dns_is_set = any((dns in table.ip and '255.255.255.255' in table.mask for table in routing_table))
+        dns_is_set = any(
+            (dns in table.ip and '255.255.255.255' in table.mask for table in routing_table)
+        )
 
         routing_table_serialized = json.loads(serializers.serialize('json', routing_table))
         response = json.dumps(
             {
                 'routing': [table['fields'] for table in routing_table_serialized],
                 'dns': dns_is_set
-            })
-        
+            }
+        )
         return HttpResponse(response, content_type="application/json")
 
 
 def vpn_cert_info(request):
     if not request.user.is_authenticated() and request.user.username != "RutokenVpn":
-        return HttpResponse('Unauthorized', status=401)
-    
+        return HttpResponse(
+            'Unauthorized',
+            status=401
+        )
     exec_paths = executables_path.EXEC_PATHS
     if request.method == "GET":
         if environment.is_demo_mode():
@@ -295,15 +304,18 @@ def vpn_cert_info(request):
 
         vpnserver_cert_path = os.path.join(exec_paths.PKI_ISSUED_FOLDER,   "vpnserver.crt")
 
-        vpn_cert = pki_methods.get_certificate_enddate(vpnserver_cert_path, exec_paths.OPENSSL, True).decode()
-        
+        #pylint: disable=no-member
+        vpn_cert = pki_methods.get_certificate_enddate(
+            vpnserver_cert_path,
+            exec_paths.OPENSSL,
+            True
+        ).decode()
+
         vpn_cert = vpn_cert.split('\n')
-        
         serial = vpn_cert[0].replace('serial=', '')
         finger_print = vpn_cert[1].replace('SHA1 Fingerprint=', '')
         cert_startdate = vpn_cert[2].replace('notBefore=', '')
         cert_enddate = vpn_cert[3].replace('notAfter=', '')
-            
         parsed_cert_startdate = datetime.strptime(cert_startdate, '%b %d %H:%M:%S %Y %Z')
         parsed_cert_enddate = datetime.strptime(cert_enddate, '%b %d %H:%M:%S %Y %Z')
 
@@ -328,13 +340,31 @@ def vpn_cert_info(request):
         if environment.is_demo_mode():
             return HttpResponse(status=200, content_type="application/json")
         pkey_type = ConfigPki.objects.get(pk=1).pki_type
-        
         pki_methods.revoke(exec_paths.PKI_SERVER_CERT, executables_path.EXEC_PATHS.OPENSSL, True)
-        pki_methods.gen_crl(executables_path.EXEC_PATHS.PKI_CRL_FILE, executables_path.EXEC_PATHS.OPENSSL, True)
-        pki_methods.generate_req(pkey_type, exec_paths.PKI_SERVER_REQ, exec_paths.PKI_SERVER_KEY, exec_paths.OPENSSL, "vpnserver", True)
-        pki_methods.sign_req_with_ca(exec_paths.PKI_SERVER_REQ, exec_paths.PKI_SERVER_CERT, exec_paths.OPENSSL_CONF, "server_exts", exec_paths.OPENSSL, True)
-        pki_methods.gen_crl(executables_path.EXEC_PATHS.PKI_CRL_FILE, executables_path.EXEC_PATHS.OPENSSL, True)
+        pki_methods.gen_crl(
+            executables_path.EXEC_PATHS.PKI_CRL_FILE,
+            executables_path.EXEC_PATHS.OPENSSL,
+            True
+        )
+        pki_methods.generate_req(
+            pkey_type,
+            exec_paths.PKI_SERVER_REQ,
+            exec_paths.PKI_SERVER_KEY,
+            exec_paths.OPENSSL,
+            "vpnserver",
+            True
+        )
+        pki_methods.sign_req_with_ca(
+            exec_paths.PKI_SERVER_REQ,
+            exec_paths.PKI_SERVER_CERT,
+            "server_exts",
+            exec_paths.OPENSSL,
+            True
+        )
+        pki_methods.gen_crl(
+            executables_path.EXEC_PATHS.PKI_CRL_FILE, executables_path.EXEC_PATHS.OPENSSL, True
+        )
         os.system('sudo systemctl restart openvpn@openvpn')
         return HttpResponse(status=200, content_type="application/json")
     else:
-        return HttpResponseBadRequest()  
+        return HttpResponseBadRequest()

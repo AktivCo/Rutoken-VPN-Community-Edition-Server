@@ -1,11 +1,14 @@
+"""
+Common PKI methods
+"""
 import subprocess
 
 def create_serial(serial_path, openssl_path, sudo_mode=False):
     openssl_parameters = [
-        'rand', '-hex', 
+        'rand', '-hex',
         '-out', serial_path,
         '16'
-    ]    
+    ]
 
     openssl_parameters = [openssl_path] + openssl_parameters
     operation_result = execute_command(openssl_parameters, sudo_mode=sudo_mode)
@@ -33,16 +36,15 @@ def sign_req(req_path, out_path, sign_key_path, openssl_path, sudo_mode=False):
     openssl_parameters = [
         'x509', '-req', '-days', '3650',
         '-in',          req_path,
-        '-out',         out_path,        
-        '-signkey',     sign_key_path        
+        '-out',         out_path,
+        '-signkey',     sign_key_path
     ]
-    
     openssl_parameters = [openssl_path] + openssl_parameters
     operation_result = execute_command(openssl_parameters, sudo_mode=sudo_mode)
 
     return operation_result.returncode
 
-def sign_req_with_ca(req_path, out_path, openssl_conf_path, extensions, openssl_path, sudo_mode=False):
+def sign_req_with_ca(req_path, out_path, extensions, openssl_path, sudo_mode=False):
 
     openssl_parameters = [
         'ca', '-utf8',
@@ -94,7 +96,7 @@ def gen_diffie_hellman(dh_path, openssl_path, sudo_mode=False):
 
 def gen_tls_key(openvpn_path, ta_key_path, sudo_mode=False):
     command_parameters = [
-        '--genkey', '--secret' , ta_key_path        
+        '--genkey', '--secret' , ta_key_path
     ]
     command_parameters = [openvpn_path] + command_parameters
     operation_result = execute_command(command_parameters, sudo_mode=sudo_mode)
@@ -122,13 +124,12 @@ def execute_command(openssl_parameters, sudo_mode=False):
     if sudo_mode:
         params = ['sudo', '-E'] + params
 
-    return subprocess.run(params, shell=False)
+    return subprocess.run(params, shell=False) #pylint:disable=subprocess-run-check
 
 def execute_command_with_std(openssl_parameters, sudo_mode=False):
     params = openssl_parameters
     if sudo_mode:
         params = ['sudo', '-E'] + params
 
-    return subprocess.run(params,  stdout=subprocess.PIPE, shell=False)
-    
+    return subprocess.run(params,  stdout=subprocess.PIPE, shell=False) #pylint:disable=subprocess-run-check
     

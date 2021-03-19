@@ -1,4 +1,6 @@
-
+"""
+controllers module
+"""
 from .index_controller import *
 from .auth_controller import *
 from .status_controller import *

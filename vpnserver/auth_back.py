@@ -1,8 +1,10 @@
-from vpnserver.models import ConfigSettings
+"""
+Authentication module
+"""
 from ldap3 import Server, Connection, AUTH_SIMPLE, STRATEGY_SYNC, SEARCH_SCOPE_WHOLE_SUBTREE
 from django.core.exceptions import ObjectDoesNotExist
 from django.contrib.auth.models import User
-
+from vpnserver.models import ConfigSettings
 
 class ADBackend(object):
     """
@@ -14,17 +16,17 @@ class ADBackend(object):
         except ObjectDoesNotExist:
             if username != 'RutokenVpn' or password != 'RutokenVpn':
                 return None
-            u = User(username='RutokenVpn')  # creating superuser, if he is not init
-            u.set_password('RutokenVpn')
-            u.is_superuser = True
-            u.is_staff = True
-            u.save()
-            return u
+            default_user = User(username='RutokenVpn')  # creating superuser, if he is not init
+            default_user.set_password('RutokenVpn')
+            default_user.is_superuser = True
+            default_user.is_staff = True
+            default_user.save()
+            return default_user
         else:
             user_name = username.lower()
             try:
                 user = User.objects.get(username=user_name)
-            except:
+            except: #pylint: disable=bare-except
                 return None
             else:
                 if user.has_usable_password():
@@ -40,24 +42,21 @@ class ADBackend(object):
                     for item in base_dn_list:
                         dn_string += "dc="+item +","
                     dn_string = dn_string[:-1]
-                    
                     try:
                         server = Server(config.domain_server, port=389)
-                    except:
+                    except: #pylint: disable=bare-except
                         print('Domain server is not available. Check IP adress or port number.')
                         return None
-                    
                     try:
-                        connection = Connection(server, 
+                        connection = Connection(server,
                                                 auto_bind = True,
                                                 client_strategy=STRATEGY_SYNC,
                                                 user=user_name + "@" + config.ldap_base_dn,
                                                 password=password,
                                                 authentication=AUTH_SIMPLE,
                                                 check_names=True)
-                    except:
+                    except: #pylint: disable=bare-except
                         print('Cannot connect to the AD. Trying old connection scheme.')
-                    
                     try:
                         connection = Connection(
                             server,
@@ -68,18 +67,17 @@ class ADBackend(object):
                             authentication=AUTH_SIMPLE,
                             check_names=True
                         )
-                    except:
+                    except: #pylint: disable=bare-except
                         print('Cannot connect to the AD.')
-                        
                     try:
-                        connection.search(dn_string, '(sAMAccountName=%s)' % user_name, SEARCH_SCOPE_WHOLE_SUBTREE,
-                                          attributes=['sAMAccountName','displayName'])
-                    except:
+                        connection.search(dn_string, '(sAMAccountName=%s)' % user_name,
+                                        SEARCH_SCOPE_WHOLE_SUBTREE,
+                                        attributes=['sAMAccountName','displayName'])
+                    except: #pylint: disable=bare-except
                         print('Cannot query the Active Directory')
                         return None
-                    
-                    response = connection.response
-                          
+                    response = connection.response #pylint: disable=unused-variable
+
                     return user
 
     def get_user(self, user_id):
@@ -87,4 +85,3 @@ class ADBackend(object):
             return User.objects.get(pk=user_id)
         except User.DoesNotExist:
             return None
-

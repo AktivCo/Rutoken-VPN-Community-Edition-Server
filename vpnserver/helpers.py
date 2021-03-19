@@ -1,3 +1,8 @@
+
+"""
+Status helper module
+"""
+
 from vpnserver.models import TaskStatus
 
 
@@ -21,5 +26,3 @@ def set_taskstatus_description(description):
     task = TaskStatus.objects.get(pk=1)
     task.description = description
     task.save()
-
-
