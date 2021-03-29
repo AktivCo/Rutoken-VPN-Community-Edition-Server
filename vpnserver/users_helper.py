@@ -29,7 +29,7 @@ def get_users_list(username):
         return userslist
     else:
         for userslist_item in userslist:
-            if username in userslist_item['username']:
+            if username == userslist_item['username']:
                 return userslist_item
 
 
