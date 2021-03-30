@@ -152,25 +152,13 @@
     </header>
     <div class="text">
         <p>{{viewSteps.additionalStatusText}}</p>
-        <ul class="break" *ngIf="checkOsByShortName('windows') || checkOsByShortName('macOS')">
-            <li>
-                <span *ngIf="checkOsByShortName('windows')">
-                    <a href="https://www.rutoken.ru/support/download/get/rtPlugin-win.html" target="_blank">
-                        <span>Рутокен Плагин</span>
-                </a>
-                </span>
-                <span *ngIf="checkOsByShortName('macOS')">
-                    <a href="https://www.rutoken.ru/support/download/get/rtPlugin-mac.html" target="_blank">
-                        <span>Рутокен Плагин</span>
-                </a>
-                </span>
-            </li>
-        </ul>
+        <ng-container *ngTemplateOutlet="installPluginLinks; context: pluginError"></ng-container>
     </div>
     <div class="control center">
         <a class="show_modal b_fill red" (click)="closeModal()">Все понятно</a>
     </div>
 </div>
+
 <div class="modal" *ngIf="viewSteps.step == viewStepsStatus.INSTALL_OPERA_ADAPTER">
     <header class="hgroup">
         <h2>{{viewSteps.statusText}}</h2>
@@ -189,57 +177,34 @@
         <a class="show_modal b_fill red" (click)="closeModal()">Все понятно</a>
     </div>
 </div>
+
 <div class="modal" *ngIf="viewSteps.step == viewStepsStatus.INSTALL_PLUGIN">
     <header class="hgroup">
         <h2>{{viewSteps.statusText}}</h2>
     </header>
     <div class="text">
         <p>{{viewSteps.additionalStatusText}}</p>
-        <ul class="break" *ngIf="checkOsByShortName('windows') || checkOsByShortName('macOS')">
-            <li>
-                <span *ngIf="checkOsByShortName('windows')">
-                    <a href="https://www.rutoken.ru/support/download/get/rtPlugin-win.html" target="_blank">
-                        <span>Рутокен Плагин</span>
-                </a>
-                </span>
-                <span *ngIf="checkOsByShortName('macOS')">
-                    <a href="https://www.rutoken.ru/support/download/get/rtPlugin-mac.html" target="_blank">
-                        <span>Рутокен Плагин</span>
-                </a>
-                </span>
-            </li>
-        </ul>
+        <ng-container *ngTemplateOutlet="installPluginLinks; context: pluginError"></ng-container>
     </div>
     <div class="control center">
         <a class="show_modal b_fill red" (click)="closeModal()">Все понятно</a>
     </div>
 </div>
+
 <div class="modal" *ngIf="viewSteps.step == viewStepsStatus.UPDATE_PLUGIN">
     <header class="hgroup">
         <h2>{{viewSteps.statusText}}</h2>
     </header>
     <div class="text">
         <p>{{viewSteps.additionalStatusText}}</p>
-        <ul class="break" *ngIf="checkOsByShortName('windows') || checkOsByShortName('macOS')">
-            <li>
-                <span *ngIf="checkOsByShortName('windows')">
-                    <a href="https://www.rutoken.ru/support/download/get/rtPlugin-win.html" target="_blank">
-                        <span>Рутокен Плагин</span>
-                </a>
-                </span>
-                <span *ngIf="checkOsByShortName('macOS')">
-                    <a href="https://www.rutoken.ru/support/download/get/rtPlugin-mac.html" target="_blank">
-                        <span>Рутокен Плагин</span>
-                </a>
-                </span>
-            </li>
-        </ul>
+        <ng-container *ngTemplateOutlet="installPluginLinks; context: pluginError"></ng-container>
     </div>
     <div class="control center">
         <a class="show_modal b_fill red" (click)="closeModal()">Все понятно</a>
     </div>
 </div>
-<div class="modal" *ngIf="viewSteps.step == viewStepsStatus.BROWSER_IS_NOT_SUPPORTED">
+
+<div class="modal" *ngIf="viewSteps.step == viewStepsStatus.BROWSER_IS_NOT_SUPPORTED || viewSteps.step == viewStepsStatus.NO_OS_SUPPORT || viewSteps.step == viewStepsStatus.NO_PLATFORM_SUPPORT">
     <header class="hgroup">
         <h2>{{viewSteps.statusText}}</h2>
     </header>
@@ -343,3 +308,20 @@
 </div>
 
 <div class="fade"></div>
+
+<ng-template #installPluginLinks let-os="os">
+    <ul class="break" *ngIf="os && (os.name === 'Windows' || os.name === 'macOS')">
+    <li>
+        <span *ngIf="os.name === 'Windows'">
+            <a href="https://www.rutoken.ru/support/download/get/rtPlugin-win.html" target="_blank">
+                <span>Рутокен Плагин</span>
+        </a>
+        </span>
+        <span *ngIf="os.name === 'macOS'">
+            <a href="https://www.rutoken.ru/support/download/get/rtPlugin-mac.html" target="_blank">
+                <span>Рутокен Плагин</span>
+        </a>
+        </span>
+    </li>
+    </ul>
+</ng-template>

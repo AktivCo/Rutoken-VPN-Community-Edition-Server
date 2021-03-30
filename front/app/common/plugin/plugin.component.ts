@@ -1,17 +1,22 @@
+/* eslint-disable @typescript-eslint/no-unsafe-call */
+/* eslint-disable @typescript-eslint/no-unsafe-return */
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
+/* eslint-disable @typescript-eslint/no-unsafe-member-access */
 import { Component, OnInit } from '@angular/core';
-import browserDetect from 'browser-detect';
+
+import Plugin from '@aktivco-it/rutoken-plugin-bootstrap/src/index';
+import {
+    NoSupportOsError,
+    NoSupportBrowserError,
+    NoSupportPlatformError,
+    NoInstalledPluginError,
+    NoSupportBrowserVersionError,
+    NoSupportPluginVersionError,
+} from '@aktivco-it/rutoken-plugin-bootstrap/src/supportError';
+
 import { HttpClientService } from '../../services/httpclient';
 import { DynamicComponent } from '../../services/dynamic-component.class';
-
-import { PluginHelper, PluginLoadErrors, PluginLoad } from './plugin.helper.class';
-
-import * as supportedBrowsers from './supportedBrowsers.json';
-import * as supportedBrowserCheck from './supportedBrowsers';
-
-// eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-const rutoken = require('rutoken');
-
-const CURRENT_PLUGIN_VERSION = '4.0.1.0';
+import { PluginHelper } from './plugin.helper.class';
 
 const viewStepsStatus = {
     ERROR: -1,
@@ -28,37 +33,9 @@ const viewStepsStatus = {
     BROWSER_IS_NOT_SUPPORTED: 15,
     INSTALL_SAFARI_PLUGIN: 16,
     INSTALL_EDGE_ADAPTER: 16,
-};
-
-const getSupportedPlatforms = (): Array<any> => {
-    const supportedPlatforms: any[] = [];
-
-    Object.keys(supportedBrowsers).forEach((platform) => supportedPlatforms.push(platform));
-
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-return
-    return supportedPlatforms;
-};
-
-const getSupportedOs = (): Array<any> => {
-    const supportedOs: any[] = [];
-
-    Object.keys(supportedBrowsers).forEach((platform: string) => {
-        Object.keys(supportedBrowsers[platform]).forEach((os: string) => supportedOs.push(os));
-    });
-
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-return
-    return supportedOs;
-};
-
-const getSupportedBrowsersForOs = (platform: string, os: string): Array<string> => {
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-    const supportedPlatforms = supportedBrowsers[platform];
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment,@typescript-eslint/no-unsafe-member-access
-    const supportedBrowsersForCurrentPlatform = supportedPlatforms[os];
-
-    const browsers = Object.keys(supportedBrowsersForCurrentPlatform);
-
-    return browsers;
+    NO_PLATFORM_SUPPORT: 17,
+    NO_OS_SUPPORT: 18,
+    BROWSER_VERSION_IS_NOT_SUPPORTED: 19,
 };
 
 @Component({
@@ -71,28 +48,23 @@ export class PluginComponent extends DynamicComponent implements OnInit {
 
     username: any;
 
-    error: string;
-
     plugin: any;
+
+    pluginError: any;
 
     pkeyType: string;
 
     pluginHelper: PluginHelper;
 
-    browserDetect: any;
-
-    browser: any;
-
     deviceList: Array<any> = [];
 
     viewStepsStatus: any = viewStepsStatus;
-
-    supportedBrowsers: any;
 
     viewSteps: {
         step: number;
         statusText: string;
         additionalStatusText: string;
+        data?: any;
     };
 
     private static getDeviceInfo(deviceNumber: number, plugin: any): Promise<any> {
@@ -128,11 +100,12 @@ export class PluginComponent extends DynamicComponent implements OnInit {
         item.pinError = undefined;
     }
 
-    setViewStep(step: number, statusText: string, additionalStatusText = ''): void {
+    setViewStep(step: number, statusText: string, additionalStatusText = '', data = {}): void {
         this.viewSteps = {
             step,
             statusText,
             additionalStatusText,
+            data,
         };
     }
 
@@ -141,11 +114,15 @@ export class PluginComponent extends DynamicComponent implements OnInit {
 
         if (!this.data) this.closeModal();
 
-        this.browserDetect = browserDetect();
-        // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-        this.supportedBrowsers = JSON.parse(JSON.stringify(supportedBrowsers));
-        // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-        this.browser = supportedBrowserCheck.GetCurrentBrowser(window.navigator.userAgent);
+        let sequence = Promise.resolve();
+
+        this.plugin = Plugin;
+
+        if (!Plugin.valid) {
+            sequence = sequence.then(() => Plugin.init())
+        }
+
+        sequence = sequence.then(() => this.getDeviceList());
 
         // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-member-access
         this.username = this.data.username;
@@ -154,155 +131,91 @@ export class PluginComponent extends DynamicComponent implements OnInit {
         this.viewStepsStatus = viewStepsStatus;
         this.pluginHelper = new PluginHelper();
 
-        // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
-        Promise.resolve(rutoken.ready)
-            .then(() => supportedBrowserCheck.IsCurrentBrowserSupported(this.supportedBrowsers))
-            .then((result: any) => {
-                if (!result) return supportedBrowserCheck.ThrowSupportException(false, false);
+        sequence.catch((error: any) => {
+            this.pluginError = error;
 
-                return supportedBrowserCheck.NeedToCheckInstalledExtension(this.supportedBrowsers);
-            })
-            // eslint-disable-next-line @typescript-eslint/no-unsafe-return, @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-member-access
-            .then((result: any) => (result ? rutoken.isExtensionInstalled() : true))
-            // eslint-disable-next-line @typescript-eslint/no-unsafe-return, @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-member-access
-            .then((result: any) => (result ? rutoken.isPluginInstalled() : supportedBrowserCheck.ThrowSupportException()))
-            // eslint-disable-next-line @typescript-eslint/no-unsafe-return, @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-member-access
-            .then((result: any) => (result ? rutoken.loadPlugin() : supportedBrowserCheck.ThrowSupportException(false)))
-            // eslint-disable-next-line consistent-return
-            .then((plugin: any) => {
-                // eslint-disable-next-line @typescript-eslint/no-throw-literal
-                if (typeof plugin === 'undefined') throw new PluginLoad(PluginLoadErrors.NO_LOAD);
+            if (error instanceof NoSupportPlatformError) {
+                this.setViewStep(viewStepsStatus.NO_PLATFORM_SUPPORT, 'Ваша операционная система не подходит для установки Рутокен плагина. Центр сертификации Рутокен работает только на настольных платформах.');
+                return;
+            }
 
-                // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
-                if (plugin.version <= CURRENT_PLUGIN_VERSION) {
-                    // eslint-disable-next-line @typescript-eslint/no-throw-literal
-                    throw new PluginLoad(PluginLoadErrors.NO_VERSION);
+            if (error instanceof NoSupportOsError || error.os.name === 'Linux') { //Linux is supported by plugin but not by app
+                this.setViewStep(viewStepsStatus.NO_OS_SUPPORT, 'Ваша операционная система не подходит для установки Рутокен плагина.');
+                return;
+            }
+
+            if (error instanceof NoSupportBrowserError || error instanceof NoSupportBrowserVersionError) {
+                this.setViewStep(viewStepsStatus.BROWSER_IS_NOT_SUPPORTED, 'Поддерживаемые браузеры');
+                return;
+            }
+
+            if (error instanceof NoInstalledPluginError) {
+                if (!error.needExtension) {
+                    this.setViewStep(
+                        viewStepsStatus.INSTALL_PLUGIN,
+                        'Установите Рутокен Плагин',
+                        'Для подготовки USB-токенов Рутокен ЭЦП, установите дополнительное программное обеспечение для браузера.',
+                    );
+                    return;
                 }
 
-                const check = supportedBrowserCheck.CheckIfSupported(
-                    supportedBrowserCheck.GetSupportedBrowsersByPluginVersion(
-                        this.supportedBrowsers,
-                        // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
-                        plugin.version,
-                    ),
+                switch (error.browser.name) {
+                    case 'Firefox':
+                    case 'Internet Explorer':
+                        this.setViewStep(
+                            viewStepsStatus.INSTALL_FIREFOX_ADAPTER,
+                            'Установите Рутокен Плагин и включите Адаптер',
+                            `Для подготовки USB-токенов Рутокен ЭЦП, необходимо установить Рутокен Плагин и включить дополнение
+                            'Адаптер Рутокен Плагин' в настройках браузера. (CTRL+SHIFT+A)`,
+                        );
+                        break;
+                    case 'Opera':
+                        this.setViewStep(
+                            viewStepsStatus.INSTALL_OPERA_ADAPTER,
+                            'Установите Адаптер Рутокен Плагин',
+                            "Для подготовки USB-токенов Рутокен ЭЦП, необходимо установить и включить дополнение 'Адаптер Рутокен Плагин' в настройках браузера.",
+                        );
+                        break;
+                    case 'Microsoft Edge':
+                        this.setViewStep(
+                            viewStepsStatus.INSTALL_EDGE_ADAPTER,
+                            'Установите Адаптер Рутокен Плагин',
+                            "Для подготовки USB-токенов Рутокен ЭЦП, необходимо установить и включить дополнение 'Адаптер Рутокен Плагин' в настройках браузера.",
+                        );
+                        break;
+                    case 'Chrome':
+                    case 'Yandex Browser':
+                    case 'SputnikBrowser':
+                        this.setViewStep(
+                            viewStepsStatus.INSTALL_CHROME_ADAPTER,
+                            'Установите Адаптер Рутокен Плагин',
+                            "Для подготовки USB-токенов Рутокен ЭЦП, необходимо установить и включить дополнение 'Адаптер Рутокен Плагин' в настройках браузера.",
+                        );
+                        break;
+                    case 'Safari':
+                        this.setViewStep(
+                            viewStepsStatus.INSTALL_SAFARI_PLUGIN,
+                            'Установите Рутокен Плагин',
+                            'Если Плагин уже установлен, убедитесь, что расширение "Адаптер Рутокен Плагин" включено.',
+                        );
+                        break;
+                    default:
+                        this.setViewStep(viewStepsStatus.ERROR, 'Ошибка Рутокен Плагин');
+                }
+                return;
+            }
+
+            if (error instanceof NoSupportPluginVersionError) {
+                this.setViewStep(
+                    viewStepsStatus.UPDATE_PLUGIN,
+                    'Обновите Рутокен Плагин',
+                    "Версия установленного в системе 'Рутокен Плагин' не совпадает с актуальной.",
                 );
+                return;
+            }
 
-                if (!check) return supportedBrowserCheck.ThrowSupportException(false, false);
-
-                // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-                this.plugin = plugin;
-                this.getDeviceList();
-            })
-            .catch((error: any) => {
-                // eslint-disable-next-line @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-member-access, no-prototype-builtins
-                if (error.hasOwnProperty('browser')) {
-                    const supportedPlatforms = getSupportedPlatforms();
-
-                    // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
-                    const currentPlatformIndex = supportedPlatforms.findIndex((p) => p === error.os.type);
-
-                    if (currentPlatformIndex !== -1) {
-                        const supportedOs = getSupportedOs();
-
-                        // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
-                        const currentOsIndex = supportedOs.findIndex((br) => br === error.platform.name);
-
-                        if (currentOsIndex !== -1) {
-                            // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
-                            const osBrowsers = getSupportedBrowsersForOs(error.os.type, error.platform.name);
-
-                            // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
-                            const currentBrowserIndex = osBrowsers.findIndex((br) => br === error.browser.name);
-
-                            if (currentBrowserIndex !== -1) {
-                                // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
-                                if (error.needExtension) {
-                                    // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access, max-depth
-                                    switch (error.browser.name) {
-                                        case 'Firefox':
-                                        case 'Internet Explorer':
-                                            this.setViewStep(
-                                                viewStepsStatus.INSTALL_FIREFOX_ADAPTER,
-                                                'Установите Рутокен Плагин и включите Адаптер',
-                                                `Для подготовки USB-токенов Рутокен ЭЦП, необходимо установить Рутокен Плагин и включить дополнение
-                                                'Адаптер Рутокен Плагин' в настройках браузера. (CTRL+SHIFT+A)`,
-                                            );
-                                            break;
-                                        case 'Opera':
-                                            this.setViewStep(
-                                                viewStepsStatus.INSTALL_OPERA_ADAPTER,
-                                                'Установите Адаптер Рутокен Плагин',
-                                                "Для подготовки USB-токенов Рутокен ЭЦП, необходимо установить и включить дополнение 'Адаптер Рутокен Плагин' в настройках браузера.",
-                                            );
-                                            break;
-                                        case 'Microsoft Edge':
-                                            this.setViewStep(
-                                                viewStepsStatus.INSTALL_EDGE_ADAPTER,
-                                                'Установите Адаптер Рутокен Плагин',
-                                                "Для подготовки USB-токенов Рутокен ЭЦП, необходимо установить и включить дополнение 'Адаптер Рутокен Плагин' в настройках браузера.",
-                                            );
-                                            break;
-                                        case 'Chrome':
-                                        case 'Yandex Browser':
-                                        case 'SputnikBrowser':
-                                            this.setViewStep(
-                                                viewStepsStatus.INSTALL_CHROME_ADAPTER,
-                                                'Установите Адаптер Рутокен Плагин',
-                                                "Для подготовки USB-токенов Рутокен ЭЦП, необходимо установить и включить дополнение 'Адаптер Рутокен Плагин' в настройках браузера.",
-                                            );
-                                            break;
-                                        case 'Safari':
-                                            this.setViewStep(
-                                                viewStepsStatus.INSTALL_SAFARI_PLUGIN,
-                                                'Установите Рутокен Плагин',
-                                                'Если Плагин уже установлен, убедитесь, что расширение "Адаптер Рутокен Плагин" включено.',
-                                            );
-                                            break;
-                                        default:
-                                            this.setViewStep(viewStepsStatus.ERROR, 'Ошибка Рутокен Плагин');
-                                    }
-                                    return;
-                                }
-                                // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
-                                if (error.needPlugin) {
-                                    this.setViewStep(
-                                        viewStepsStatus.INSTALL_PLUGIN,
-                                        'Установите Рутокен Плагин',
-                                        'Для подготовки USB-токенов Рутокен ЭЦП, установите дополнительное программное обеспечение для браузера.',
-                                    );
-                                    return;
-                                }
-                                this.setViewStep(viewStepsStatus.BROWSER_IS_NOT_SUPPORTED, 'Поддерживаемые браузеры');
-                                return;
-                            }
-                            this.setViewStep(viewStepsStatus.BROWSER_IS_NOT_SUPPORTED, 'Поддерживаемые браузеры');
-                            return;
-                        }
-                        this.setViewStep(viewStepsStatus.BROWSER_IS_NOT_SUPPORTED, 'Поддерживаемые браузеры');
-                        return;
-                    }
-                    this.setViewStep(viewStepsStatus.BROWSER_IS_NOT_SUPPORTED, 'Поддерживаемые браузеры');
-                    return;
-                }
-                if (error instanceof PluginLoad) {
-                    switch (error.error) {
-                        case PluginLoadErrors.NO_LOAD:
-                            this.setViewStep(viewStepsStatus.ERROR, 'Ошибка  Рутокен Плагин');
-                            break;
-                        case PluginLoadErrors.NO_VERSION:
-                            this.setViewStep(
-                                viewStepsStatus.UPDATE_PLUGIN,
-                                'Обновите Рутокен Плагин',
-                                "Версия установленного в системе 'Рутокен Плагин' не совпадает с актуальной.",
-                            );
-                            break;
-                        default:
-                            this.setViewStep(viewStepsStatus.ERROR, 'Ошибка  Рутокен Плагин');
-                    }
-                    return;
-                }
-                this.setViewStep(viewStepsStatus.ERROR, 'Ошибка  Рутокен Плагин');
-            });
+            this.setViewStep(viewStepsStatus.ERROR, 'Ошибка  Рутокен Плагин');
+        });
     }
 
     getDeviceList(): void {
@@ -408,8 +321,4 @@ export class PluginComponent extends DynamicComponent implements OnInit {
     closeModal(): void {
         this.close.emit();
     }
-
-    checkOsByShortName = (osName: string): void =>
-        // eslint-disable-next-line @typescript-eslint/no-unsafe-return, @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-member-access
-        supportedBrowserCheck.GetCurrentOsName().toLowerCase().includes(osName);
 }
