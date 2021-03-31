@@ -37,7 +37,7 @@ def users(request):
                 response = json.dumps(userslist)
                 return HttpResponse(response, content_type="application/json")
             else:
-                user = User.objects.get(pk=id)
+                user = User.objects.get(pk=user_id)
                 if not environment.is_demo_mode():
                     certs = clr_helper(user.username)
                     u_certs = [k for k in certs if user.username in k['username']]
