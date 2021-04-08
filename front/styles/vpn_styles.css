@@ -644,6 +644,16 @@ button.b_icon:hover[disabled] {
   background: url("./images/layout/rutoken_vpn/button_device.png") no-repeat 7px bottom;
 }
 
+.b_icon.button-block {
+  background-image: url("./images/layout/rutoken_vpn/button_block.png");
+  height: 32px;
+  padding-left: 20px;
+}
+
+.b_icon.button-block.force-red {
+  background: url("./images/layout/rutoken_vpn/button_block.png") no-repeat 7px bottom;
+}
+
 .b_icon.mobile-empty {
   background-image: url("./images/layout/rutoken_vpn/button_mobile.png");
   height: 32px;

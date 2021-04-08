@@ -114,26 +114,12 @@ export class UsersListComponent implements OnInit {
     }
 
     setUserCertGeneratingAccess(user: IdentityModel, certType: CertTypes): void {
-        const model = { id: user.id, certType: null, value: null };
-        switch (certType) {
-            case CertTypes.mobile: {
-                model.certType = 'canGenereateMobileCert';
-                model.value = !user.canGenereateMobileCert;
-                break;
-            }
-            case CertTypes.token: {
-                model.certType = 'canGenereateCertOnToken';
-                model.value = !user.canGenereateCertOnToken;
-                break;
-            }
-            default:
-                return;
-        }
-        this.apiService.setUserCertGeneratingAccess(model).subscribe((usr: any) => {
+        const selIndex = this.users.findIndex((x) => x.id === user.id);
+        const mod = this.users[selIndex];
+
+        this.apiService.setUserCertGeneratingAccess(mod).subscribe((usr: any) => {
             // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-unsafe-member-access
             const selected = this.users.findIndex((x) => x.id === usr.id);
-            // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-            this.users[selected] = { ...this.users[selected], ...usr };
         });
     }
 }

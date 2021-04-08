@@ -55,7 +55,7 @@
                         [title]="(item.canGenereateMobileCert ? 'Запретить' : 'Разрешить')
                         + ' пользователю выписывание сертификатов для мобильных устройств'"
                         [disabled]="requesting"
-                        (click)="setUserCertGeneratingAccess(item, certTypes.mobile)">
+                        (click)="item.canGenereateMobileCert = !item.canGenereateMobileCert; setUserCertGeneratingAccess(item)">
                 </button>
                 <button class="b_icon device-empty"
                         [ngClass]="item.canGenereateCertOnToken ? 'navy' : 'force-red'"
@@ -63,7 +63,15 @@
                         [title]="(item.canGenereateCertOnToken ? 'Запретить' : 'Разрешить')
                         + ' пользователю выписывание сертификатов для ключей'"
                         [disabled]="requesting"
-                        (click)="setUserCertGeneratingAccess(item, certTypes.token)">
+                        (click)="item.canGenereateCertOnToken = !item.canGenereateCertOnToken; setUserCertGeneratingAccess(item)">
+                </button>
+                <button class="b_icon button-block"
+                    [ngClass]="!item.isDisabled ? 'navy' : 'force-red'"
+                    data-toggle="tooltip" data-placement="bottom"
+                    [title]="(!item.isDisabled ? 'Запретить' : 'Разрешить')
+                    + ' пользователю вход в систему'"
+                    [disabled]="requesting"
+                    (click)="item.isDisabled = !item.isDisabled; setUserCertGeneratingAccess(item)">
                 </button>
             </td>
             <td>

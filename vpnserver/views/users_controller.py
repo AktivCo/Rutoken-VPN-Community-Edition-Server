@@ -198,10 +198,11 @@ def cert_access(request):
     cert_types = ('canGenereateMobileCert', 'canGenereateCertOnToken')
 
     user_id = request.POST.get('id', None)
-    cert_type = request.POST.get('certType', None)
-    value = request.POST.get('value', False)
+    can_generate_mobile_cert = request.POST.get('canGenereateMobileCert', None)
+    can_generate_cert_on_token = request.POST.get('canGenereateCertOnToken', None)
+    is_disabled = request.POST.get('isDisabled', None)
 
-    if user_id is None or cert_type is None or value is None or cert_type not in cert_types:
+    if user_id is None or can_generate_mobile_cert is None or can_generate_cert_on_token is None or is_disabled is None:
         return HttpResponseBadRequest()
 
     if not User.objects.filter(id=user_id).exists():
@@ -212,18 +213,16 @@ def cert_access(request):
     if user.username is "RutokenVpn":
         return HttpResponseBadRequest()
 
-    value = value == 'true'
-
     if not hasattr(user, 'cert_access'):
         user_access = AccessToCertGeneration()
         user_access.user = user
     else:
         user_access = user.cert_access
+        
+    user_access.can_generate_mobile_cert = can_generate_mobile_cert == 'true'
+    user_access.can_generate_cert_on_token = can_generate_cert_on_token == 'true'
+    user_access.is_disabled = is_disabled == 'true'
 
-    if cert_type == 'canGenereateMobileCert':
-        user_access.can_generate_mobile_cert = value
-    if cert_type == 'canGenereateCertOnToken':
-        user_access.can_generate_cert_on_token = value
     user_access.save()
 
     return JsonResponse(
@@ -231,5 +230,6 @@ def cert_access(request):
             'id': user_access.user.id,
             'canGenereateMobileCert': user_access.can_generate_mobile_cert,
             'canGenereateCertOnToken': user_access.can_generate_cert_on_token,
+            'isDisabled': user_access.is_disabled,
         }
     )

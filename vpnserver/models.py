@@ -125,3 +125,7 @@ class AccessToCertGeneration(models.Model):
         verbose_name='Может генерировать сертификат на токене',
         default=True
     )
+    is_disabled = models.BooleanField(
+        verbose_name='Заблокирован',
+        default=False
+    )

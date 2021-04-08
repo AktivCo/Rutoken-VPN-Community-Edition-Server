@@ -28,6 +28,16 @@ def signin(request):
 
         if user is not None:
             auth.login(request, user)
+            if hasattr(user, 'cert_access') and user.cert_access.is_disabled:
+                return HttpResponse(
+                    json.dumps(
+                        {
+                            'error': True,
+                            'message': "Доступ в личный кабинет ограничен"
+                        }
+                    ),
+                    status=200)
+
             return HttpResponse(json.dumps({'error': False}), status=200)
         else:
             return HttpResponse(
