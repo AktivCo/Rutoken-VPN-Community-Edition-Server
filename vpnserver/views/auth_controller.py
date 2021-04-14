@@ -8,7 +8,7 @@ from django.contrib.auth.models import User
 from django.http import HttpResponse
 from django.core.exceptions import ObjectDoesNotExist, ValidationError
 
-
+from vpnserver.identity_helper import is_authenticated
 
 def signin(request):
     if request.method == "POST":
@@ -65,7 +65,7 @@ def signin(request):
 
 
 def signout(request):
-    if request.user.is_authenticated():
+    if is_authenticated(request):
         auth.logout(request)
         return HttpResponse(status=200)
     else:

@@ -12,10 +12,12 @@ from django.core.exceptions import ValidationError, ObjectDoesNotExist
 from django.http import HttpResponse, HttpResponseBadRequest
 
 from vpnserver.models import ConfigPki, ConfigNtp, TaskStatus
+from vpnserver.identity_helper import is_authenticated
+
 from vpnserver import environment
 
 def vpn_config_admpwd(request):
-    if request.user.is_authenticated() and request.user.username == "RutokenVpn":
+    if is_authenticated(request) and request.user.username == "RutokenVpn":
         if request.method == "POST":
             try:
                 user = auth.authenticate(
@@ -49,7 +51,7 @@ def vpn_config_admpwd(request):
         return HttpResponse('Unauthorized', status=401)
 
 def settings(request):
-    if not request.user.is_authenticated():
+    if not is_authenticated(request):
         return HttpResponse('Unauthorized', status=401)
     current_settings = {}
     if ConfigPki.objects.exists():
@@ -75,7 +77,7 @@ def settings(request):
 
 
 def manage_box(request):
-    if request.user.is_authenticated() and request.user.username == "RutokenVpn":
+    if is_authenticated(request) and request.user.username == "RutokenVpn":
         action = int(request.GET.get("action"))
         if action == 0 or action == 1:
             task_status = TaskStatus.objects.get(pk=1)
@@ -95,7 +97,7 @@ def manage_box(request):
 
 
 def vpn_config_ntp(request):
-    if request.user.is_authenticated() and request.user.username == "RutokenVpn":
+    if is_authenticated(request) and request.user.username == "RutokenVpn":
         #type 0 - date from client
         #type 1 - ntp server
         if request.method == "POST":

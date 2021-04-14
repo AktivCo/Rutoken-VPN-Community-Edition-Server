@@ -15,7 +15,7 @@ from vpnserver.models import (
     ConfigVpn,
     ConfigPki,
 )
-
+from vpnserver.identity_helper import is_authenticated
 
 from pkiapi import executables_path, pki_methods, config_methods
 
@@ -23,7 +23,7 @@ from pkiapi import executables_path, pki_methods, config_methods
 def vpn_getclientvpnconf(request):
     if time.time() < 1458893516.0:  # check time
         return HttpResponseBadRequest()
-    if not request.user.is_authenticated():
+    if not is_authenticated(request):
         return HttpResponse('Unauthorized', status=401)
     if request.method != "GET":
         return HttpResponseBadRequest()
@@ -95,7 +95,7 @@ def personal(request):
     """
     Generates user certs
     """
-    if not request.user.is_authenticated():
+    if not is_authenticated(request):
         return HttpResponse('Unauthorized', status=401)
 
     if request.method != "POST":

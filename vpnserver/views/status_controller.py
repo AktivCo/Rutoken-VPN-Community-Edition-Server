@@ -10,11 +10,12 @@ from django.http import HttpResponse, HttpResponseBadRequest, JsonResponse
 from vpnserver.models import TaskStatus
 from vpnserver.users_helper import get_users_list
 from vpnserver.helpers import set_taskstatus_init
+from vpnserver.identity_helper import is_authenticated
 from vpnserver import environment
 
 
 def identity(request):
-    if request.user.is_authenticated():
+    if is_authenticated(request):
         name = request.user.username
         user = None
         if name in 'RutokenVpn':
@@ -32,7 +33,7 @@ def identity(request):
 
 
 def init_status(request):
-    if request.user.is_authenticated():
+    if is_authenticated(request):
         try:
             task_list = TaskStatus.objects.get(pk=1)
             data = serializers.serialize('json', [task_list])
@@ -47,7 +48,7 @@ def init_status(request):
 
 
 def set_task_init(request) :
-    if request.user.is_authenticated() and request.user.username == "RutokenVpn":
+    if is_authenticated(request) and request.user.username == "RutokenVpn":
         try:
             set_taskstatus_init()
             return HttpResponse(status=200,content_type="application/json")

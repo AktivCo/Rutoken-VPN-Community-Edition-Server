@@ -16,8 +16,10 @@ from vpnserver.os_helper import clr_helper, revoke_helper, disconnect_user
 from vpnserver.models import AccessToCertGeneration
 from vpnserver import environment
 
+from vpnserver.identity_helper import is_authenticated
+
 def get_domainusers_list(request):
-    if request.user.is_authenticated() and request.user.username == "RutokenVpn":
+    if is_authenticated(request) and request.user.username == "RutokenVpn":
         if request.method == "GET":
             users_list = get_domain_users()
             response = json.dumps(sorted(users_list, key=lambda user: user['username']))
@@ -29,7 +31,7 @@ def get_domainusers_list(request):
 
 
 def users(request):
-    if request.user.is_authenticated() and request.user.username == "RutokenVpn":
+    if is_authenticated(request) and request.user.username == "RutokenVpn":
         if request.method == "GET":
             user_id = request.GET.get('id')
             if user_id is None:
@@ -61,7 +63,7 @@ def users(request):
     return HttpResponse('Unauthorized', status=401)
 
 def vpn_config_crl(request):
-    if request.user.is_authenticated():
+    if is_authenticated(request):
         if request.method == "POST":
             if time.time() < 1458893516.0:  # check time
                 return HttpResponseBadRequest()
@@ -95,7 +97,7 @@ def vpn_config_crl(request):
     return HttpResponse('Unauthorized', status=401)
 
 def vpn_config_connected_users(request):
-    if request.user.is_authenticated() and request.user.username == "RutokenVpn":
+    if is_authenticated(request) and request.user.username == "RutokenVpn":
         #type 0 - date from client
         #type 1 - ntp server
         if request.method != "GET":
@@ -146,7 +148,7 @@ def vpn_config_connected_users(request):
 
 
 def vpn_config_disconnect_user(request):
-    if request.user.is_authenticated() and request.user.username == "RutokenVpn":
+    if is_authenticated(request) and request.user.username == "RutokenVpn":
         #type 0 - date from client
         #type 1 - ntp server
         if request.method != "GET":
@@ -159,7 +161,7 @@ def vpn_config_disconnect_user(request):
 
 @require_POST
 def sync_with_ad(request):
-    if not request.user.is_authenticated() and not request.user.username == "RutokenVpn":
+    if not is_authenticated(request) and not request.user.username == "RutokenVpn":
         return HttpResponse('Unauthorized', status=401)
 
     try:
@@ -189,7 +191,7 @@ def sync_with_ad(request):
 
 
 def cert_access(request):
-    if not request.user.is_authenticated() and request.user.username is not "RutokenVpn":
+    if not is_authenticated(request) and request.user.username is not "RutokenVpn":
         return HttpResponse('Unauthorized', status=401)
 
     if not request.method == "POST":
