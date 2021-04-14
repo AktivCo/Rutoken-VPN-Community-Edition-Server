@@ -42,19 +42,17 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'kombu.transport.django',
     'vpnserver',
 )
 
-MIDDLEWARE_CLASSES = (
+MIDDLEWARE = (
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
-    'django.contrib.auth.middleware.SessionAuthenticationMiddleware',
+    # 'django.contrib.auth.middleware.SessionAuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'Vpn.middleware.NoCachingMiddleware'
 )
 
 ROOT_URLCONF = 'Vpn.urls'
@@ -104,7 +102,8 @@ TEMPLATES = [
         'OPTIONS': {
             'context_processors': [
                 'django.contrib.messages.context_processors.messages',
-                'django.core.context_processors.request',
+                'django.template.context_processors.debug',
+                'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
             ],
             'debug': DEBUG,
@@ -112,4 +111,4 @@ TEMPLATES = [
     },
 ]
 
-BROKER_URL = 'django://'
+BROKER_URL = 'redis://localhost:6379/0'

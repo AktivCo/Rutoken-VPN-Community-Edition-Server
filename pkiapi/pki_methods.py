@@ -86,7 +86,7 @@ def gen_diffie_hellman(dh_path, openssl_path, sudo_mode=False):
     openssl_parameters = [
         'genpkey',  '-genparam', '-algorithm', 'DH',
         '-out', dh_path,
-        '-pkeyopt', 'dh_paramgen_prime_len:1024',
+        '-pkeyopt', 'dh_paramgen_prime_len:2048',
         '-pkeyopt', 'dh_paramgen_generator:2'
     ]
     openssl_parameters = [openssl_path] + openssl_parameters

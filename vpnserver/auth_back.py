@@ -1,7 +1,7 @@
 """
 Authentication module
 """
-from ldap3 import Server, Connection, AUTH_SIMPLE, STRATEGY_SYNC, SEARCH_SCOPE_WHOLE_SUBTREE
+from ldap3 import Server, Connection, SIMPLE, SYNC, SUBTREE
 from django.core.exceptions import ObjectDoesNotExist
 from django.contrib.auth.models import User
 from vpnserver.models import ConfigSettings
@@ -10,7 +10,7 @@ class ADBackend(object):
     """
     Ms Active directory auth
     """
-    def authenticate(self, username=None, password=None):
+    def authenticate(self, request, username=None, password=None):
         try:
             config = User.objects.get(pk=1)
         except ObjectDoesNotExist:
@@ -50,10 +50,10 @@ class ADBackend(object):
                     try:
                         connection = Connection(server,
                                                 auto_bind = True,
-                                                client_strategy=STRATEGY_SYNC,
+                                                client_strategy=SYNC,
                                                 user=user_name + "@" + config.ldap_base_dn,
                                                 password=password,
-                                                authentication=AUTH_SIMPLE,
+                                                authentication=SIMPLE,
                                                 check_names=True)
                     except: #pylint: disable=bare-except
                         print('Cannot connect to the AD. Trying old connection scheme.')
@@ -61,17 +61,17 @@ class ADBackend(object):
                         connection = Connection(
                             server,
                             auto_bind=True,
-                            client_strategy=STRATEGY_SYNC,
+                            client_strategy=SYNC,
                             user=base_dn_list[0]+"\\"+ user_name,
                             password=password,
-                            authentication=AUTH_SIMPLE,
+                            authentication=SIMPLE,
                             check_names=True
                         )
                     except: #pylint: disable=bare-except
                         print('Cannot connect to the AD.')
                     try:
                         connection.search(dn_string, '(sAMAccountName=%s)' % user_name,
-                                        SEARCH_SCOPE_WHOLE_SUBTREE,
+                                        SUBTREE,
                                         attributes=['sAMAccountName','displayName'])
                     except: #pylint: disable=bare-except
                         print('Cannot query the Active Directory')

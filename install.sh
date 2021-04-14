@@ -16,15 +16,17 @@ apt-get install -y git python3-pip curl openvpn wget supervisor nginx
 curl -sL https://deb.nodesource.com/setup_14.x | sudo -E bash -
 apt-get update
 apt-get install -y nodejs
+apt-get install -y redis-server
+apt-get install -y ifupdown net-tools
 cd /opt
 git clone $repositoryUrl
 cd $ROOT_PROJECT_PATH
 git checkout $branch
-python3 -m pip install django==1.9.6
-python3 -m pip install requests==2.10.0
-python3 -m pip install ldap3==1.2.2
-python3 -m pip install celery==3.1.23 
-python3 -m pip install kombu==3.0.35
+python3 -m pip install django==3.2
+python3 -m pip install requests==2.25.1
+python3 -m pip install ldap3==2.9
+python3 -m pip install celery==4.4.2
+python3 -m pip install redis==3.5.3
 python3 -m pip install gunicorn==19.4.5
 mkdir db
 python3 manage.py makemigrations vpnserver
@@ -32,13 +34,7 @@ python3 manage.py migrate
 export NG_CLI_ANALYTICS=off
 npm install &&  npm run webpack:opensource
 mkdir /etc/openvpn
-wget https://www.openssl.org/source/openssl-1.1.0f.tar.gz
-tar xzvf openssl-1.1.0f.tar.gz
-cd openssl-1.1.0f
-./config -Wl,--enable-new-dtags,-rpath,'$(LIBRPATH)'
-make
-sudo make install
-openssl version -a
+
 cd $ROOT_PROJECT_PATH
 chown -R  ubuntu:ubuntu $ROOT_PROJECT_PATH
 
@@ -76,7 +72,7 @@ startsecs=10
 stopwaitsecs = 600
 killasgroup=true
 priority=998
-environment=OPENVPN_BIN=/usr/sbin/openvpn, OPENVPN="/etc/openvpn",OPENSSL=/usr/local/bin/openssl,OPENSSL_CONF="$ROOT_PROJECT_PATH/Vpn/config/openssl.cnf",LANG=en_US.UTF-8,LC_ALL=en_US.UTF-8,LC_LANG=en_US.UTF-8
+environment=OPENVPN_BIN=/usr/sbin/openvpn, OPENVPN="/etc/openvpn",OPENSSL=/usr/bin/openssl,OPENSSL_CONF="$ROOT_PROJECT_PATH/Vpn/config/openssl.cnf",LANG=en_US.UTF-8,LC_ALL=en_US.UTF-8,LC_LANG=en_US.UTF-8
 
 EOF
 
@@ -90,7 +86,7 @@ redirect_stderr=true
 autostart=true
 autorestart=true
 startsecs=5
-environment=OPENVPN_BIN=/usr/sbin/openvpn, OPENVPN="/etc/openvpn",OPENSSL=/usr/local/bin/openssl,OPENSSL_CONF="$ROOT_PROJECT_PATH/Vpn/config/openssl.cnf", LANG=en_US.UTF-8,LC_ALL=en_US.UTF-8,LC_LANG=en_US.UTF-8
+environment=OPENVPN_BIN=/usr/sbin/openvpn, OPENVPN="/etc/openvpn",OPENSSL=/usr/bin/openssl,OPENSSL_CONF="$ROOT_PROJECT_PATH/Vpn/config/openssl.cnf", LANG=en_US.UTF-8,LC_ALL=en_US.UTF-8,LC_LANG=en_US.UTF-8
 
 EOF
 

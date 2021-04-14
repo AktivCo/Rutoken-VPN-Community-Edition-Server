@@ -54,6 +54,6 @@ urlpatterns = [
 
 # Admin panel for debug use
 if settings.DEBUG:
-    urlpatterns += [url(r'^admin/', include(admin.site.urls))]
+    urlpatterns += [url(r'^admin/', admin.site.urls)]
 
 urlpatterns += [url(r'^.*$', views.index, name='index')]
