@@ -63,7 +63,7 @@ a:hover span {
   background: #178 url("./images/layout/rutoken_vpn/button_settings.png") no-repeat 15px 100%;
   color: #fff;
   animation: blink 3s linear infinite;
-  
+
 
 }
 @keyframes blink {
@@ -97,7 +97,7 @@ a:hover span {
 
 
 .jumper nav {
-   
+
   border-bottom-color: #d23;
 }
 
@@ -119,7 +119,7 @@ a:hover span {
 .jumper .catalogue .level li.current > a:after,
 .jumper .catalogue .level li.current > strong:after {
   border: none;
- 
+
 }
 
 
@@ -258,7 +258,7 @@ a:hover span {
 .menu ul li.special.current a span,
 .menu ul li.special.current strong  {
   color: #d23;
-  
+
 }
 
 
@@ -383,7 +383,7 @@ a:hover span {
 
 }
 .widjets dl {
-  
+
   width: 400px;
   padding: 25px 25px 0;
   border: 1px solid #ddd;
@@ -415,10 +415,10 @@ a:hover span {
 .widjets dl .rvpn_desktop,
 .widjets dl .rvpn_mobile {
 
-  display: block;  
+  display: block;
   width: 400px;
-  height: 150px;  
-  
+  height: 150px;
+
 }
 
 .widjets dl .rvpn_desktop {
@@ -432,7 +432,7 @@ a:hover span {
 }
 
 .widjets dl:not(.disabled):hover .rvpn_desktop {
-  
+
   background: transparent url('./images/widjets/rvpn_desktop.png') no-repeat center bottom;
 }
 
@@ -903,7 +903,7 @@ button.b_icon.mobile:hover[disabled] {
     cursor: pointer;
 }
 .tbl_settings table tbody td .routing {
-    margin-top: 40px;   
+    margin-top: 40px;
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -916,11 +916,11 @@ button.b_icon.mobile:hover[disabled] {
     vertical-align: middle;
     width: auto;
     margin-right: 20px;
-    line-height: 30px;    
+    line-height: 30px;
 }
 .tbl_settings table tbody td .routing button {
     height: 30px;
-    line-height: 10px;   
+    line-height: 10px;
 }
 
 
@@ -965,7 +965,7 @@ button.b_icon.mobile:hover[disabled] {
 /* --------------------------------------------------------------------------------
    Table Head
    -------------------------------------------------------------------------------- */
-	 
+
 .tbl_result thead th,
 .tbl_result thead td {
   border-bottom: 2px solid #ddd;
@@ -980,7 +980,7 @@ button.b_icon.mobile:hover[disabled] {
 /* --------------------------------------------------------------------------------
    Table Body
    -------------------------------------------------------------------------------- */
-	 
+
 .tbl_result tbody th,
 .tbl_result tbody td {
   font-size: 13px;
@@ -1009,12 +1009,12 @@ button.b_icon.mobile:hover[disabled] {
   background-image:  url("./images/layout/rutoken_vpn/tbl_device_off.png");
 }
 .tbl_result tbody tr.mobile th {
-  
-  
+
+
   background-image:  url("./images/layout/rutoken_vpn/tbl_mobile_on.png");
 }
 .tbl_result tbody tr.connected th {
-  
+
   height: 32px;
   background-image:  url("./images/layout/rutoken_vpn/tbl_connected.svg");
   background-size: 30px 30px;
@@ -1099,11 +1099,11 @@ button.b_icon.mobile:hover[disabled] {
   color: #888;
   vertical-align: middle;
   cursor: pointer;
-  
+
 }
 
 .tbl_result .pin span  {
-  
+
   vertical-align: middle;
   font: italic 14px/1 "Segoe UI", Helvetica, Arial, sans-serif;
   color: #d23;
