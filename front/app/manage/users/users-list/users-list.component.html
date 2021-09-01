@@ -24,7 +24,7 @@
             <th>Логин</th>
             <td>Пользователь</td>
             <td>Генерация</td>
-            <td>Запрет</td>
+            <td>Ограничения</td>
             <td>&nbsp;</td>
         </tr>
     </thead>
@@ -69,9 +69,17 @@
                     [ngClass]="!item.isDisabled ? 'navy' : 'force-red'"
                     data-toggle="tooltip" data-placement="bottom"
                     [title]="(!item.isDisabled ? 'Запретить' : 'Разрешить')
-                    + ' пользователю вход в систему'"
+                    + ' вход в личный кабинет'"
                     [disabled]="requesting"
                     (click)="item.isDisabled = !item.isDisabled; setUserCertGeneratingAccess(item)">
+                </button>
+                <button class="b_icon button-block"
+                    [ngClass]="!item.isBlocked ? 'navy' : 'force-red'"
+                    data-toggle="tooltip" data-placement="bottom"
+                    [title]="(!item.isBlocked ? 'Заблокировать' : 'Разблокировать')
+                    + ' подключение к VPN'"
+                    [disabled]="requesting"
+                    (click)="item.isBlocked = !item.isBlocked; blockUser(item)">
                 </button>
             </td>
             <td>

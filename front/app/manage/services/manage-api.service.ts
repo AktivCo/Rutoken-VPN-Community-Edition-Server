@@ -23,6 +23,10 @@ export class ManageApiService {
         return this.httpClient.post('/api/crl', { certificate: certificateCN });
     }
 
+    public blockUser(model: unknown): Observable<any> {
+        return this.httpClient.post('/api/blockuser', model);
+    }
+
     public registerMobileCert(model: unknown): Observable<any> {
         return this.httpClient.post('/api/personal', model);
     }

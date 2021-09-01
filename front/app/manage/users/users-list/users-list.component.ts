@@ -122,4 +122,14 @@ export class UsersListComponent implements OnInit {
             const selected = this.users.findIndex((x) => x.id === usr.id);
         });
     }
+
+    blockUser(user: IdentityModel): void {
+        const selIndex = this.users.findIndex((x) => x.id === user.id);
+        const mod = this.users[selIndex];
+
+        this.apiService.blockUser(mod).subscribe((usr: any) => {
+            // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-unsafe-member-access
+            const selected = this.users.findIndex((x) => x.id === usr.id);
+        });
+    }
 }
