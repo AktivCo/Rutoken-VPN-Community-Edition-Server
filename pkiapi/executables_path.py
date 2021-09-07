@@ -11,6 +11,7 @@ class EXEC_PATHS: # pylint: disable=invalid-name, too-few-public-methods
 
     VPN_CONFIG          = os.path.join(VPN_FOLDER, 'openvpn.conf')
     PKI_FOLDER          = os.path.join(VPN_FOLDER, 'pki')
+    OPENVPN_CCD         = os.path.join(VPN_FOLDER, 'ccd')
 
     PKI_PRIVATE_FOLDER  = os.path.join(PKI_FOLDER,  'private')
     PKI_ISSUED_FOLDER   = os.path.join(PKI_FOLDER,  'issued')

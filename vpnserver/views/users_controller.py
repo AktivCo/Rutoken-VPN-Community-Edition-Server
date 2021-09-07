@@ -12,7 +12,7 @@ from django.http import HttpResponse, HttpResponseBadRequest, JsonResponse
 from django.views.decorators.http import require_POST
 
 from vpnserver.users_helper import get_users_list, get_domain_users
-from vpnserver.os_helper import clr_helper, revoke_helper, disconnect_user
+from vpnserver.os_helper import clr_helper, revoke_helper, disconnect_user, block_user
 from vpnserver.models import AccessToCertGeneration
 from vpnserver import environment
 
@@ -157,6 +157,49 @@ def vpn_config_disconnect_user(request):
         disconnect_user(client)
         return HttpResponse(status=200)
     return HttpResponse('Unauthorized', status=401)
+
+def vpn_config_block_user(request):
+    if not is_authenticated(request) and request.user.username is not "RutokenVpn":
+        return HttpResponse('Unauthorized', status=401)
+
+    if not request.method == "POST":
+        return HttpResponseBadRequest()
+        
+    user_id = request.POST.get('id', None)
+
+    if not User.objects.filter(id=user_id).exists():
+        return HttpResponseBadRequest()
+
+    user = User.objects.get(id=user_id)
+
+    if not hasattr(user, 'cert_access'):
+        user_access = AccessToCertGeneration()
+        user_access.user = user
+    else:
+        user_access = user.cert_access
+
+    if not environment.is_demo_mode():
+        user_access = block_user(user_access)
+    else:
+        can_generate_mobile_cert = request.POST.get('canGenereateMobileCert', None)
+        can_generate_cert_on_token = request.POST.get('canGenereateCertOnToken', None)
+        is_disabled = request.POST.get('isDisabled', None)
+        is_blocked = request.POST.get('isBlocked', None)
+        user_access.can_generate_mobile_cert = can_generate_mobile_cert == 'true'
+        user_access.can_generate_cert_on_token = can_generate_cert_on_token == 'true'
+        user_access.is_disabled = is_disabled == 'true'
+        user_access.is_blocked = is_blocked == 'true'
+        user_access.save()
+
+    return JsonResponse(
+        {
+            'id': user_access.user.id,
+            'canGenereateMobileCert': user_access.can_generate_mobile_cert,
+            'canGenereateCertOnToken': user_access.can_generate_cert_on_token,
+            'isDisabled': user_access.is_disabled,
+            'isBlocked': user_access.is_blocked,
+        }
+    )
 
 
 @require_POST

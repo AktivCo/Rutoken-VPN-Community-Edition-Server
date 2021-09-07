@@ -28,6 +28,7 @@ urlpatterns = [
     url(r'^api/disconnectuser', views.vpn_config_disconnect_user, name='disconnect_user'),
     url(r'^api/sync', views.sync_with_ad, name='sync_with_ad'),
     url(r'^api/cert_access', views.cert_access, name='forbid_generate_certs'),
+    url(r'^api/blockuser', views.vpn_config_block_user, name='block_user'),
 
     #system_controller
     url(r'^api/network', views.vpn_config_network, name='config_getnetwork'),

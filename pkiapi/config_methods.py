@@ -55,6 +55,9 @@ def create_server_config(pkey_type, server, ca_cert, server_cert, server_key, dh
         for table in routing_table:
             config_builder.append('push "route %s %s" # server"\n' % (table.ip, table.mask))
 
+    #ccd section   
+    config_builder.append('client-config-dir /etc/openvpn/ccd\n')
+
     if logs_status:
         config_builder.append('###logging section\n\n')
         config_builder.append('log-append %s\n' %

@@ -20,11 +20,13 @@ def get_users_list(username):
         user['canGenereateMobileCert'] = True
         user['canGenereateCertOnToken'] = True
         user['isDisabled'] = False
+        user['isBlocked'] = False
 
         if hasattr(i, 'cert_access'):
             user['canGenereateMobileCert'] = i.cert_access.can_generate_mobile_cert
             user['canGenereateCertOnToken'] = i.cert_access.can_generate_cert_on_token
             user['isDisabled'] = i.cert_access.is_disabled
+            user['isBlocked'] = i.cert_access.is_blocked
 
         userslist.append(user)
     if username is None:

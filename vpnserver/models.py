@@ -129,3 +129,7 @@ class AccessToCertGeneration(models.Model):
         verbose_name='Заблокирован',
         default=False
     )
+    is_blocked = models.BooleanField(
+        verbose_name='Заблокирован доступ к VPN',
+        default=False
+    )
