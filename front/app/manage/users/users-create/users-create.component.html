@@ -27,7 +27,7 @@
                         <td>
                             <span class="required" [ngClass]="{'error': name.invalid && !name.pristine}">
                                 <input class="chk" [(ngModel)]="model.name" name="username" #name="ngModel"
-                                 pattern="^[A-Za-z0-9]{1,30}$" type="text" required />
+                                 pattern="^[A-Za-z0-9_]{1,30}$" type="text" required />
                             </span>
                         </td>
                     </tr>
@@ -36,7 +36,7 @@
                         <td>
                             <span [ngClass]="{'error': fullname.invalid && !fullname.pristine}">
                                 <input class="chk" [(ngModel)]="model.fullname" name="fullname" #fullname="ngModel"
-                                 pattern="^[A-Za-z0А-Яа-я-9 ]{1,30}$" type="text"  />
+                                 pattern="^[A-Za-z0А-Яа-я-9_ ]{1,30}$" type="text"  />
                             </span>
                         </td>
                     </tr>

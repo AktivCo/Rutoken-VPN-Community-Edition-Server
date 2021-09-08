@@ -79,8 +79,9 @@ def vpn_getclientvpnconf(request):
 
     os.system("sudo chown -R root:root %s" % executables_path.EXEC_PATHS.VPN_FOLDER)
 
-    str_arr = client_name.split("_")
-    client_file_name = str_arr[0] + "_" + str_arr[2] + ".ovpn"
+    username_cert, timestamp, cert_client_type = client_name.rsplit("_", 2)
+    str_arr = "_".join([username_cert, cert_client_type])
+    client_file_name = str_arr + ".ovpn"
     response_client_name = quote(client_file_name)
     response = HttpResponse(client_config)
     response['Content-Type'] = 'application/octet-stream'

@@ -21,7 +21,8 @@ def clr_helper(username):
             if line[0] == "V":
                 k, v_line = line.split("/CN=") #pylint: disable=unused-variable
                 if not 'vpnserver' in v_line:
-                    username_cert, cert = v_line.split("_", 1)
+                    username_cert, timestamp, cert_client_type = v_line.rsplit("_", 2)
+                    cert = "_".join([timestamp, cert_client_type])
                     if username_cert.startswith('\\x'):
                         hex_string_name = re.sub(r'\\x', '', username_cert)
                         byte_name = bytes.fromhex(hex_string_name)
@@ -35,7 +36,7 @@ def clr_helper(username):
     os.system("sudo chown root:root %s" % executables_path.EXEC_PATHS.PKI_INDEX_FILE)
 
     for i in st_list:
-        temp = i.split('_')
+        temp = i.rsplit('_', 2)
         model = {}
 
         model['username'] = temp[0]
