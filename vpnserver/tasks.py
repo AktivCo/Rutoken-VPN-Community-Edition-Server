@@ -119,11 +119,11 @@ def setnewvpn(pkey_type, server_name, server_dns, server_dns_additional, routing
     )
     log_path = logs_path.LOGS_PATH.LOG_FILE_PATH
     log_dir = logs_path.LOGS_PATH.LOGS_DIR
-    # Создаем директорию где будут храниться логи
+    # Create directory for store logs
     if logs_status and not os.path.isdir(log_dir):
         os.system("sudo mkdir %s" % log_dir)
 
-    # Создаем конфигурационный файл для logrotate
+    # Create config file for logrotate
     create_logrotate_config(logs_status)
 
     with open(exec_paths.VPN_CONFIG, 'w') as file:
@@ -138,7 +138,7 @@ def setnewvpn(pkey_type, server_name, server_dns, server_dns_additional, routing
         os.system('sudo systemctl restart openvpn@openvpn')
         os.system("sudo chown -R root:root %s" % exec_paths.VPN_FOLDER)
 
-    # Разрешаем чтение лог-файла
+    # Allow to read log file
     if logs_status:
         if os.path.isfile(log_path):
             os.system('sudo chmod o+r %s' % log_path)
@@ -169,7 +169,7 @@ def set_new_ip():
 
 
 
-# Создаем конфигурационный файл для logrotate
+# Create config file for logrotate
 def create_logrotate_config(status):
 
     logs_file = logs_path.LOGS_PATH.LOG_FILE_PATH
@@ -197,7 +197,7 @@ def create_logrotate_config(status):
         os.system("sudo touch %s" % logrotate_file)
     os.system("sudo chown ubuntu:ubuntu %s" % logrotate_file)
 
-    # Перезаписываем конфигурационный файл
+    # Rewrite config file
     with open(logrotate_file, 'w') as file:
         file.write(''.join(logrotate_config))
 
