@@ -75,7 +75,7 @@ class ConfigVpn (models.Model):
     """
     server_name = models.CharField(
         'Внешний "белый" IP адрес сервера', max_length=15
-    ) # 255 - максимально возможная длина доменного имени
+    ) # 255 - max allowed length for a domain name
     cipher = models.CharField("Шифрование", max_length=50, default="BF-CBC")
     external_ip = models.CharField('Внешний "белый" IP адрес сервера', max_length=15)
 
