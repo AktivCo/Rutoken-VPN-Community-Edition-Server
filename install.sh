@@ -11,23 +11,14 @@ if [ -n "$2" ]; then branch="$2" ; fi
 sed -i s/\GRUB_CMDLINE_LINUX=\"\/GRUB_CMDLINE_LINUX=\"net.ifnames=0\ \/ /etc/default/grub
 update-grub
 
-apt-get update
-apt-get install -y git python3-pip curl openvpn wget supervisor nginx
 curl -sL https://deb.nodesource.com/setup_14.x | sudo -E bash -
 apt-get update
-apt-get install -y nodejs
-apt-get install -y redis-server
-apt-get install -y ifupdown net-tools
+apt-get install -y git python3-pip curl openvpn wget supervisor nginx nodejs redis-server ifupdown net-tools
 cd /opt
 git clone $repositoryUrl
 cd $ROOT_PROJECT_PATH
 git checkout $branch
-python3 -m pip install django==3.2
-python3 -m pip install requests==2.25.1
-python3 -m pip install ldap3==2.9
-python3 -m pip install celery==4.4.2
-python3 -m pip install redis==3.5.3
-python3 -m pip install gunicorn==19.4.5
+python3 -m pip install django==3.2 requests==2.25.1 ldap3==2.9 celery==4.4.2 redis==3.5.3 gunicorn==19.4.5
 mkdir db
 python3 manage.py makemigrations vpnserver
 python3 manage.py migrate
