@@ -1,7 +1,13 @@
 <ol>
 <li>Установка сервиса с помощью скрипта install.sh 
 <ol>
-<li> Установить Ubuntu 16.04 </li>
+<li> Установить Ubuntu 20.04 </li>
+<li> Добавить пользователя с именем "ubuntu" от которого будет произведена установка:</li>
+
+     grep -q "^ubuntu:" /etc/group || groupadd "ubuntu"
+     grep -q "^ubuntu:" /etc/passwd || useradd "ubuntu" -N -G users --create-home -s /bin/bash
+     usermod -a -G "ubuntu" "ubuntu" || exit 2
+     usermod -a -G "sudo" "ubuntu"
 <li> Скачать файл install.sh из репозитория </li>
 <li> Запустить скрипт от имени пользователя, с правами superuser:</li>
 

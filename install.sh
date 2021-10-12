@@ -5,6 +5,42 @@ branch=public
 PROJECT_NAME=Rutoken-VPN-Community-Edition-Server
 ROOT_PROJECT_PATH=/opt/$PROJECT_NAME
 
+if [[ "$(id -u)" != 0 ]]; then
+echo "Error! Please run as root or with sudo"
+exit 1
+fi
+
+/bin/egrep  -i "^ubuntu:" /etc/group
+if [ $? -eq 0 ]; then
+   echo "Group \"ubuntu\" exists"
+else 
+   echo "To continue installation we have to add new group that is called \"ubuntu\" into your system. Do you agree?"
+   select yn in "Yes" "No"; do
+    case $yn in
+        Yes ) break;;
+        No ) exit;;
+    esac
+done
+fi
+
+/bin/egrep  -i "^ubuntu:" /etc/passwd
+if [ $? -eq 0 ]; then
+   echo "User \"ubuntu\" exists"
+else 
+   echo "To continue installation we have to add new user that is called \"ubuntu\" into your system and add him to a group that is called \"ubuntu\" too. Do you agree?"
+   select yn in "Yes" "No"; do
+    case $yn in
+        Yes ) break;;
+        No ) exit;;
+    esac
+done
+fi
+
+grep -q "^ubuntu:" /etc/group || groupadd "ubuntu"
+grep -q "^ubuntu:" /etc/passwd || useradd "ubuntu" -N -G users --create-home -s /bin/bash
+usermod -a -G "ubuntu" "ubuntu" || exit 2
+usermod -a -G "sudo" "ubuntu"
+
 if [ -n "$1" ]; then repositoryUrl="$1" ; fi
 if [ -n "$2" ]; then branch="$2" ; fi
 
@@ -12,6 +48,10 @@ sed -i s/\GRUB_CMDLINE_LINUX=\"\/GRUB_CMDLINE_LINUX=\"net.ifnames=0\ \/ /etc/def
 update-grub
 
 apt-get update
+
+killall -9 unattended-upgr
+killall -9 apt-get
+
 apt-get install -y git python3-pip curl openvpn wget supervisor nginx
 curl -sL https://deb.nodesource.com/setup_14.x | sudo -E bash -
 apt-get update
@@ -43,7 +83,8 @@ cat > /etc/nginx/sites-enabled/default <<EOF
 server {
   listen 80;
     location /static {
-       alias $ROOT_PROJECT_PATH/vpnserver/static/;
+        include  /etc/nginx/mime.types;
+        alias $ROOT_PROJECT_PATH/vpnserver/static/;
     }
     location /media {
         alias /var/log/openvpn;
