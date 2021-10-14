@@ -96,7 +96,7 @@ export class UsersADComponent implements OnInit {
             this.users = this.allUsers.filter(
                 (c) =>
                     // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-unsafe-call
-                    c.username.indexOf(seacrhString) !== -1 || c.fullname.toLowerCase().indexOf(seacrhString) !== -1,
+                    c.username.toLowerCase().indexOf(seacrhString) !== -1 || c.fullname.toLowerCase().indexOf(seacrhString) !== -1,
             );
         }
     }
