@@ -37,6 +37,8 @@
 
 Клиент для работы с сервисом можно скачать с сайта компании “Актив” - https://www.rutoken.ru/support/download/rutoken-vpn/
 
+Также в GitHub доступен исходный код <a href="https://github.com/AktivCo/Rutoken-VPN-Community-Edition-Client">Рутокен VPN Клиент Community Edition</a>
+
 ********************************************************************************
 
 Руководство для разработчика вы можете найти в файле "Developer Guide.pdf"
