@@ -11,11 +11,12 @@ cd rutokenvepn-server (перейти в корень проекта)
 pyenv exec python -m venv venv (в проекте в папку venv устанавливаем виртуальное окружение с python 3.6.0)  
 source venv/bin/activate - активация виртуального окружения python.  
 Установка:  
-python -m pip install django==1.9.6  
-python -m pip install requests==2.10.0  
-python -m pip install ldap3==1.2.2  
-python -m pip install celery==3.1.23  
-python -m pip install kombu==3.0.35  
+python3 -m pip install django==3.2
+python3 -m pip install requests==2.25.1
+python3 -m pip install ldap3==2.9
+python3 -m pip install celery==4.4.2
+python3 -m pip install redis==3.5.3
+python3 -m pip install gunicorn==19.4.5
 
 Создание базы:  
 mkdir db  
@@ -27,6 +28,9 @@ python manage.py migrate
 а) sudo apt-get install curl  
 b) curl -sL https://deb.nodesource.com/setup_14.x | sudo -E bash -  
 c) sudo apt-get install nodejs  
+
+Установка зависимостей для фронта 
+npm install
 
 Сборка фронта   
 npm run webpack:opensource  
