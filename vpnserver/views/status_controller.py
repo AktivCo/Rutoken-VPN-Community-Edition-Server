@@ -10,7 +10,7 @@ from django.http import HttpResponse, HttpResponseBadRequest, JsonResponse
 from vpnserver.models import TaskStatus
 from vpnserver.users_helper import get_users_list
 from vpnserver.helpers import set_taskstatus_init
-from vpnserver.identity_helper import is_authenticated
+from vpnserver.identity_helper import is_authenticated, is_admin
 from vpnserver import environment
 
 
@@ -48,7 +48,7 @@ def init_status(request):
 
 
 def set_task_init(request) :
-    if is_authenticated(request) and request.user.username == "RutokenVpn":
+    if is_authenticated(request) and is_admin(request):
         try:
             set_taskstatus_init()
             return HttpResponse(status=200,content_type="application/json")
@@ -62,6 +62,9 @@ def check_time(request): #pylint: disable=unused-argument
     """
     checking sever time and send it to /api/checktime
     """
+    if not is_authenticated(request):
+        return HttpResponse('Unauthorized', status=401)
+
     now = datetime.utcnow()
     return JsonResponse(
         {

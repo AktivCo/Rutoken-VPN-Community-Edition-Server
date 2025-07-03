@@ -23,14 +23,14 @@ from vpnserver.models import (
     ConfigRouting,
 )
 from vpnserver.tasks import setnewpki, set_new_ip, setnewvpn
-from vpnserver.identity_helper import is_authenticated
+from vpnserver.identity_helper import is_authenticated, is_admin
 
 from pkiapi import executables_path, pki_methods
 
 
 
 def vpn_config_network(request):
-    if is_authenticated(request) and request.user.username == "RutokenVpn":
+    if is_authenticated(request) and is_admin(request):
         if request.method == "POST":
             try:
                 config = ConfigNetwork.objects.get(pk=1)
@@ -83,9 +83,9 @@ def vpn_config_pki(request):
     :param request:
     :return:
     """
-    if not is_authenticated(request):
+    if not is_authenticated(request) or not is_admin(request):
         return HttpResponse('Unauthorized', status=401)
-    if request.method == "POST" and request.user.username == "RutokenVpn":
+    if request.method == "POST":
         if time.time() < 1458893516.0:  # check time
             return HttpResponseBadRequest()
 
@@ -137,7 +137,7 @@ def vpn_config_vpn(request):
     :param request:
     :return:
     """
-    if is_authenticated(request) and request.user.username == "RutokenVpn":
+    if is_authenticated(request) and is_admin(request):
         if request.method == "POST":
             if time.time() < 1458893516.0:  # check time
                 return HttpResponseBadRequest()
@@ -188,7 +188,7 @@ def vpn_config_domain(request):
     :param request:
     :return:
     """
-    if is_authenticated(request) and request.user.username == "RutokenVpn":
+    if is_authenticated(request) and is_admin(request):
         if request.method == "POST":
             try:
                 config = ConfigSettings.objects.get(pk=1)
@@ -235,7 +235,7 @@ def vpn_config_routing(request):
     :param request:
     :return:
     """
-    if not is_authenticated(request) and request.user.username != "RutokenVpn":
+    if not is_authenticated(request) or not is_admin(request):
         return HttpResponse('Unauthorized', status=401)
 
     if time.time() < 1458893516.0:  # check time
@@ -285,7 +285,7 @@ def vpn_config_routing(request):
 
 
 def vpn_cert_info(request):
-    if not is_authenticated(request) and request.user.username != "RutokenVpn":
+    if not is_authenticated(request) or not is_admin(request):
         return HttpResponse(
             'Unauthorized',
             status=401

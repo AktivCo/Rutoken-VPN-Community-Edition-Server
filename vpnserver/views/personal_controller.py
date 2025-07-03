@@ -15,7 +15,7 @@ from vpnserver.models import (
     ConfigVpn,
     ConfigPki,
 )
-from vpnserver.identity_helper import is_authenticated
+from vpnserver.identity_helper import is_authenticated, is_admin
 
 from pkiapi import executables_path, pki_methods, config_methods
 
@@ -55,6 +55,10 @@ def vpn_getclientvpnconf(request):
     name = str(request.GET.get("clientname"))
     encodedname = name.encode('utf-8').strip()
     client_name = encodedname.decode('utf-8')
+    username_config, _ = name.split('_', 1)
+
+    if username_config != request.user.username and not is_admin(request):
+        return HttpResponseBadRequest()
 
     if "rutokenVpnClient" not in client_name:
         client_cert_path = os.path.join(
@@ -109,6 +113,10 @@ def personal(request):
     name_from_req = str(request.POST.get("name"))
     encodedname = name_from_req.encode('utf-8').strip()
     name = encodedname.decode('utf-8')
+    username_cert, _ = name.split('_', 1)
+
+    if username_cert != request.user.username and not is_admin(request):
+        return HttpResponseBadRequest()
 
     can_generate_cert_on_token = True
     can_generate_mobile_cert = True

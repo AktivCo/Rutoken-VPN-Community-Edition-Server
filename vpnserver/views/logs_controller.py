@@ -19,11 +19,11 @@ from vpnserver.models import (
 from vpnserver.tasks import setnewvpn
 from vpnserver import environment
 
-from vpnserver.identity_helper import is_authenticated
+from vpnserver.identity_helper import is_authenticated, is_admin
 
 
 def get_logs_list(request):
-    if not is_authenticated(request) and request.user.username == "RutokenVpn":
+    if not is_authenticated(request) or not is_admin(request):
         return HttpResponse('Unauthorized', status=401)
     if not request.method == "GET":
         return HttpResponseBadRequest()
@@ -34,7 +34,7 @@ def get_logs_list(request):
 
 
 def clear_logs(request):
-    if not is_authenticated(request) and request.user.username == "RutokenVpn":
+    if not is_authenticated(request) or not is_admin(request):
         return HttpResponse('Unauthorized', status=401)
     if not request.method == "POST":
         return HttpResponseBadRequest()
@@ -46,7 +46,7 @@ def clear_logs(request):
 
 
 def logs_enable(request):
-    if not is_authenticated(request) and request.user.username == "RutokenVpn":
+    if not is_authenticated(request) or not is_admin(request):
         return HttpResponse('Unauthorized', status=401)
 
     if request.method == "POST":
